@@ -1,0 +1,23 @@
+C:\Users\Thibault\Documents\Visual Studio 2008\Projects\WindowsGame1\WindowsGame1\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Thibault\Documents\Visual Studio 2008\Projects\WindowsGame1\WindowsGame1\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Thibault\Documents\Visual Studio 2008\Projects\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\cube.xnb
+C:\Users\Thibault\Documents\Visual Studio 2008\Projects\WindowsGame1\WindowsGame1\bin\x86\Debug\WindowsGame1.exe
+C:\Users\Thibault\Documents\Visual Studio 2008\Projects\WindowsGame1\WindowsGame1\bin\x86\Debug\WindowsGame1.pdb
+C:\Users\Thibault\Documents\Visual Studio 2008\Projects\WindowsGame1\WindowsGame1\obj\x86\Debug\WindowsGame1.exe
+C:\Users\Thibault\Documents\Visual Studio 2008\Projects\WindowsGame1\WindowsGame1\obj\x86\Debug\WindowsGame1.pdb
+C:\Users\Thibault\Desktop\Proj\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\cube.xnb
+C:\Users\Thibault\Desktop\Proj\WindowsGame1\WindowsGame1\bin\x86\Debug\WindowsGame1.exe
+C:\Users\Thibault\Desktop\Proj\WindowsGame1\WindowsGame1\bin\x86\Debug\WindowsGame1.pdb
+C:\Users\Thibault\Desktop\Proj\WindowsGame1\WindowsGame1\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Thibault\Desktop\Proj\WindowsGame1\WindowsGame1\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Thibault\Desktop\Proj\WindowsGame1\WindowsGame1\obj\x86\Debug\WindowsGame1.exe
+C:\Users\Thibault\Desktop\Proj\WindowsGame1\WindowsGame1\obj\x86\Debug\WindowsGame1.pdb
+C:\Users\Twinkler\Desktop\Proj\WindowsGame1\WindowsGame1\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Twinkler\Desktop\Proj\WindowsGame1\WindowsGame1\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Twinkler\Desktop\Proj\WindowsGame1\WindowsGame1\obj\x86\Debug\WindowsGame1.exe
+C:\Users\Twinkler\Desktop\Proj\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\cube.xnb
+C:\Users\Twinkler\Desktop\Proj\WindowsGame1\WindowsGame1\bin\x86\Debug\WindowsGame1.exe
+C:\Users\Twinkler\Desktop\Proj\WindowsGame1\WindowsGame1\bin\x86\Debug\WindowsGame1.pdb
+C:\Users\Twinkler\Desktop\Proj\WindowsGame1\WindowsGame1\obj\x86\Debug\WindowsGame1.pdb
+C:\Users\Twinkler\Desktop\Proj\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\sound.xnb
+C:\Users\Twinkler\Desktop\Proj\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\sound.wma
