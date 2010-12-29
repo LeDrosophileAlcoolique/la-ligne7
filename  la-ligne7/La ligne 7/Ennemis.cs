@@ -50,7 +50,7 @@ namespace ligne7
             direction_x = Direction(direction.X, speed);
             direction_z = Direction(direction.Z, speed);
 
-            deplacement = new Vector3(direction_x * speed / 3, 0, direction_z * speed);
+            deplacement = new Vector3(direction_x * speed, 0, direction_z * speed);
 
             Update(deplacement);
         }
@@ -58,10 +58,10 @@ namespace ligne7
         protected int Direction(float direction, float speed)
         {
             int retourne;
-
-            if (direction < -speed / 2)
+            // speed / 2 permet a l'enemi de ne pas se deplace losqu'il arrive sur le joueur
+            if (direction < - speed /2)
                 retourne = 1;
-            else if (direction > speed / 2)
+            else if (direction > speed /2)
                 retourne = -1;
             else
                 retourne = 0;
@@ -84,6 +84,7 @@ namespace ligne7
                     effect.EnableDefaultLighting();
 
                     // Effect world = possibilite de faire rotation, translation...
+                    effect.Parameters["World"].SetValue(true);
                     effect.World = transforms[mesh.ParentBone.Index] * Matrix.CreateTranslation(position);
 
                     // Vue du modèle en perspective

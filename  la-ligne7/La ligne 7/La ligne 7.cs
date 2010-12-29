@@ -88,13 +88,16 @@ namespace ligne7
             // remet la souris au centre de l'ecran
             Mouse.SetPosition(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
 
+            // effect view = vue de la camera
+            Matrix view = Matrix.CreateLookAt(joueur.Position, joueur.Target, Vector3.Up);
+
             base.Update(gameTime);
         }
          
         protected override void Draw(GameTime gameTime)
         {
             // Ecran blanc au démarrage
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.RoyalBlue);
 
             // Appel de la méthode Draw dans la classe ennemis
             ennemis.Draw(joueur);
