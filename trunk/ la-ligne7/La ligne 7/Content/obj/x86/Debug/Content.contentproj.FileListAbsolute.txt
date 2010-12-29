@@ -1,0 +1,5 @@
+C:\Users\Thibault\Documents\Visual Studio 2008\Projects\WindowsGame1\WindowsGame1\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Thibault\Desktop\Proj\WindowsGame1\WindowsGame1\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Twinkler\Desktop\Proj\WindowsGame1\WindowsGame1\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Twinkler\Desktop\Proj\La ligne 7\La ligne 7\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\wr\Documents\Visual Studio 2008\Projects\Projet\La ligne 7\La ligne 7\Content\obj\x86\Debug\ResolveAssemblyReference.cache
