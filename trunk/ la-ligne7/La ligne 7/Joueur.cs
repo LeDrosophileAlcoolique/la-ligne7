@@ -19,17 +19,15 @@ namespace ligne7
         protected Vector3 cameraTarget;
         protected Matrix projection;
         protected Matrix view;
-        protected float ang1;
-        protected float ang2;
+        float ang1;
+        float ang2;
 
         public Joueur(float aspectRatio)
         {
-            cible = Vector3.Zero;
+            cible = new Vector3(1, 0, 0);
             cameraTranslation = new Vector3(20.0f);
-            cameraPosition = new Vector3(0, 0, -650);
+            cameraPosition = new Vector3(-650, 0, 0);
             cameraTarget = Vector3.Zero;
-            ang1 = 0;
-            ang2 = 89.5f;
 
             // Matrice de l'effet de vue en perspective
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), aspectRatio, 1.0f, 10000.0f);
@@ -44,7 +42,7 @@ namespace ligne7
             KeyboardState clavier = Keyboard.GetState();
 
             // Permet d'avancer
-            if (clavier.IsKeyDown(Keys.Z))
+            if (clavier.IsKeyDown(Keys.W))
             {
                 cameraPosition.X += cible.X;
                 cameraPosition.Z += cible.Z;
@@ -58,7 +56,7 @@ namespace ligne7
             }
 
             //Permet d'aller a gauche
-            if (clavier.IsKeyDown(Keys.Q))
+            if (clavier.IsKeyDown(Keys.A))
             {
                 cameraPosition.X += (float)(Math.Cos(ang2 - 90));
                 cameraPosition.Z += (float)(Math.Sin(ang2 - 90));
@@ -78,15 +76,17 @@ namespace ligne7
             if (mouseste.Y > y + 10)
             {
                 ang1 -= 0.05f;
-                cible.X = (float)(Math.Cos(ang1));
-                cible.Y = (float)(Math.Sin(ang1));
+                cible.X = (float)(cible.X * Math.Cos(ang1));
+                cible.Z = (float)(cible.Z * Math.Cos(ang1));
+                cible.Y = (float)(1 * Math.Sin(ang1));
             }
 
             if (mouseste.Y < y - 10)
             {
                 ang1 += 0.05f;
-                cible.X = (float)(Math.Cos(ang1));
-                cible.Y = (float)(Math.Sin(ang1));
+                cible.X = (float)(cible.X * Math.Cos(ang1));
+                cible.Z = (float)(cible.Z * Math.Cos(ang1));
+                cible.Y = (float)(1 * Math.Sin(ang1));
             }
 
             if (mouseste.X > x + 10)
@@ -103,11 +103,17 @@ namespace ligne7
                 cible.Z = (float)(1 * Math.Sin(ang2));
             }
 
+            if (clavier.IsKeyDown(Keys.Space))
+            {
+                cameraPosition.Y += 1;
+            }
+
             //positionne la cible de la camera en face de sa position
             cameraTarget = cameraPosition + cible;
 
             // effect view = vue de la camera
             view = Matrix.CreateLookAt(cameraPosition, cameraTarget, Vector3.Up);
+
         }
 
         public Vector3 Position
@@ -123,6 +129,11 @@ namespace ligne7
         public Matrix View
         {
             get { return view; }
+        }
+
+        public Vector3 Target
+        {
+            get { return cameraTarget; }
         }
     }
 }
