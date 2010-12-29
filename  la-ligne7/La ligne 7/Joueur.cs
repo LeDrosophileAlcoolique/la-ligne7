@@ -19,6 +19,7 @@ namespace ligne7
         protected Vector3 cameraTarget;
         protected Matrix projection;
         protected Matrix view;
+        bool sol;
         float ang1;
         float ang2;
 
@@ -103,9 +104,17 @@ namespace ligne7
                 cible.Z = (float)(1 * Math.Sin(ang2));
             }
 
-            if (clavier.IsKeyDown(Keys.Space))
+            if (sol == true && clavier.IsKeyDown(Keys.Space))
             {
-                cameraPosition.Y += 1;
+                cameraPosition.Y += 10f;
+                if (cameraPosition.Y < 50)
+                {
+                    sol = true;
+                }
+                else
+                {
+                    sol = false;
+                }
             }
 
             //positionne la cible de la camera en face de sa position
@@ -114,6 +123,14 @@ namespace ligne7
             // effect view = vue de la camera
             view = Matrix.CreateLookAt(cameraPosition, cameraTarget, Vector3.Up);
 
+            if (cameraPosition.Y != 0)
+            {
+                cameraPosition.Y -= 0.5f;
+            }
+            else
+            {
+                sol = true;
+            }
         }
 
         public Vector3 Position
@@ -135,5 +152,6 @@ namespace ligne7
         {
             get { return cameraTarget; }
         }
+
     }
 }
