@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Storage;
 #endregion
 
 namespace ligne7
-{// salut arnaud
+{
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
