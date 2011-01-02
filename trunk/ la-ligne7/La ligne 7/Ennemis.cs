@@ -30,7 +30,7 @@ namespace ligne7
 
         public void LoadContent(ContentManager content)
         {
-            model = content.Load<Model>("cube");
+            model = content.Load<Model>("Zombie");
         }
 
         protected void Update(Vector3 translation)
