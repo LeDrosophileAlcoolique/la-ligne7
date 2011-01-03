@@ -58,7 +58,7 @@ namespace ligne7
         protected int Direction(float direction, float speed)
         {
             int retourne;
-            // speed / 2 permet a l'enemi de ne pas se deplace losqu'il arrive sur le joueur
+            // speed / 2 permet a l'ennemi de ne pas se deplacer lorsqu'il arrive sur le joueur
             if (direction < - speed /2)
                 retourne = 1;
             else if (direction > speed /2)
