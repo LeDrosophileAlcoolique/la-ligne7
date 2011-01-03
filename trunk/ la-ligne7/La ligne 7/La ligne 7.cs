@@ -61,10 +61,10 @@ namespace ligne7
             son.LoadContentAndPlay(Content);
             ennemis.LoadContent(Content);
 
-            // permet d'afficher des images 2D
+            // Permet d'afficher des images 2D
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //load l'image du curseur
+            // Load l'image du curseur
             curseur.LoadContent(Content, "curseur", graphics);
         }
 
@@ -75,20 +75,20 @@ namespace ligne7
 
         protected override void Update(GameTime gameTime)
         {
-            // Permet de quitter quand on appuie sur echap
+            // Permet de quitter quand on appuie sur échap
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit(); 
 
             // Appel de la méthode Update dans la classe Joueur
             joueur.Deplacement(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
 
-            // Les ennemis qui nous suient
+            // Les ennemis qui nous suivent
             ennemis.Suivre(joueur, gameTime);
 
-            // remet la souris au centre de l'ecran
+            // Remet la souris au centre de l'ecran
             Mouse.SetPosition(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
 
-            // effect view = vue de la camera
+            // Effect view = vue de la camera
             Matrix view = Matrix.CreateLookAt(joueur.Position, joueur.Target, Vector3.Up);
 
             base.Update(gameTime);
