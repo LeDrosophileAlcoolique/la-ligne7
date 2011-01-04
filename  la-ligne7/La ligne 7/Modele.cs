@@ -27,14 +27,14 @@ namespace ligne7
 
         public Modele(ContentManager Content, List<Modele> liste_modele, float i, Vector3 position)
         {
-            Vector3 modeleRef = new Vector3(i, 20 + i, 0.0f);
+            Vector3 modeleRef = new Vector3(i, 20 + i, 0.0f);  // pour mettre le modele a cote de l'ennemi (chiffres pris au hasard)
 
             // On charge le model
             model = Content.Load<Model>("Station");
 
             //modelePosition = new Vector3(rand.Next(10), -1.0f, rand.Next(10));
             //modelePosition = new Vector3((-3.0f + i), (-3.0f + i), -650.0f);
-            modelePosition = modeleRef;
+            modelePosition = position + modeleRef; // position du nouveau modele = position de l'ennemi + decalage
             //modelePosition = new Vector3((0.0f + i), (0.0f + i), 300.0f);
            
         }
