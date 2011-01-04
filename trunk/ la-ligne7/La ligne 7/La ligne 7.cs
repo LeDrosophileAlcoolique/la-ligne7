@@ -101,7 +101,7 @@ namespace ligne7
             // On dessine un mur si le joueur appui sur M
             if (Keyboard.GetState().IsKeyDown(Keys.M))
             {
-                i += 20;
+                i += 20;  // pour decaler le modele a chaque pression sur M
                 list_modele.Add(new Modele(Content, list_modele, i, ennemis.Position));
 
             }
