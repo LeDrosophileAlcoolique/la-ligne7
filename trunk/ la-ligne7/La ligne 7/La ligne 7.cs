@@ -117,7 +117,7 @@ namespace ligne7
             foreach (Modele modele in list_modele)
             {
                 //modele.Draw(joueur.Projection, Vector3.Zero, joueur.Target);
-                modele.Draw(joueur.Projection, Vector3.Zero, joueur.Target);
+                modele.Draw(joueur.Projection, modele.Position, joueur.Target);
             }
 
             // Appel de la méthode Draw dans la classe ennemis
