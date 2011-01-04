@@ -20,26 +20,30 @@ namespace ligne7
         Model model;
         Vector3 modelePosition;
         //Random rand;
-        Vector3 modeleRef = Vector3.Zero;
+        
 
         
         
 
         public Modele(ContentManager Content, List<Modele> liste_modele, float i, Vector3 position)
         {
+            Vector3 modeleRef = new Vector3(i, 20 + i, 0.0f);
 
             // On charge le model
             model = Content.Load<Model>("Station");
 
-            // On définit la position aléatoire du mur
-            //rand = new Random();
-
             //modelePosition = new Vector3(rand.Next(10), -1.0f, rand.Next(10));
             //modelePosition = new Vector3((-3.0f + i), (-3.0f + i), -650.0f);
-            modelePosition = position;
+            modelePosition = modeleRef;
             //modelePosition = new Vector3((0.0f + i), (0.0f + i), 300.0f);
            
         }
+
+        public Vector3 Position
+        {
+            get { return modelePosition; } 
+        }
+
 
         public void Update(Viewport vp)
         {
@@ -62,7 +66,7 @@ namespace ligne7
                 mesh.Draw();
             }
         }
-
+        
     }
 }
 
