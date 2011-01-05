@@ -1,116 +1,93 @@
-
-\documentclass[12pt,a4paper]{article}  %type de document
-\usepackage[T1]{fontenc}		% fonte
-\usepackage[francais]{babel}		% langue
-\usepackage{graphicx}       		% images
-\usepackage[utf8]{inputenc}		% les accents 
-\usepackage{eurosym}		% sigle euro
-\usepackage{enumerate}		% listes a puces
+\documentclass[12pt,a4paper]{article} %type de document
+\usepackage[T1]{fontenc} % fonte
+\usepackage[francais]{babel} % langue
+\usepackage{graphicx} % images
+\usepackage[utf8]{inputenc} % les accents
+\usepackage{eurosym} % sigle euro
+\usepackage{enumerate} % listes a puces
 \usepackage{fancyhdr}
-\usepackage{geometry}         % Définir les marges
-% \pagestyle{headings}  
+\usepackage{geometry} % Définir les marges
+% \pagestyle{headings}
 \usepackage{color}
-
 \title {Rapport de première soutenance}
 \author {De Gagne Arnaud\and Weng Rémi\and Mahoudeaux Jacques\and Holley Thibault}
 \date {}
-
 \begin{document}
-
-\maketitle
+\maketitle    
 \begin{figure}[hp]
-	\centering
-	\includegraphics[width=0.90\textwidth]{logo.png}
-	\label{fig:aMAZEing escape}
+\centering
+\includegraphics[width=0.90\textwidth]{logo.png}
+\label{fig:aMAZEing escape}
 \end{figure}
-
-
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
-
 \newpage
-\tableofcontents 
+\tableofcontents
 \newpage
-
 \section {Introduction}
 Pour nous préparer à coder La Ligne 7, nous avons participé aux 2 conférences organisées par GConf: celle sur le C\# ainsi que celle sur XNA et SVN. Elles étaient à chaque fois suivies d'un TP de nuit dans le but de nous faire progresser en nous apprenant à réaliser de petits projets avec, à chaque fois, des SPE ou des ING1 disponibles à tout moment pour le moindres questions. Nous avons donc appris grossièrement les choses de base à savoir avec XNA tel que le fonctionnement d'un jeu avec l'utilisation des méthodes Update() et Draw() ainsi que les nouveaux types de base comme le Vector3. Mais ce n'est pas tout, car c'est grâce à ce fameux TP que nous avons enfin mis en application ce que nous avions vaguement appris sur la programmation orientée objet. Désormais, les mots tels que "classe", "méthode", "attribut" ou encore "constructeur" ne nous sont plus inconnus. Ça nous a d'ailleurs grandement aidés à organiser notre projet de façon moins brouillon. Malheureusement, certains membres du groupe n'ont pas pu assister à ces TP. C'est pourquoi nous avons décidé de dédier une matinée pour une mise à niveau de ceux n'ayant pas pu s'entrainer en posant plein de questions sur les bases de XNA et le fonctionnement de l'orienté objet à ceux qui ont eu le privilège d'y aller. Cette entrevue était un passage obligé pour que nous puissions chacun être efficaces de notre côté.
-
 \section {Organisation}
-
 Grâce à la date tardive de passage de notre soutenance (le dernier jour des soutenances) et au fait que certains d'entre nous passaient leurs vacances en famille loin de Paris, nous avons décidé de travailler en majorité les partiels pendant les vacances, et le projet pendant la semaine de soutenance. La "mise à niveau" en C\# s'est d'ailleurs déroulée le lundi matin. Depuis, nous avons travaillé sans relâche jusqu'au jour fatidique, nous levant tous les jours à 9h30 jusqu'à à peu près 22h et en étant constamment en contact sur internet.\\
 Le jour précédent la soutenance, nous nous sommes réunis pour regrouper le travail effectué de chacun et préparer les fichiers pour le lendemain.
-
 \newpage
 \section {Avancement}
-
 Nous avons travaillé pendant une courte durée, mais très intensivement. C'est pourquoi le projet s'est bien développé. Cependant, alors que certaines parties ont avancé plus que ce qui n'était prévu, d'autres ont pris un peu de retard. Nous espérons le rattraper par la suite !
-
 \subsection {Site Web}
-Étant donné que nous avons été en avance sur notre projet, nous avons pu commencer à mettre en place un site internet qui va permettre de donner des informations à nos multiples joueurs. Nous avons aussi profité de notre avance pour créer un forum pour la communication du groupe : échanger des liens et les données du jeu. Ce qui a permis d'améliorer la répartition du travail entre chaque membre du groupe.
-
+Étant donné que nous avons été en avance sur notre projet, nous avons pu commencer à mettre en place un site internet qui va permettre de donner des informations à nos multiples joueurs. Nous avons aussi profité de notre avance pour créer un forum pour la communication du groupe : échanger des liens et les données du jeu. Ce qui a permis d'améliorer la répartition du travail entre chaque membre du groupe et connaître l'avancement de chaque membre du groupe.\\
+Le site est disponible à  l'adresse suivante : http://ligne7.fr.nf
 \newpage
 
-\subsection {Moteur 3D (Thibault)}
-Un monde en 3 dimensions est bien plus complexe à créer que ce que l'on pourrait s'imaginer. Le joueur se déplaçant avec une caméra de type FPS (First Person Shooter). Alors que sa position dans l'espace est donnée par un Vector3 (3 flottants). L'orientation de la caméra utilise des rotations autour des axes X et Y: c'est ce qu'on appelle respectivement le yaw et le pitch (le roll, la rotation autour de l'axe Z, n'étant pas utile que dans les simulations aériennes ou spatiales nous ne l'utilisons pas). Les mouvements de camera font également appel a des matrices qui permettent de modifier la position du point CameraTarget (représentée par un Vector3) vers lequel la camera est orientée.\\
+subsection {I.A.(Thibault et Jacques)}
+Pour l’instant l’IA est extrêmement simpliste et ne consiste qu’en un calcul de la différence entre les coordonnée de la camera et celles du modèle.
 
+
+\subsection {Moteur 3D (Thibault et Jacques)}
+\subsubsection {Thibault}
+Un monde en 3 dimensions est bien plus complexe à créer que ce que l'on pourrait s'imaginer. Le joueur se déplaçant avec une caméra de type FPS (First Person Shooter). Alors que sa position dans l'espace est donnée par un Vector3 (3 flottants). L'orientation de la caméra utilise des rotations autour des axes X et Y: c'est ce qu'on appelle respectivement le yaw et le pitch (le roll, la rotation autour de l'axe Z, n'étant pas utile que dans les simulations aériennes ou spatiales nous ne l'utilisons pas). Les mouvements de camera font également appel a des matrices qui permettent de modifier la position du point cameraTarget (représentée par un Vector3) vers lequel la camera est orientée.\\
 \begin {center}
-\includegraphics [width = 0.70\textwidth] {YawPitchRoll.jpg} 
+\includegraphics [width = 0.70\textwidth] {YawPitchRoll.jpg}
 \end {center}
+\newpage
+Seulement, difficile de savoir si une caméra est fonctionnelle dans un espace constitué uniquement de bleu clair (couleur de "rafraichissement" de base). Nous avons donc décidé d'importer un modèle de dés pour apprendre a configurer une camera, a gérer des déplacement. Cela nous a aussi permis de mieux comprendre le chargement des contenus du Content Pipeline et l'utilité de la méthode "LoadContent". Après de nombreux déboires, nous avons réussi à afficher notre dé. Mais nous voulions aussi voir apparaitre la station métro que j’avais créé pour pouvoir évoluer dans un environnement fermé. Et là encore un nouveau problème se posait, l'affichage de plusieurs modèles. Ce fut vite réglé, il suffisait de répéter la ligne de code autant de fois qu’il y avait de modèle, mais alors comment ferions nous pour générer des centaines de zombie ? Après avoir pris des renseignements, nous avons donc entreprit de charger plusieurs modèle identique représentant les zombies, pour cela nous avons tenté l'utilisation de liste. Mais Jacques vous en parleras mieux que moi. Pour ma part, je me devais de charger notre modèle de zombie, mais là encore un problème, la physique que 3DS Max avait crée faisait que la texture ne collait plus sur le squelette, par manque de temps, je n’ai pu gérer ce problème, j’ai donc pris un zombie sans squelette et sans texture que j’ai redimensionné pour le voir évoluer, malheureusement sans animation, dans le milieu que nous avons créé spécialement pour la soutenance.  \\
+
+\subsubsection{Jacques}
+Pour éviter de devoir répéter les mêmes lignes de codes et de déclarer un par un tous les modèle et les matrices qu’ils utilisent, nous avons utilisé les propriétés des listes. Nous avons également créé une classe « modèle » dont nous appelons les méthodes dans la liste. En utilisant la commande Liste.Add  on peut créer un grand nombre de zombies. Nous pensons appliquer également cette méthode aux futurs projectiles que nous aurons à gérer. Cependant sur les ordinateur de l’école cette méthode donne lieu a des lags dès que on load un nombre limité de modèle. De plus nous ne savons pas encore comment nous allons pouvoir gérer les collisions avec nombreux modèles qui apparaissent sans nom explicite et en étant sûr que lorsque nous voulons qu’un modèle disparaisse, ce ne soit pas un autre modèle, voir même toute la liste, qui disparaisse à sa place.
 
 \newpage
-
-Seulement, difficile de savoir si une caméra est fonctionnelle dans un espace constitué uniquement de bleu clair (couleur de "rafraichissement" de base). Nous avons donc décidé d'importer un modèle de dés pour apprendre a configurer une camera, a gérer des déplacement. Cela nous a aussi permis de mieux comprendre le chargement des contenus du Content Pipeline et l'utilité de la méthode "LoadContent". Après de nombreuses déboires, nous avons réussi à afficher notre station de metro. Là encore un nouveau problème se posait, l'affichage de plusieurs modèle. Nous avons donc entreprit de charger plusieurs modèle identique représentant les zombies, pour cela nous avons tenté l'utilisation de liste.  \\
-
-
-
-\newpage
-
-\subsection {Physique (Kevin)}
-Au départ nous voulions commencer par gérer la collision du personnage avec le modèle qui nous servait d'ennemis, ce que nous avons réussi avec les Bounding Boxes d'XNA. Les Bounding Boxes sont définies par des Vecteurs (ici tridimensionnels) minimaux et maximaux. Elles nous permettent de gérer plus facilement la collision.
-
+\subsection {Physique (Thibault)}
+Au départ nous voulions commencer par gérer la collision du personnage avec le modèle qui nous servait d'ennemis, mais cela n’a pas tout à fait marché, en effet, l’intersectios en deux Bounding Boxes ne se faisaient pas correctement. Les Bounding Boxes sont définies par des Vecteurs (ici tridimensionnels) minimaux et maximaux. Elles nous permettent de gérer plus facilement la collision. Mais ici le problème fut que les Bounding Boxes ne se déplaçaient pas avec le modèle. Puis ayant régler ce problème, sont apparus les listes, n’arrivant pas à les gérer nous avons voulu reprendre le problème à zéro, et nous sommes actuellement en phase de recherche de tutos pour nous expliquer plus en détail les gestions des collisions.
 Nous prévoyons donc de pouvoir gérer la collision entre le joueur et les murs d'ici la seconde soutenance, par ailleurs cela nous permet également de gérer la collision entre le chasseur et les murs.
-
 \subsection {Interface (Rémi)}
 Pour cette première soutenance, pour la partie interface, nous avons créé un menu assez basique qui permet de lancer et modifier quelques options du jeu. Nos deux principaux problèmes ont été l'affichage du texte et les transitions entre le menu principal et les sous-menus. Afin de résoudre ces problèmes, nous nous sommes inspiré et pris les principes d'un starter kit XNA traitant le menu. Ainsi, cela m'a amené aussi à créer une classe gérant les différents écrans du programme (le menu, le jeu) ce qui entrainé la modification complète de la structure du jeu.
-Cependant, nous avons pas pu travailler sur la qualité graphique du menu mais nous espérons parvenir à régler ce "problème" pour la prochaine soutenance en mettant des images, une police plus adapté à notre thème de zombie et la gestion de la souris dans le menu.
-
+Cependant, nous n’avons pas pu travailler sur la qualité graphique du menu mais nous espérons parvenir à régler ce "problème" pour la prochaine soutenance en mettant des images, une police plus adapté à notre thème de zombie et la gestion de la souris dans le menu.
 \newpage
 \subsection {Modélisation (Thibault & Jacques)}
 \subsubsection {Jacques}
-L'objectif de cette première soutenance, en ce qui concerne la modélisation 3D, était de réussir à importer un modèle représentant l'ennemi ainsi qu'une station de métro. Pour ce faire, nous avons dû télécharger un modèle de zombie et réaliser le modèle de la station ainsi que le modèle d'un wagon d'une rame de metro. Nous avons essayer de réaliser nos modèle de la façon la plus réaliste possible ce qui nous a fait perdre du temps a chercher des informations notamment sur les dimension des rames de métro. Nous avons ensuite dut modifier la station et la rame de metro car elle ne s'imbriquaient pas. Cependant nous avons des problèmes de compatibilité car Thibault travaille sous 3dsMax et moi sous Gmax ce qui pose des problème lors de l'exportation des modèles. De plus Gmax a l'inconvénient de ne pas pouvoir créer des fichier .X ou .FBX pouvant être directement importé dans XNA. Enfin nous ne sommes toujours pas parvenu a loader un modèle animé avec un squelette.  \\
-
+L'objectif de cette première soutenance, en ce qui concerne la modélisation 3D, était de réussir à importer un modèle représentant l'ennemi ainsi qu'une station de métro. Pour ce faire, nous avons dû télécharger un modèle de zombie et réaliser le modèle de la station ainsi que le modèle d'un wagon d'une rame de métro. Nous avons essayé de réaliser nos modèle de la façon la plus réaliste possible ce qui nous a fait perdre du temps à chercher des informations notamment sur les dimensions des rames de métro. Nous avons ensuite dut modifier la station et la rame de métro car elle ne s’imbriquait pas. Cependant nous avons des problèmes de compatibilité car Thibault travaille sous 3dsMax et moi sous Gmax ce qui pose des problèmes lors de l'exportation des modèles. De plus Gmax a l'inconvénient de ne pas pouvoir créer des fichiers .X ou .FBX pouvant être directement importé dans XNA. Enfin nous ne sommes toujours pas parvenus à loader un modèle animé avec un squelette. \\
 \subsubsection{Thibault}
 Ce fut la première fois que je touchais à un logiciel de modélisation 3D, j'ai donc passé pas mal de temps à écumer les tutoriels pouvant m'apporter plus de connaissance sur ces logiciels. Puis, je me suis lancé dans la création d'une station de métro de la ligne 7 (celle de Léo Lagrange). Après quelques essais je trouvais enfin ma station convenable pour une première présentation, ceci dit, je n'ai pas encore mis de texture car il était plus important de me lancer dans la gestion et la compréhension du moteur 3D d'XNA. De ce fait, j'ai trouvé un modèle de zombie sur internet, modèle que j'ai redimensionné pour pouvoir l'utiliser lors de cette soutenance.
-
-
-
 \newpage
 \section {La prochaine fois}
-
 \subsection {Site Web}
-Nous devons absolument travailler sur le design de notre site pour l'instant peu attirant. C'est, nous pensons, le plus gros travail à effectuer pour ce domaine. Ensuite seulement, nous ouvrirons d'autres sections avec de nouvelles pages comme la présentation de l'équipe par exemple.
-
-\subsection {Moteur 3D (Jonathan)}
-La prochaine étape est la génération d'un labyrinthe parfait ou du moins avec une sortie accessible au joueur de sa position initiale. Pour ça, deux choix sont possibles. Soit nous changeons notre façon de voir le labyrinthe: plutôt que de mettre soit un mur, soit un chemin sur chaque case, il faudrait que chacune de ses cases puisse avoir 4 murs au maximum. Soit nous recherchons un algorithme adapté à notre type de labyrinthe. Nous avons vaguement entendu parler d'une solution utilisant un graphe, mais sans plus.\\
-
+Pour la prochaine fois, nous prévoyons d'améliorer l'aspect graphique du site qui pour l'instant n'a pas de couleur ni d'image. Mais aussi, nous prévoyons ouvrir d'autres sections du site afin d'interagir avec nos joueurs et mettre de nouvelles informations sur notre jeu et notre équipe.
+\subsection {Moteur 3D (Thibault et Jacques)}
+\\
 \begin {center}
-\includegraphics [width = 0.7\textwidth] {labyrinthe_parfait.png} 
+\includegraphics [width = 0.7\textwidth] {labyrinthe_parfait.png}
 \end {center}
-
-Par ailleurs, nous pensons qu'il serait temps de s'intéresser aux "effets" disponibles dans XNA car apparemment, les moyens d'obtenir l'ambiance que nous recherchons sont nombreux et des outils pour les ombres ou le brouillard existent. Il serait donc intéressant de s'aventurer de ce côté par la suite !
-
-\subsection {Physique (Kevin)}
-Les collisions avec les murs de vertices n'étant pas encore tout à fait au point, l'objectif principal sera de régler ces problèmes.
-
-\subsection {Interface (Wahren)}
-L'idéal, pour la prochaine soutenance, serait de créer un menu fonctionnel en relation avec le jeu.
-
+Pour la prochaine fois nous approfondirons notre travail sur les listes de facons a pouvoir loader et unloader parfaitement des modèle sur simple pression d’une touche du clavier ou bien lorsque le modèle subit une collision avec un projectile.
+Nous essayerons également d’animer notre modèle de zombie. Pour cela nous nous intéressons beaucoup a la librairie XNAnimation qui nous permettrait de régler ce problème rapidement.
+\subsection {Physique (Thibault)}
+Les collisions n’étant pas du tout au point à l’heure actuelle, nous espérons mettre sur pied un système de collision convenable d’ici la seconde soutenance.
+\subsection {Interface (Rémi)}
+Le menu sera plus attrayant la prochaine fois puisque nous mettrons des images et un menu plus dynamique avec des effets. Un menu qui pourra aussi modifier les options du jeu ce qui n'est pas possible maintenant.
 \subsection {Modélisation (Thibault & Jacques)}
-L'inclusion du modèle du chasseur animé, et pouvant se déplacer, est une priorité. Par la suite, il faudra s'arranger pour le faire se déplacer dans le labyrinthe en utilisant des algorithmes de résolution (A*) pour faire en sorte qu'il suive en permanence le joueur.
+L'inclusion du modèle du zombie animé, pouvant se déplacer, est une priorité. Par la suite, il faudra s'arranger pour le faire se déplacer dans un environnement avec des objets.
+\section {IA}
+Pour la pochaine fois nous essayerons de faire en sorte que le zombie s’oriente face au joueur avant d’avancer vers lui. Pour cela nous sommes en train d’étudier un tutoriel trouver sur le MSDN.
+
 
 \section {Conclusion}
 Malgré quelques retards, notre projet avance et il y a de fortes chances que le projet arrive à terme si nous avançons à cette vitesse à chaque fois entre les soutenances. Ce qui est plutôt encourageant ! En tout cas, nous sommes toujours motivés et prêts plus que jamais à faire face à n'importe quelle difficulté !
-
-
 \end {document}
