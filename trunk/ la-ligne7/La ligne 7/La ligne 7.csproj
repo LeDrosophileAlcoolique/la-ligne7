@@ -88,7 +88,6 @@
     <Compile Include="Ennemis.cs" />
     <Compile Include="Joueur.cs" />
     <Compile Include="La ligne 7.cs" />
-    <Compile Include="Modele.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Son.cs" />

@@ -23,9 +23,6 @@ namespace ligne7
         Son son;
         Curseur curseur;
         float aspectRatio;
-        List<Modele> list_modele;
-        Modele modele;
-        float i = 0.0f;
 
         public Game1()
         {
@@ -55,10 +52,6 @@ namespace ligne7
             joueur = new Joueur(aspectRatio);
             ennemis = new Ennemis();
             curseur = new Curseur();
-
-            //initialisation liste de modele
-            modele = new Modele(Content, list_modele, i, ennemis.Position);
-            list_modele = new List<Modele>();
 
             base.Initialize();
         }
@@ -98,14 +91,6 @@ namespace ligne7
             // Effect view = vue de la camera
             Matrix view = Matrix.CreateLookAt(joueur.Position, joueur.Target, Vector3.Up);
 
-            // On dessine un mur si le joueur appui sur M
-            if (Keyboard.GetState().IsKeyDown(Keys.M))
-            {
-                i += 20;  // pour decaler le modele a chaque pression sur M
-                list_modele.Add(new Modele(Content, list_modele, i, ennemis.Position));
-
-            }
-
             base.Update(gameTime);
         }
          
@@ -113,12 +98,6 @@ namespace ligne7
         {
             // Ecran blanc au démarrage
             GraphicsDevice.Clear(Color.RoyalBlue);
-
-            foreach (Modele modele in list_modele)
-            {
-                //modele.Draw(joueur.Projection, Vector3.Zero, joueur.Target);
-                modele.Draw(joueur.Projection, modele.Position, joueur.Target);
-            }
 
             // Appel de la méthode Draw dans la classe ennemis
             ennemis.Draw(joueur);

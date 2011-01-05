@@ -30,7 +30,7 @@ namespace ligne7
 
         public void LoadContent(ContentManager content)
         {
-            model = content.Load<Model>("Station");
+            model = content.Load<Model>("Zombie");
         }
 
         protected void Update(Vector3 translation)
@@ -96,10 +96,6 @@ namespace ligne7
 
                 mesh.Draw();
             }
-        }
-        public Vector3 Position
-        {
-            get { return position; }
         }
     }
 }
