@@ -23,6 +23,11 @@ namespace ligne7
         Son son;
         Curseur curseur;
         float aspectRatio;
+        //test
+        List<Modele> list_modele;
+        Modele modele;
+        float i = 0.0f;
+        KeyboardState oldState; 
 
         public Game1()
         {
@@ -52,6 +57,10 @@ namespace ligne7
             joueur = new Joueur(aspectRatio);
             ennemis = new Ennemis();
             curseur = new Curseur();
+
+            //test
+            modele = new Modele(Content, list_modele, i);
+            list_modele = new List<Modele>();
 
             base.Initialize();
         }
@@ -88,9 +97,18 @@ namespace ligne7
             // Remet la souris au centre de l'ecran
             Mouse.SetPosition(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
 
+            
+
+            //test
+            // On dessine un mur si le joueur appui sur M
+            if ((Keyboard.GetState().IsKeyDown(Keys.M)) && (oldState.IsKeyUp(Keys.M)))
+            {
+                i += 30;
+                list_modele.Add(new Modele(Content, list_modele, i));
+            }
             // Effect view = vue de la camera
             Matrix view = Matrix.CreateLookAt(joueur.Position, joueur.Target, Vector3.Up);
-
+            oldState = Keyboard.GetState();
             base.Update(gameTime);
         }
          
@@ -101,6 +119,10 @@ namespace ligne7
 
             // Appel de la méthode Draw dans la classe ennemis
             ennemis.Draw(joueur);
+
+            //test
+            foreach (Modele modele in list_modele)
+                modele.Draw(joueur.Projection, joueur.View, joueur.Target);
 
             spriteBatch.Begin();
             curseur.Draw(spriteBatch);

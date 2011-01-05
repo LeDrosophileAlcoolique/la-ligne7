@@ -25,10 +25,10 @@ namespace ligne7
 
         public Joueur(float aspectRatio)
         {
-            cible = new Vector3(1, 0, 0);
+            cible = new Vector3(0, 0, 1);
             cameraTranslation = new Vector3(20.0f);
             cameraPosition = new Vector3(-650, 0, 0);
-            cameraTarget = Vector3.Zero;
+            cameraTarget = cameraPosition + cible;
 
             // Matrice de l'effet de vue en perspective
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), aspectRatio, 1.0f, 10000.0f);
@@ -77,16 +77,16 @@ namespace ligne7
             if (mouseste.Y > y + 10)
             {
                 ang1 -= 0.05f;
-                cible.X = (float)(cible.X * Math.Cos(ang1));
-                cible.Z = (float)(cible.Z * Math.Cos(ang1));
+                cible.X = (float)(cible.X * Math.Cos(ang2));
+                cible.Z = (float)(cible.Z * Math.Cos(ang2));
                 cible.Y = (float)(1 * Math.Sin(ang1));
             }
 
             if (mouseste.Y < y - 10)
             {
                 ang1 += 0.05f;
-                cible.X = (float)(cible.X * Math.Cos(ang1));
-                cible.Z = (float)(cible.Z * Math.Cos(ang1));
+                cible.X = (float)(cible.X * Math.Cos(ang2));
+                cible.Z = (float)(cible.Z * Math.Cos(ang2));
                 cible.Y = (float)(1 * Math.Sin(ang1));
             }
 
