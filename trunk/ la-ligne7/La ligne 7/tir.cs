@@ -21,17 +21,17 @@ namespace ligne7
 
         Model balle;
         Vector3 tirPosition;
-        Vector3 epaule = new Vector3(0, 0.5f, 0);
+        Vector3 epaule = new Vector3(0, 0.0f, 0.0f);
         Vector3 direction = Vector3.Zero;
         float speed = 1.0f;
         
         public Tir(ContentManager Content, List<Tir> liste_tir, Vector3 spawnBalle, Vector3 vecteurTir)
         {
             // On charge le model
-            balle = Content.Load<Model>("Station");
+            balle = Content.Load<Model>("balle");
 
             //modelePosition = new Vector3(rand.Next(10), -1.0f, rand.Next(10));
-            tirPosition = spawnBalle;// - epaule;
+            tirPosition = spawnBalle;// -epaule;
 
             direction = vecteurTir;
 
@@ -49,7 +49,6 @@ namespace ligne7
 
         public void PartirTresLoin(GameTime gameTime)
         {
-            int direction_x, direction_z;
             float speed = gameTime.ElapsedGameTime.Milliseconds * this.speed;
             Vector3 deplacement;
 

@@ -30,7 +30,7 @@ namespace ligne7
         {
             cible = new Vector3(0, 0, 1);
             cameraTranslation = new Vector3(0.04f);
-            cameraPosition = new Vector3(0, 0, -650);
+            cameraPosition = new Vector3(0, 0, -150.0f);
             cameraTarget = cameraPosition + cible;
             
             // Matrice de l'effet de vue en perspective
@@ -48,7 +48,7 @@ namespace ligne7
             KeyboardState clavier = Keyboard.GetState();
 
             // Permet d'avancer
-            if (clavier.IsKeyDown(Keys.W))
+            if (clavier.IsKeyDown(Keys.Z))
             {
                 cameraPosition.X += cible.X;
                 cameraPosition.Z += cible.Z;
@@ -62,7 +62,7 @@ namespace ligne7
             }
 
             //Permet d'aller a gauche
-            if (clavier.IsKeyDown(Keys.A))
+            if (clavier.IsKeyDown(Keys.Q))
             {
                 cameraPosition.X += (float)(Math.Cos(ang2 - (Math.PI / 2)));
                 cameraPosition.Z += (float)(Math.Sin(ang2 - (Math.PI / 2)));

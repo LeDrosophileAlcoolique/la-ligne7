@@ -137,7 +137,7 @@ namespace ligne7
             //if (Keyboard.GetState().IsKeyDown(Keys.K))
             {
                 vecteurTir = joueur.Target - joueur.Position;
-                list_tir.Add(new Tir(Content, list_tir, joueur.Position, vecteurTir));
+                list_tir.Add(new Tir(Content, list_tir, joueur.Position- new Vector3(0.0f,50.0f,0.0f), vecteurTir));
             }
             //tir update
             //tir
@@ -169,7 +169,7 @@ namespace ligne7
             field.Draw(joueur);
             //test
             foreach (Modele modele in list_modele)
-                modele.Draw(joueur.Projection, joueur.View, joueur.Target);
+                modele.Draw(joueur.Projection, joueur.Position, joueur.Target);
 
             spriteBatch.Begin();
             curseur.Draw(spriteBatch);

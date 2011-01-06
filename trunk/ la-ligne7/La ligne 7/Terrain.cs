@@ -22,13 +22,13 @@ namespace ligne7
 
         public Terrain()
         {
-            position = Vector3.Zero;
+            position = Vector3.Zero - new Vector3(0,50.0f,0);
         }
 
         public void LoadContent(ContentManager Content)
         {
             // On charge le model
-            field = Content.Load<Model>("Station");
+            field = Content.Load<Model>("field");
         }
 
         public void Draw(Joueur joueur)
