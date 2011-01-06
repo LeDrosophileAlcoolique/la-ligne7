@@ -28,8 +28,11 @@ namespace ligne7
         Modele modele;
         float i = 0.0f;
         KeyboardState oldState;
+        Terrain field;
         debuge debug;
         SpriteFont font;
+
+
 
         public Game1()
         {
@@ -60,6 +63,7 @@ namespace ligne7
             joueur = new Joueur(aspectRatio);
             ennemis = new Ennemis();
             curseur = new Curseur();
+            field = new Terrain();
 
             //test
             modele = new Modele(Content, list_modele, i);
@@ -78,7 +82,12 @@ namespace ligne7
 
             // Load l'image du curseur
             curseur.LoadContent(Content, "curseur", graphics);
+
+            field.LoadContent(Content);
+
             font = Content.Load<SpriteFont>("Spritefont1");
+
+
         }
 
         protected override void UnloadContent()
@@ -104,7 +113,7 @@ namespace ligne7
             
 
             //test
-            // On dessine un mur si le joueur appui sur M
+            // On créé un modèle 3d si le joueur appuie sur M
             if ((Keyboard.GetState().IsKeyDown(Keys.M)) && (oldState.IsKeyUp(Keys.M)))
             {
                 i += 30;
@@ -118,11 +127,16 @@ namespace ligne7
          
         protected override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.RenderState.DepthBufferEnable = true ;
+
+
             // Ecran blanc au démarrage
-            GraphicsDevice.Clear(Color.RoyalBlue);
+            GraphicsDevice.Clear(Color.Blue);
 
             // Appel de la méthode Draw dans la classe ennemis
             ennemis.Draw(joueur);
+
+            field.Draw(joueur);
 
             //test
             foreach (Modele modele in list_modele)

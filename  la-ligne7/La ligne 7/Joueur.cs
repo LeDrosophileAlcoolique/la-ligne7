@@ -26,7 +26,7 @@ namespace ligne7
         public Joueur(float aspectRatio)
         {
             cible = new Vector3(0, 0, 1);
-            cameraTranslation = new Vector3(20.0f);
+            cameraTranslation = new Vector3(0.04f);
             cameraPosition = new Vector3(0, 0, -650);
             cameraTarget = cameraPosition + cible;
 
