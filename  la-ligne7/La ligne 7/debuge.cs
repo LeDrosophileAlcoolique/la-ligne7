@@ -5,9 +5,8 @@ using System.Text;
 
 namespace ligne7
 {
-    class debuge
+    class Debuge
     {
-
         public string debug(Joueur joueur, Ennemis ennemi)
         {
             string str;
