@@ -32,7 +32,7 @@ namespace ligne7
             rand = new Random();
 
             //modelePosition = new Vector3(rand.Next(10), -1.0f, rand.Next(10));
-            modelePosition = new Vector3(i, 0, i);
+            modelePosition = new Vector3(0, 0, i);
 
         }
 
@@ -43,7 +43,7 @@ namespace ligne7
 
         public void Draw(Matrix Projection, Matrix view, Vector3 cible)
         {
-            //On déssine le mur
+            //On dessine le mur
             Matrix[] transforms = new Matrix[model.Bones.Count];
             model.CopyAbsoluteBoneTransformsTo(transforms);
 

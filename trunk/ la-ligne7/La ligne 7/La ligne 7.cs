@@ -23,16 +23,20 @@ namespace ligne7
         Son son;
         Curseur curseur;
         public float aspectRatio;
-        //test
+        //modele
         List<Modele> list_modele;
         Modele modele;
         float i = 0.0f;
         KeyboardState oldState;
+        Vector3 vecteurTir = Vector3.Zero;
+        
         Terrain field;
         debuge debug;
         SpriteFont font;
 
-
+        //tir
+        Tir tir;
+        List<Tir> list_tir;
 
         public Game1()
         {
@@ -69,6 +73,11 @@ namespace ligne7
             modele = new Modele(Content, list_modele, i);
             list_modele = new List<Modele>();
 
+            // tir
+            //tir initialize
+            tir = new Tir(Content, list_tir, joueur.Position, vecteurTir);
+            list_tir = new List<Tir>();
+
             base.Initialize();
         }
 
@@ -97,12 +106,14 @@ namespace ligne7
 
         protected override void Update(GameTime gameTime)
         {
+            
+
             // Permet de quitter quand on appuie sur échap
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit(); 
 
             // Appel de la méthode Update dans la classe Joueur
-            joueur.Deplacement(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
+            joueur.Deplacement(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2, Content);
 
             // Les ennemis qui nous suivent
             ennemis.Suivre(joueur, gameTime);
@@ -119,6 +130,22 @@ namespace ligne7
                 i += 30;
                 list_modele.Add(new Modele(Content, list_modele, i));
             }
+
+            //Tir
+            // On tire lorsque le joueur appuie sur clic gauche.
+            if ((Mouse.GetState().LeftButton == ButtonState.Pressed))
+            //if (Keyboard.GetState().IsKeyDown(Keys.K))
+            {
+                vecteurTir = joueur.Target - joueur.Position;
+                list_tir.Add(new Tir(Content, list_tir, joueur.Position, vecteurTir));
+            }
+            //tir update
+            //tir
+            foreach (Tir tir in list_tir)
+                tir.PartirTresLoin(gameTime);
+
+
+
             // Effect view = vue de la camera
             Matrix view = Matrix.CreateLookAt(joueur.Position, joueur.Target, Vector3.Up);
             oldState = Keyboard.GetState();
@@ -128,16 +155,18 @@ namespace ligne7
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.RenderState.DepthBufferEnable = true ;
-
-
             // Ecran blanc au démarrage
             GraphicsDevice.Clear(Color.Blue);
 
             // Appel de la méthode Draw dans la classe ennemis
             ennemis.Draw(joueur);
+            //appel des tir
+            //Tir.Draw2(joueur.Projection, joueur.View, joueur.Target,joueur.List_tir, joueur.Shoot);
 
+            //tir
+            foreach (Tir tir in list_tir)
+                tir.Draw(joueur.Projection, joueur.View, joueur.Target);
             field.Draw(joueur);
-
             //test
             foreach (Modele modele in list_modele)
                 modele.Draw(joueur.Projection, joueur.View, joueur.Target);
@@ -151,6 +180,7 @@ namespace ligne7
          }
      }
 }
+
     
 
 

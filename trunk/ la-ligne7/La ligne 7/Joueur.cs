@@ -22,6 +22,9 @@ namespace ligne7
         bool sol;
         public double ang1;
         public double ang2;
+        
+
+        
 
         public Joueur(float aspectRatio)
         {
@@ -29,15 +32,17 @@ namespace ligne7
             cameraTranslation = new Vector3(0.04f);
             cameraPosition = new Vector3(0, 0, -650);
             cameraTarget = cameraPosition + cible;
-
+            
             // Matrice de l'effet de vue en perspective
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), aspectRatio, 1.0f, 10000.0f);
 
             // effect view = vue de la camera
             view = Matrix.CreateLookAt(cameraPosition, cameraTarget, Vector3.Up);
+
         }
 
-        public void Deplacement(int x, int y)
+        
+        public void Deplacement(int x, int y, ContentManager Content)
         {
             // Partie clavier
             KeyboardState clavier = Keyboard.GetState();
@@ -131,6 +136,10 @@ namespace ligne7
             {
                 sol = true;
             }
+
+            
+
+
         }
 
         public Vector3 Position
