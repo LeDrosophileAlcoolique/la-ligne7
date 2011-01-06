@@ -84,16 +84,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Curseur.cs" />
-    <Compile Include="debuge.cs" />
+    <Compile Include="joueur\Clavier.cs" />
+    <Compile Include="joueur\Curseur.cs" />
+    <Compile Include="Debuge.cs" />
     <Compile Include="Ennemis.cs" />
-    <Compile Include="Joueur.cs" />
+    <Compile Include="joueur\Joueur.cs" />
     <Compile Include="La ligne 7.cs" />
+    <Compile Include="menu\Bouton.cs" />
+    <Compile Include="menu\Ecrire.cs" />
+    <Compile Include="menu\MainMenu.cs" />
+    <Compile Include="menu\Menu.cs" />
+    <Compile Include="menu\OptionsMenu.cs" />
     <Compile Include="Modele.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="screen\GameScreen.cs" />
+    <Compile Include="screen\MainScreen.cs" />
+    <Compile Include="screen\MenuScreen.cs" />
+    <Compile Include="screen\OptionsScreen.cs" />
+    <Compile Include="screen\ScreenManager.cs" />
     <Compile Include="Son.cs" />
-    <Compile Include="tir.cs" />
+    <Compile Include="joueur\tir.cs" />
     <Compile Include="Terrain.cs" />
   </ItemGroup>
   <ItemGroup>
