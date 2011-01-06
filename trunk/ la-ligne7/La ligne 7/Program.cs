@@ -11,8 +11,6 @@ namespace ligne7
         {
             using (Game1 game = new Game1())
             {
-                // non va te faire foutre
-                // Test pour svn
                 game.Run();
             }
         }
