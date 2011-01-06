@@ -20,14 +20,14 @@ namespace ligne7
         protected Matrix projection;
         protected Matrix view;
         bool sol;
-        float ang1;
-        float ang2;
+        public double ang1;
+        public double ang2;
 
         public Joueur(float aspectRatio)
         {
             cible = new Vector3(0, 0, 1);
             cameraTranslation = new Vector3(20.0f);
-            cameraPosition = new Vector3(-650, 0, 0);
+            cameraPosition = new Vector3(0, 0, -650);
             cameraTarget = cameraPosition + cible;
 
             // Matrice de l'effet de vue en perspective
@@ -59,15 +59,15 @@ namespace ligne7
             //Permet d'aller a gauche
             if (clavier.IsKeyDown(Keys.A))
             {
-                cameraPosition.X += (float)(Math.Cos(ang2 - 90));
-                cameraPosition.Z += (float)(Math.Sin(ang2 - 90));
+                cameraPosition.X += (float)(Math.Cos(ang2 - (Math.PI / 2)));
+                cameraPosition.Z += (float)(Math.Sin(ang2 - (Math.PI / 2)));
             }
 
             //Permet d'aller a droite
             if (clavier.IsKeyDown(Keys.D))
             {
-                cameraPosition.X += (float)(Math.Cos(ang2 + 90));
-                cameraPosition.Z += (float)(Math.Sin(ang2 + 90));
+                cameraPosition.X += (float)(Math.Cos(ang2 + (Math.PI / 2)));
+                cameraPosition.Z += (float)(Math.Sin(ang2 + (Math.PI / 2)));
             }
 
             // Partie souris
@@ -76,30 +76,30 @@ namespace ligne7
             // fait pivoter la camera selon le deplacement de la souris
             if (mouseste.Y > y + 10)
             {
-                ang1 -= 0.05f;
-                cible.X = (float)(cible.X * Math.Cos(ang2));
-                cible.Z = (float)(cible.Z * Math.Cos(ang2));
+                if (ang1 > -(Math.PI / 2))
+                    ang1 -= (Math.PI / 90);
+
                 cible.Y = (float)(1 * Math.Sin(ang1));
             }
 
             if (mouseste.Y < y - 10)
             {
-                ang1 += 0.05f;
-                cible.X = (float)(cible.X * Math.Cos(ang2));
-                cible.Z = (float)(cible.Z * Math.Cos(ang2));
+                if (ang1 < (Math.PI / 2))
+                    ang1 += (Math.PI / 90);
+
                 cible.Y = (float)(1 * Math.Sin(ang1));
             }
 
             if (mouseste.X > x + 10)
             {
-                ang2 += 0.05f;
+                ang2 += (Math.PI / 90);
                 cible.X = (float)(1 * Math.Cos(ang2));
                 cible.Z = (float)(1 * Math.Sin(ang2));
             }
 
             if (mouseste.X < x - 10)
             {
-                ang2 -= 0.05f;
+                ang2 -= (Math.PI / 90);
                 cible.X = (float)(1 * Math.Cos(ang2));
                 cible.Z = (float)(1 * Math.Sin(ang2));
             }
