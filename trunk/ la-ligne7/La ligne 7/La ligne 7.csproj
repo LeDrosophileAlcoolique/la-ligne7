@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Curseur.cs" />
+    <Compile Include="debuge.cs" />
     <Compile Include="Ennemis.cs" />
     <Compile Include="Joueur.cs" />
     <Compile Include="La ligne 7.cs" />

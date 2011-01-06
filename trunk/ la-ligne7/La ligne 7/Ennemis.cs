@@ -17,7 +17,7 @@ namespace ligne7
     class Ennemis
     {
         protected Model model;
-        protected Vector3 position;
+        public Vector3 position;
         protected float speed;
 
         public Ennemis()

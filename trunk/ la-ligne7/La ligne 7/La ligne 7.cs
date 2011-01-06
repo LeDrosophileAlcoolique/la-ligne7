@@ -22,12 +22,14 @@ namespace ligne7
         Ennemis ennemis;
         Son son;
         Curseur curseur;
-        float aspectRatio;
+        public float aspectRatio;
         //test
         List<Modele> list_modele;
         Modele modele;
         float i = 0.0f;
-        KeyboardState oldState; 
+        KeyboardState oldState;
+        debuge debug;
+        SpriteFont font;
 
         public Game1()
         {
@@ -54,6 +56,7 @@ namespace ligne7
 
             // Appel de la classe Son, Joueur et ennemis
             son = new Son();
+            debug = new debuge();
             joueur = new Joueur(aspectRatio);
             ennemis = new Ennemis();
             curseur = new Curseur();
@@ -75,6 +78,7 @@ namespace ligne7
 
             // Load l'image du curseur
             curseur.LoadContent(Content, "curseur", graphics);
+            font = Content.Load<SpriteFont>("Spritefont1");
         }
 
         protected override void UnloadContent()
@@ -126,6 +130,7 @@ namespace ligne7
 
             spriteBatch.Begin();
             curseur.Draw(spriteBatch);
+            spriteBatch.DrawString(font, debug.debug(joueur, ennemis), new Vector2(250, 0), Color.Black);
             spriteBatch.End();
 
             base.Draw(gameTime);
