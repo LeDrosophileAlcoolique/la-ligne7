@@ -129,6 +129,8 @@ namespace ligne7
 
         public override void Draw(GameTime gameTime)
         {
+            screenManager.Game.GraphicsDevice.Clear(Color.Black);
+
             SpriteBatch spriteBatch = screenManager.SpriteBatch;
             // Appel de la méthode Draw dans la classe ennemis
             ennemis.Draw(joueur);
@@ -145,7 +147,7 @@ namespace ligne7
 
             spriteBatch.Begin();
             curseur.Draw(spriteBatch);
-            spriteBatch.DrawString(font, debug.debug(joueur, ennemis), new Vector2(250, 0), Color.Black);
+            // spriteBatch.DrawString(font, debug.debug(joueur, ennemis), new Vector2(250, 0), Color.Black);
             spriteBatch.End();
         }
     }

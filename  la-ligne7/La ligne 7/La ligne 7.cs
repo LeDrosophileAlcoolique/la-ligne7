@@ -78,9 +78,6 @@ namespace ligne7
         {
             GraphicsDevice.RenderState.DepthBufferEnable = true;
 
-            // Ecran blanc au démarrage
-            GraphicsDevice.Clear(Color.White);
-
             screenManager.GameTime = gameTime;
             screenManager.Dessin();
 
