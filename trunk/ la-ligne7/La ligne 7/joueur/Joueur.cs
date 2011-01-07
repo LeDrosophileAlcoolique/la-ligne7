@@ -64,15 +64,15 @@ namespace ligne7
             //Permet d'aller a gauche
             if (clavier.IsKeyDown(Keys.Q))
             {
-                cameraPosition.X += (float)(Math.Cos(ang2 - (Math.PI / 2)));
-                cameraPosition.Z += (float)(Math.Sin(ang2 - (Math.PI / 2)));
+                cameraPosition.X += (float)(Math.Sin(ang2 + (Math.PI / 2)));
+                cameraPosition.Z += (float)(Math.Cos(ang2 + (Math.PI / 2)));
             }
 
             //Permet d'aller a droite
             if (clavier.IsKeyDown(Keys.D))
             {
-                cameraPosition.X += (float)(Math.Cos(ang2 + (Math.PI / 2)));
-                cameraPosition.Z += (float)(Math.Sin(ang2 + (Math.PI / 2)));
+                cameraPosition.X += (float)(Math.Sin(ang2 - (Math.PI / 2)));
+                cameraPosition.Z += (float)(Math.Cos(ang2 - (Math.PI / 2)));
             }
 
             // Partie souris
@@ -83,7 +83,8 @@ namespace ligne7
             {
                 if (ang1 > -(Math.PI / 2))
                     ang1 -= (Math.PI / 90);
-
+                cible.X = (float)(1 * Math.Sin(ang2));
+                cible.Z = (float)(1 * Math.Cos(ang2));
                 cible.Y = (float)(1 * Math.Sin(ang1));
             }
 
@@ -91,22 +92,23 @@ namespace ligne7
             {
                 if (ang1 < (Math.PI / 2))
                     ang1 += (Math.PI / 90);
-
+                cible.X = (float)(1 * Math.Sin(ang2));
+                cible.Z = (float)(1 * Math.Cos(ang2));
                 cible.Y = (float)(1 * Math.Sin(ang1));
             }
 
             if (mouseste.X > x + 10)
             {
-                ang2 += (Math.PI / 90);
-                cible.X = (float)(1 * Math.Cos(ang2));
-                cible.Z = (float)(1 * Math.Sin(ang2));
+                ang2 -= (Math.PI / 90);
+                cible.Z = (float)(1 * Math.Cos(ang2));
+                cible.X = (float)(1 * Math.Sin(ang2));
             }
 
             if (mouseste.X < x - 10)
             {
-                ang2 -= (Math.PI / 90);
-                cible.X = (float)(1 * Math.Cos(ang2));
-                cible.Z = (float)(1 * Math.Sin(ang2));
+                ang2 += (Math.PI / 90);
+                cible.Z = (float)(1 * Math.Cos(ang2));
+                cible.X = (float)(1 * Math.Sin(ang2));
             }
 
             if (sol == true && clavier.IsKeyDown(Keys.Space))

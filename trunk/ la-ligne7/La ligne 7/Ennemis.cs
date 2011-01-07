@@ -23,7 +23,7 @@ namespace ligne7
         public Ennemis()
         {
             speed = 0.03f;
-            position = Vector3.Zero;
+            position = new Vector3(0, -39, 0);
         }
 
         // Méthode pour charger le modèle

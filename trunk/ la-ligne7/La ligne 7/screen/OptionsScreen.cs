@@ -49,6 +49,8 @@ namespace ligne7
 
         public override void Draw(GameTime gameTime)
         {
+            screenManager.Game.GraphicsDevice.Clear(Color.White);
+
             SpriteBatch spriteBatch = screenManager.SpriteBatch;
             
             spriteBatch.Begin();
