@@ -15,13 +15,13 @@ namespace ligne7
     {
         protected ScreenManager screenManager;
 
-        public abstract void LoadContent();
-        public abstract void Update(GameTime gameTime);
-        public abstract void Draw(GameTime gameTime);
-
         public GameScreen(ScreenManager screenManager)
         {
             this.screenManager = screenManager;
         }
+
+        public abstract void LoadContent();
+        public abstract void Update(GameTime gameTime);
+        public abstract void Draw(GameTime gameTime);
     }
 }
