@@ -25,6 +25,8 @@ namespace ligne7
         protected List<Ennemis> listEnnemis;
         protected List<Tir> listTir;
 
+        protected Debug debug;
+
         public MainScreen(ScreenManager screenManager)
             : base(screenManager)
         {
@@ -44,6 +46,8 @@ namespace ligne7
             curseur = new Curseur();
             listEnnemis = new List<Ennemis>();
             listTir = new List<Tir>();
+
+            debug = new Debug("Debug", 0, 0);
         }
 
         public override void LoadContent()
@@ -52,6 +56,10 @@ namespace ligne7
 
             field.LoadContent(screenManager.Game.Content);
             curseur.LoadContent(screenManager.Game.Content, graphics);
+
+            listEnnemis.Add(new Ennemis(screenManager.Game.Content));
+
+            debug.LoadFont(screenManager.Game.Content);
         }
 
         public override void Update(GameTime gameTime)
@@ -59,15 +67,15 @@ namespace ligne7
             clavier.Update();
 
             // Appel de la méthode Update dans la classe Joueur
-            joueur.Deplacement(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2, screenManager.Game.Content);
+            joueur.Deplacement(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2, screenManager.Game.Content, listEnnemis);
 
             // On créé un modèle 3d si le joueur appuie sur M
             if (clavier.IsNewKeyPress(Keys.M))
                 listEnnemis.Add(new Ennemis(screenManager.Game.Content));
 
             // Les ennemis qui nous suivent
-            foreach(Ennemis ennemis in listEnnemis)
-                ennemis.Suivre(joueur, gameTime);
+            foreach (Ennemis ennemis in listEnnemis)
+                ennemis.Suivre(joueur, gameTime, listEnnemis);
 
             // On tire lorsque le joueur appuie sur clic gauche.
             if ((Mouse.GetState().LeftButton == ButtonState.Pressed))
@@ -79,6 +87,9 @@ namespace ligne7
 
             // Remet la souris au centre de l'ecran
             Mouse.SetPosition(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
+
+            if (listEnnemis.Count > 0)
+                debug.Update(joueur.Box.Min + "," + joueur.Box.Max + ", \n" + listEnnemis[0].Box.Min + "," + listEnnemis[0].Box.Max);
         }
 
         public override void Draw(GameTime gameTime)
@@ -99,6 +110,7 @@ namespace ligne7
 
             spriteBatch.Begin();
             curseur.Draw(spriteBatch);
+            debug.Draw(spriteBatch);
             spriteBatch.End();
         }
     }

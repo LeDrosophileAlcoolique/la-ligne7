@@ -18,6 +18,7 @@ namespace ligne7
     {
         protected Model model;
         protected Vector3 position;
+        protected BoundingBox box;
         protected string assetName;
 
         public Modele3D()
@@ -59,6 +60,14 @@ namespace ligne7
                 mesh.Draw();
             }
         }
+
+        public BoundingBox Box
+        { 
+            get
+            {
+                return box;
+            }
+        }
     }
 
     class ModelDeplacement : Modele3D
@@ -71,9 +80,20 @@ namespace ligne7
 
         }
 
+        public bool IsCollision(BoundingBox cible, Vector3 translation)
+        {
+            Vector3 prevision = position + translation;
+
+            BoundingBox nextBox = new BoundingBox(prevision - new Vector3(50, 50, 50), prevision + new Vector3(50, 50, 50));
+
+            return nextBox.Intersects(cible);
+        }
+
         protected void Update(Vector3 translation)
         {
             position += translation;
+
+            box = new BoundingBox(position - new Vector3(50, 50, 50), position + new Vector3(50, 50, 50));
         }
     }
 

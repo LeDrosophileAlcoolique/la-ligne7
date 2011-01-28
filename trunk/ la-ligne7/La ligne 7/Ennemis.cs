@@ -26,9 +26,22 @@ namespace ligne7
             model = content.Load<Model>("Balle");
         }
 
+        public bool IsCollisionEnnemis(List<Ennemis> listEnnemis)
+        {
+            bool isCollision = false;
+
+            for (int i = 0; i < listEnnemis.Count; i++)
+            {
+                if (this != listEnnemis[i] && box.Intersects(listEnnemis[i].Box))
+                    isCollision = true;
+            }
+
+            return isCollision;
+        }
+
         // Ennemis ne nous suivent pas en Y car les zombies ne sautent pas 
 
-        public void Suivre(Joueur joueur, GameTime gameTime)
+        public void Suivre(Joueur joueur, GameTime gameTime, List<Ennemis> listEnnemis)
         {
             int direction_x, direction_z;
             float speed = gameTime.ElapsedGameTime.Milliseconds * this.speed;
@@ -40,7 +53,8 @@ namespace ligne7
 
             deplacement = new Vector3(direction_x * speed, 0, direction_z * speed);
 
-            Update(deplacement);
+            if (!IsCollision(joueur.Box, deplacement) && !IsCollisionEnnemis(listEnnemis))  
+                Update(deplacement);
         }
 
         protected int Direction(float direction, float speed)

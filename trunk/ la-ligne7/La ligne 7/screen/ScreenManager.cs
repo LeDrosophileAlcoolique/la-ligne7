@@ -55,7 +55,8 @@ namespace ligne7
             { 
                 gameTime = value; 
             }
-            get { 
+            get 
+            { 
                 return gameTime; 
             }
         }
@@ -78,7 +79,8 @@ namespace ligne7
 
         public Clavier Clavier
         {
-            get { 
+            get 
+            { 
                 return clavier; 
             }
         }

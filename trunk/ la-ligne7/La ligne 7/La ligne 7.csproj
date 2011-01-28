@@ -85,10 +85,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="joueur\Clavier.cs" />
-    <Compile Include="joueur\Curseur.cs" />
+    <Compile Include="Joueur\Clavier.cs" />
+    <Compile Include="Joueur\Curseur.cs" />
     <Compile Include="Ennemis.cs" />
-    <Compile Include="joueur\Joueur.cs" />
+    <Compile Include="Joueur\Joueur.cs" />
     <Compile Include="La ligne 7.cs" />
     <Compile Include="Menu\Ecrire.cs" />
     <Compile Include="Menu\Menu.cs" />
@@ -100,7 +100,7 @@
     <Compile Include="Screen\MenuScreen.cs" />
     <Compile Include="Screen\ScreenManager.cs" />
     <Compile Include="Son.cs" />
-    <Compile Include="joueur\Tir.cs" />
+    <Compile Include="Joueur\Tir.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

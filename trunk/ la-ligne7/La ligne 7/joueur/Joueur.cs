@@ -19,6 +19,7 @@ namespace ligne7
         protected Vector3 cameraTarget;
         protected Matrix projection;
         protected Matrix view;
+        protected BoundingBox box;
 
         protected double ang1;
         protected double ang2;
@@ -29,7 +30,7 @@ namespace ligne7
         {
             cible = new Vector3(0, 0, 1);
             cameraTranslation = new Vector3(0.04f);
-            cameraPosition = new Vector3(0, 35, -150.0f);
+            cameraPosition = new Vector3(0, 0, -135f);
             cameraTarget = cameraPosition + cible;
             
             // Matrice de l'effet de vue en perspective
@@ -41,39 +42,59 @@ namespace ligne7
             IsEnTrainDeSauter = false;
         }
 
-        
-        public void Deplacement(int x, int y, ContentManager Content)
+        public bool IsCollisionEnnemis(List<Ennemis> listEnnemis)
+        {
+            bool isCollision = false;
+
+            for (int i = 0; i < listEnnemis.Count; i++)
+            {
+                if (box.Intersects(listEnnemis[i].Box))
+                    isCollision = true;
+            }
+
+            return isCollision;
+        }
+
+
+        public void Deplacement(int x, int y, ContentManager Content, List<Ennemis> listEnnemis)
         {
             // Partie clavier
             KeyboardState clavier = Keyboard.GetState();
 
+            Vector3 previsionPosition = cameraPosition;
+
             // Permet d'avancer
             if (clavier.IsKeyDown(Keys.Z))
             {
-                cameraPosition.X += cible.X;
-                cameraPosition.Z += cible.Z;
+                previsionPosition.X += cible.X;
+                previsionPosition.Z += cible.Z;
             }
 
             //Permet de reculer
             if (clavier.IsKeyDown(Keys.S))
             {
-                cameraPosition.X -= cible.X;
-                cameraPosition.Z -= cible.Z;
+                previsionPosition.X -= cible.X;
+                previsionPosition.Z -= cible.Z;
             }
 
             //Permet d'aller a gauche
             if (clavier.IsKeyDown(Keys.Q))
             {
-                cameraPosition.X += (float)(Math.Sin(ang2 + (Math.PI / 2)));
-                cameraPosition.Z += (float)(Math.Cos(ang2 + (Math.PI / 2)));
+                previsionPosition.X += (float)(Math.Sin(ang2 + (Math.PI / 2)));
+                previsionPosition.Z += (float)(Math.Cos(ang2 + (Math.PI / 2)));
             }
 
             //Permet d'aller a droite
             if (clavier.IsKeyDown(Keys.D))
             {
-                cameraPosition.X += (float)(Math.Sin(ang2 - (Math.PI / 2)));
-                cameraPosition.Z += (float)(Math.Cos(ang2 - (Math.PI / 2)));
+                previsionPosition.X += (float)(Math.Sin(ang2 - (Math.PI / 2)));
+                previsionPosition.Z += (float)(Math.Cos(ang2 - (Math.PI / 2)));
             }
+
+            box = new BoundingBox(previsionPosition - new Vector3(50, 50, 50), previsionPosition + new Vector3(50, 50, 50));
+
+            if (!IsCollisionEnnemis(listEnnemis))
+                cameraPosition = previsionPosition;
 
             // Partie souris
             MouseState mouseste = Mouse.GetState();
@@ -164,5 +185,12 @@ namespace ligne7
             }
         }
 
+        public BoundingBox Box
+        {
+            get
+            {
+                return box;
+            }
+        }
     }
 }
