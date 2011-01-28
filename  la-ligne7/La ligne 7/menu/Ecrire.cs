@@ -77,4 +77,18 @@ namespace ligne7
             }
         }
     }
+
+    class Debug : Ecrire
+    {
+        public Debug(string name, float x, float y)
+            : base(name, x, y)
+        {
+            assetNameFont = "Debug";
+        }
+
+        public void Update(string name)
+        {
+            this.name = name;
+        }
+    }
 }
