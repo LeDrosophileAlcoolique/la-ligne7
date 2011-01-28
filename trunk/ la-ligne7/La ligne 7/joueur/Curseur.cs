@@ -16,11 +16,14 @@ namespace ligne7
         protected Vector2 position;
         protected Texture2D texture;
 
+        protected string assetName;
+
         public Curseur() 
         {
+            assetName = "Curseur";
         }
 
-        public void LoadContent(ContentManager content, string assetName, GraphicsDeviceManager graphics)
+        public void LoadContent(ContentManager content, GraphicsDeviceManager graphics)
         {
             texture = content.Load<Texture2D>(assetName);
             position = new Vector2((graphics.GraphicsDevice.Viewport.Width - texture.Width) / 2, (graphics.GraphicsDevice.Viewport.Height - texture.Height) / 2);

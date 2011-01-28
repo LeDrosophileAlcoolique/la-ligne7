@@ -12,40 +12,23 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 #endregion
 
-// nouvelle version
-
 namespace ligne7
 {
-    class Tir
+    class Tir : ModelDeplacement
     {
-
-        Model balle;
-        Vector3 tirPosition;
         Vector3 epaule = new Vector3(0, 0.0f, 0.0f);
         Vector3 direction = Vector3.Zero;
-        float speed = 1.0f;
         
-        public Tir(ContentManager Content, List<Tir> liste_tir, Vector3 spawnBalle, Vector3 vecteurTir)
+        public Tir(ContentManager Content, Joueur joueur)
         {
+            speed = 1.0f;
+
+            position = joueur.Position - new Vector3(0.0f, 50.0f, 0.0f);
+            direction = joueur.Target - joueur.Position;
+
             // On charge le model
-            balle = Content.Load<Model>("balle");
-
-            //modelePosition = new Vector3(rand.Next(10), -1.0f, rand.Next(10));
-            tirPosition = spawnBalle;// -epaule;
-
-            direction = vecteurTir;
-
+            model = Content.Load<Model>("balle");
         }
-
-
-
-
-        protected void Update(Vector3 translation)
-        {
-            tirPosition += translation;
-        }
-
-        // Ennemis ne nous suivent pas en Y car les zombies ne sautent pas 
 
         public void PartirTresLoin(GameTime gameTime)
         {
@@ -56,31 +39,6 @@ namespace ligne7
 
             Update(deplacement);
         }
-
-        /*public void Draw2(Matrix Projection, Matrix view, Vector3 cible, List<Tir> list_tir, Tir shoot)
-        {
-           foreach (Tir tir in list_tir)
-                shoot.Draw(Projection, view, cible);
-        }*/
-
-        public void Draw(Matrix Projection, Matrix view, Vector3 cible)
-        {
-            //On dessine le mur
-            Matrix[] transforms = new Matrix[balle.Bones.Count];
-            balle.CopyAbsoluteBoneTransformsTo(transforms);
-
-            foreach (ModelMesh mesh in balle.Meshes)
-            {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    effect.Projection = Projection;
-                    effect.View = view;
-                    effect.World = transforms[mesh.ParentBone.Index] * Matrix.CreateTranslation(tirPosition);
-                }
-                mesh.Draw();
-            }
-        }
-
     }
 }
 

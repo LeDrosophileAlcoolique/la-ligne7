@@ -51,23 +51,36 @@ namespace ligne7
 
         public GameTime GameTime
         {
-            set { gameTime = value; }
-            get { return gameTime; }
+            set 
+            { 
+                gameTime = value; 
+            }
+            get { 
+                return gameTime; 
+            }
         }
 
         public SpriteBatch SpriteBatch
         {
-            get { return spriteBatch; }
+            get 
+            { 
+                return spriteBatch; 
+            }
         }
 
         public GraphicsDeviceManager Graphics
         {
-            get { return graphics; }
+            get 
+            { 
+                return graphics; 
+            }
         }
 
         public Clavier Clavier
         {
-            get { return clavier; }
+            get { 
+                return clavier; 
+            }
         }
     }
 }

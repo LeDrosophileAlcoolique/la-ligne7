@@ -14,28 +14,16 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace ligne7
 {
-    class Ennemis
+    class Ennemis : ModelDeplacement
     {
-        protected Model model;
-        public Vector3 position;
-        protected float speed;
-
-        public Ennemis()
+        public Ennemis(ContentManager content)
+            : base()
         {
             speed = 0.03f;
-            position = new Vector3(0, -39, 0);
-        }
+            position = Vector3.Zero;
 
-        // Méthode pour charger le modèle
-
-        public void LoadContent(ContentManager content)
-        {
-            model = content.Load<Model>("Zombie");
-        }
-
-        protected void Update(Vector3 translation)
-        {
-            position += translation;
+            // On charge le modèle
+            model = content.Load<Model>("Balle");
         }
 
         // Ennemis ne nous suivent pas en Y car les zombies ne sautent pas 
@@ -58,6 +46,7 @@ namespace ligne7
         protected int Direction(float direction, float speed)
         {
             int retourne;
+
             // speed / 2 permet a l'ennemi de ne pas se deplacer lorsqu'il arrive sur le joueur
             if (direction < - speed /2)
                 retourne = 1;
@@ -67,35 +56,6 @@ namespace ligne7
                 retourne = 0;
 
             return retourne;
-        }
-
-        public void Draw(Joueur joueur)
-        {
-            // Matrice squelette ? Surement lol
-            Matrix[] transforms = new Matrix[model.Bones.Count];
-            model.CopyAbsoluteBoneTransformsTo(transforms);
-
-            // Dessine le modèle
-            foreach (ModelMesh mesh in model.Meshes)
-            {
-                foreach (BasicEffect effect in mesh.Effects)
-                {
-                    // Lumiere
-                    effect.EnableDefaultLighting();
-
-                    // Effect world = possibilite de faire rotation, translation...
-                    effect.Parameters["World"].SetValue(true);
-                    effect.World = transforms[mesh.ParentBone.Index] * Matrix.CreateTranslation(position);
-
-                    // Vue du modèle en perspective
-                    effect.Parameters["Projection"].SetValue(joueur.Projection);
-
-                    // Camera
-                    effect.Parameters["View"].SetValue(joueur.View);
-                }
-
-                mesh.Draw();
-            }
         }
     }
 }
