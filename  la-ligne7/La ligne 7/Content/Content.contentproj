@@ -35,15 +35,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="sound.mp3">
-      <Name>sound</Name>
+    <Compile Include="Sound.mp3">
+      <Name>Sound</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="curseur.bmp">
-      <Name>curseur</Name>
+    <Compile Include="Curseur.bmp">
+      <Name>Curseur</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -63,22 +63,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SpriteFont1.spritefont">
-      <Name>SpriteFont1</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="balle.FBX">
-      <Name>balle</Name>
+    <Compile Include="Balle.FBX">
+      <Name>Balle</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="field.FBX">
-      <Name>field</Name>
+    <Compile Include="Field.FBX">
+      <Name>Field</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>

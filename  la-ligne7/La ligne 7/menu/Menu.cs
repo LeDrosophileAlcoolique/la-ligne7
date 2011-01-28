@@ -25,6 +25,8 @@ namespace ligne7
             this.boutons[0].IsSelected = true;
         }
 
+        // La fonction SetBoutonSelected change le bouton qui est sélectionné
+
         public void SetBoutonSelected(int selected, int operation)
         {
             boutons[selected].IsSelected = false;
@@ -48,12 +50,62 @@ namespace ligne7
 
         public int Selected
         { 
-            get { return selected; }
+            get 
+            { 
+                return selected; 
+            }
         }
 
         public Bouton[] Boutons
         {
-            get { return boutons; }
+            get 
+            { 
+                return boutons; 
+            }
+        }
+    }
+
+    // Le comportement du menu pricipal affiché au lancement du jeu
+
+    class MainMenu : Menu
+    {
+        public MainMenu(Bouton[] boutons)
+            : base(boutons)
+        {
+        }
+
+        public override void pressEnter(ScreenManager screenManager)
+        {
+            switch (selected)
+            {
+                case 0:
+                    screenManager.ChangeGameScreen(new MainScreen(screenManager));
+                    break;
+                case 2:
+                    screenManager.ChangeGameScreen(new OptionsScreen(screenManager));
+                    break;
+                case 3:
+                    screenManager.Game.Exit();
+                    break;
+            }
+        }
+    }
+
+    class OptionsMenu : Menu
+    {
+        public OptionsMenu(Bouton[] boutons)
+            : base(boutons)
+        {
+        }
+
+        public override void pressEnter(ScreenManager screenManager)
+        {
+            switch (selected)
+            {
+                case 2:
+                    screenManager.ChangeGameScreen(new MenuScreen(screenManager));
+                    break;
+            }
         }
     }
 }

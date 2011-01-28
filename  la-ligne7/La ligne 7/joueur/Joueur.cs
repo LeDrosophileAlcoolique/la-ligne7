@@ -19,18 +19,17 @@ namespace ligne7
         protected Vector3 cameraTarget;
         protected Matrix projection;
         protected Matrix view;
-        bool sol;
-        public double ang1;
-        public double ang2;
-        
 
-        
+        protected double ang1;
+        protected double ang2;
+
+        protected bool IsEnTrainDeSauter;
 
         public Joueur(float aspectRatio)
         {
             cible = new Vector3(0, 0, 1);
             cameraTranslation = new Vector3(0.04f);
-            cameraPosition = new Vector3(0, 0, -150.0f);
+            cameraPosition = new Vector3(0, 35, -150.0f);
             cameraTarget = cameraPosition + cible;
             
             // Matrice de l'effet de vue en perspective
@@ -39,6 +38,7 @@ namespace ligne7
             // effect view = vue de la camera
             view = Matrix.CreateLookAt(cameraPosition, cameraTarget, Vector3.Up);
 
+            IsEnTrainDeSauter = false;
         }
 
         
@@ -111,57 +111,57 @@ namespace ligne7
                 cible.X = (float)(1 * Math.Sin(ang2));
             }
 
-            if (sol == true && clavier.IsKeyDown(Keys.Space))
+            // Saut optimisé mais à modifier si le jeu possede plusieurs étages
+
+            if (cameraPosition.Y <= 35)
+                IsEnTrainDeSauter = clavier.IsKeyDown(Keys.Space);
+
+            if (IsEnTrainDeSauter)
             {
-                cameraPosition.Y += 10f;
-                if (cameraPosition.Y < 50)
-                {
-                    sol = true;
-                }
-                else
-                {
-                    sol = false;
-                }
+                cameraPosition.Y += 5f;
+                IsEnTrainDeSauter = cameraPosition.Y < 65;
             }
+
+            if (!IsEnTrainDeSauter && cameraPosition.Y > 35)
+                cameraPosition.Y -= 0.5f;
 
             //positionne la cible de la camera en face de sa position
             cameraTarget = cameraPosition + cible;
 
             // effect view = vue de la camera
             view = Matrix.CreateLookAt(cameraPosition, cameraTarget, Vector3.Up);
-
-            if (cameraPosition.Y != 0)
-            {
-                cameraPosition.Y -= 0.5f;
-            }
-            else
-            {
-                sol = true;
-            }
-
-            
-
-
         }
 
         public Vector3 Position
         {
-            get { return cameraPosition; }
+            get 
+            { 
+                return cameraPosition; 
+            }
         }
 
         public Matrix Projection
         {
-            get { return projection; }
+            get 
+            { 
+                return projection; 
+            }
         }
 
         public Matrix View
         {
-            get { return view; }
+            get 
+            { 
+                return view; 
+            }
         }
 
         public Vector3 Target
         {
-            get { return cameraTarget; }
+            get 
+            { 
+                return cameraTarget; 
+            }
         }
 
     }

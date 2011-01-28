@@ -12,33 +12,33 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 #endregion
 
-
 namespace ligne7
 {
-    class Terrain
+    class Modele3D
     {
-        protected Model field;
+        protected Model model;
         protected Vector3 position;
+        protected string assetName;
 
-        public Terrain()
+        public Modele3D()
         {
-            position = Vector3.Zero - new Vector3(0,50.0f,0);
+            
         }
 
         public void LoadContent(ContentManager Content)
         {
             // On charge le model
-            field = Content.Load<Model>("field");
+            model = Content.Load<Model>(assetName);
         }
 
         public void Draw(Joueur joueur)
         {
             // Matrice squelette ? Surement lol
-            Matrix[] transforms = new Matrix[field.Bones.Count];
-            field.CopyAbsoluteBoneTransformsTo(transforms);
+            Matrix[] transforms = new Matrix[model.Bones.Count];
+            model.CopyAbsoluteBoneTransformsTo(transforms);
 
             // Dessine le modèle
-            foreach (ModelMesh mesh in field.Meshes)
+            foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
@@ -58,6 +58,32 @@ namespace ligne7
 
                 mesh.Draw();
             }
+        }
+    }
+
+    class ModelDeplacement : Modele3D
+    {
+        protected float speed;
+
+        public ModelDeplacement()
+            : base()
+        {
+
+        }
+
+        protected void Update(Vector3 translation)
+        {
+            position += translation;
+        }
+    }
+
+    class Terrain : Modele3D
+    {
+        public Terrain()
+            : base()
+        {
+            position = new Vector3(0, 0, 0);
+            assetName = "Field";
         }
     }
 }
