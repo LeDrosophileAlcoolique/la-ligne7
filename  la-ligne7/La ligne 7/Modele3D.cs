@@ -73,6 +73,7 @@ namespace ligne7
     class ModelDeplacement : Modele3D
     {
         protected float speed;
+        protected BoundingBox nextBox;
 
         public ModelDeplacement()
             : base()
@@ -84,7 +85,7 @@ namespace ligne7
         {
             Vector3 prevision = position + translation;
 
-            BoundingBox nextBox = new BoundingBox(prevision - new Vector3(50, 50, 50), prevision + new Vector3(50, 50, 50));
+            nextBox = new BoundingBox(prevision - new Vector3(50, 50, 50), prevision + new Vector3(50, 50, 50));
 
             return nextBox.Intersects(cible);
         }
@@ -93,7 +94,7 @@ namespace ligne7
         {
             position += translation;
 
-            box = new BoundingBox(position - new Vector3(50, 50, 50), position + new Vector3(50, 50, 50));
+            box = nextBox;
         }
     }
 

@@ -32,7 +32,7 @@ namespace ligne7
 
             for (int i = 0; i < listEnnemis.Count; i++)
             {
-                if (this != listEnnemis[i] && box.Intersects(listEnnemis[i].Box))
+                if (this != listEnnemis[i] && nextBox.Intersects(listEnnemis[i].Box))
                     isCollision = true;
             }
 

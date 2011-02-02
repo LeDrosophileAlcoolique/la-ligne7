@@ -83,7 +83,7 @@ namespace ligne7
 
             // Deplacement Tir
             foreach (Tir tir in listTir)
-                tir.PartirTresLoin(gameTime);
+                tir.PartirTresLoin(gameTime, listEnnemis);
 
             // Remet la souris au centre de l'ecran
             Mouse.SetPosition(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
