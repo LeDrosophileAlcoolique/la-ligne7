@@ -20,6 +20,7 @@ namespace ligne7
         protected Matrix projection;
         protected Matrix view;
         protected BoundingBox box;
+        protected BoundingBox nextBox;
 
         protected double ang1;
         protected double ang2;
@@ -48,7 +49,7 @@ namespace ligne7
 
             for (int i = 0; i < listEnnemis.Count; i++)
             {
-                if (box.Intersects(listEnnemis[i].Box))
+                if (nextBox.Intersects(listEnnemis[i].Box))
                     isCollision = true;
             }
 
@@ -91,7 +92,7 @@ namespace ligne7
                 previsionPosition.Z += (float)(Math.Cos(ang2 - (Math.PI / 2)));
             }
 
-            box = new BoundingBox(previsionPosition - new Vector3(50, 50, 50), previsionPosition + new Vector3(50, 50, 50));
+            nextBox = new BoundingBox(previsionPosition - new Vector3(50, 50, 50), previsionPosition + new Vector3(50, 50, 50));
 
             if (!IsCollisionEnnemis(listEnnemis))
                 cameraPosition = previsionPosition;
@@ -134,16 +135,16 @@ namespace ligne7
 
             // Saut optimisé mais à modifier si le jeu possede plusieurs étages
 
-            if (cameraPosition.Y <= 35)
+            if (cameraPosition.Y <= 0)
                 IsEnTrainDeSauter = clavier.IsKeyDown(Keys.Space);
 
             if (IsEnTrainDeSauter)
             {
                 cameraPosition.Y += 5f;
-                IsEnTrainDeSauter = cameraPosition.Y < 65;
+                IsEnTrainDeSauter = cameraPosition.Y < 35;
             }
 
-            if (!IsEnTrainDeSauter && cameraPosition.Y > 35)
+            if (!IsEnTrainDeSauter && cameraPosition.Y > 0)
                 cameraPosition.Y -= 0.5f;
 
             //positionne la cible de la camera en face de sa position
@@ -151,6 +152,8 @@ namespace ligne7
 
             // effect view = vue de la camera
             view = Matrix.CreateLookAt(cameraPosition, cameraTarget, Vector3.Up);
+
+            box = nextBox;
         }
 
         public Vector3 Position

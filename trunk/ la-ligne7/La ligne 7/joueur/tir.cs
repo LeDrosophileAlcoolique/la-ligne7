@@ -30,14 +30,26 @@ namespace ligne7
             model = Content.Load<Model>("balle");
         }
 
-        public void PartirTresLoin(GameTime gameTime)
+        public void PartirTresLoin(GameTime gameTime, List<Ennemis> listEnnemis)
         {
+            List<Ennemis> listEnnemisASupprimer = new List<Ennemis>();
             float speed = gameTime.ElapsedGameTime.Milliseconds * this.speed;
             Vector3 deplacement;
 
             deplacement = new Vector3(direction.X * speed, direction.Y * speed, direction.Z * speed);
 
             Update(deplacement);
+
+            foreach (Ennemis ennemis in listEnnemis)
+            {
+                if (IsCollision(ennemis.Box, position))
+                    listEnnemisASupprimer.Add(ennemis);
+            }
+
+            // Gestion Tir, gros bourrin à améliorer 
+
+            foreach (Ennemis ennemis in listEnnemisASupprimer)
+                listEnnemis.Remove(ennemis);
         }
     }
 }
