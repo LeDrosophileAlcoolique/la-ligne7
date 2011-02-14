@@ -24,7 +24,7 @@ namespace ligne7
 
         public void LoadContentAndPlay(ContentManager content)
         {
-            MediaPlayer.Play(content.Load<Song>("Sound"));
+            MediaPlayer.Play(content.Load<Song>("psycraft"));
         }
     }
 }

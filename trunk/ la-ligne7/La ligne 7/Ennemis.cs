@@ -20,10 +20,10 @@ namespace ligne7
             : base()
         {
             speed = 0.03f;
-            position = Vector3.Zero;
+            position = new Vector3(0,10,0);
 
             // On charge le modèle
-            model = content.Load<Model>("Balle");
+            model = content.Load<Model>("Zombie");
         }
 
         public bool IsCollisionEnnemis(List<Ennemis> listEnnemis)

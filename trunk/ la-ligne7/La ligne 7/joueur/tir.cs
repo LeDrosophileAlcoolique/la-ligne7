@@ -23,7 +23,7 @@ namespace ligne7
         {
             speed = 1.0f;
 
-            position = joueur.Position - new Vector3(0.0f, 50.0f, 0.0f);
+            position = joueur.Position - new Vector3(0.0f, 5.0f, 0.0f);
             direction = joueur.Target - joueur.Position;
 
             // On charge le model
