@@ -31,7 +31,7 @@ namespace ligne7
         {
             cible = new Vector3(0, 0, 1);
             cameraTranslation = new Vector3(0.04f);
-            cameraPosition = new Vector3(0, 0, -135f);
+            cameraPosition = new Vector3(0, 20, -135f);
             cameraTarget = cameraPosition + cible;
             
             // Matrice de l'effet de vue en perspective
@@ -135,7 +135,7 @@ namespace ligne7
 
             // Saut optimisé mais à modifier si le jeu possede plusieurs étages
 
-            if (cameraPosition.Y <= 0)
+            if (cameraPosition.Y <= 20)
                 IsEnTrainDeSauter = clavier.IsKeyDown(Keys.Space);
 
             if (IsEnTrainDeSauter)
@@ -144,7 +144,7 @@ namespace ligne7
                 IsEnTrainDeSauter = cameraPosition.Y < 35;
             }
 
-            if (!IsEnTrainDeSauter && cameraPosition.Y > 0)
+            if (!IsEnTrainDeSauter && cameraPosition.Y > 20)
                 cameraPosition.Y -= 0.5f;
 
             //positionne la cible de la camera en face de sa position
