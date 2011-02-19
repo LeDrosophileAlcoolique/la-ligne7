@@ -14,6 +14,7 @@ namespace ligne7
     class MainScreen : GameScreen
     {
         protected GraphicsDeviceManager graphics;
+        protected Souris souris;
         protected Clavier clavier;
         public float aspectRatio;
 
@@ -31,8 +32,9 @@ namespace ligne7
         public MainScreen(ScreenManager screenManager)
             : base(screenManager)
         {
-            graphics = screenManager.Graphics;
+            graphics = screenManager.Graphics; 
             clavier = new Clavier(screenManager.Game);
+            souris = new Souris(screenManager.Game);
 
             // Ratio Hauteur/Largeur pour la vue en perspective du modèle
             aspectRatio = (float)graphics.GraphicsDevice.Viewport.Width / (float)graphics.GraphicsDevice.Viewport.Height;
@@ -75,6 +77,7 @@ namespace ligne7
         public override void Update(GameTime gameTime)
         {
             clavier.Update();
+            souris.Update();
 
             // Appel de la méthode Update dans la classe Joueur
             joueur.Deplacement(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2, screenManager.Game.Content, listEnnemis, listdecor, listdecorinvers);
@@ -88,7 +91,7 @@ namespace ligne7
                 //ennemis.Suivre(joueur, gameTime, listEnnemis);
 
             // On tire lorsque le joueur appuie sur clic gauche.
-            if ((Mouse.GetState().LeftButton == ButtonState.Pressed))
+            if (souris.IsNewClickPress())
                 listTir.Add(new Tir(screenManager.Game.Content, joueur));
 
             // Deplacement Tir

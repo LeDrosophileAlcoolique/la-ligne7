@@ -18,6 +18,7 @@ namespace ligne7
         protected Ecrire author;
         protected Ecrire team;
         protected Texture2D fond;
+        protected Curseur curseur;
 
         public MenuScreen(ScreenManager screenManager)
             : base(screenManager)
@@ -26,6 +27,7 @@ namespace ligne7
             menu = new MainMenu(new Bouton[] { new Bouton("Jouer !", 30, 100), new Bouton("Instructions", 130, 200), new Bouton("Options", 230, 300), new Bouton("Quitter, bye bye", 330, 400) });
             author = new Ecrire("Copyright - RETP - Arnaud, Jacques, Remi, Thibault", 0, screenManager.Game.GraphicsDevice.Viewport.Height - 100);
             team = new Ecrire("Les Rats Envahissent Tout Paris", 0, screenManager.Game.GraphicsDevice.Viewport.Height - 65);
+            curseur = new Curseur();
         }
 
         public override void LoadContent()
@@ -36,12 +38,11 @@ namespace ligne7
             author.LoadFont(screenManager.Game.Content);
             team.LoadFont(screenManager.Game.Content);
             fond = screenManager.Game.Content.Load<Texture2D>("Bloody");
+            curseur.LoadContent(screenManager.Game.Content, graphics);
         }
 
         public override void Update(GameTime gameTime)
         {
-            screenManager.Clavier.Update();
-
             foreach (Bouton bouton in menu.Boutons)
                 bouton.Translation(gameTime);
 
@@ -52,8 +53,15 @@ namespace ligne7
                 menu.SetBoutonSelected(menu.Selected, -1);
 
             if (screenManager.Clavier.IsNewKeyPress(Keys.Enter))
-                menu.pressEnter(screenManager);
-            Mouse.SetPosition(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
+                menu.PressEnter(screenManager);
+
+            if (screenManager.Souris.IsChangeState())
+                menu.focus(screenManager.Souris.CurrentMouseState.X, screenManager.Souris.CurrentMouseState.Y);
+
+            if (screenManager.Souris.IsNewClickPress())
+                menu.Click(screenManager, screenManager.Souris.CurrentMouseState.X, screenManager.Souris.CurrentMouseState.Y);
+
+            curseur.Update(screenManager.Souris.CurrentMouseState.X, screenManager.Souris.CurrentMouseState.Y);
         }
 
         public override void Draw(GameTime gameTime)
@@ -69,19 +77,24 @@ namespace ligne7
 
             author.Draw(spriteBatch);
             team.Draw(spriteBatch);
+            curseur.Draw(spriteBatch);
             spriteBatch.End();
         }
     }
 
     class OptionsScreen : GameScreen
     {
+        protected GraphicsDeviceManager graphics;
         protected Menu menu;
         protected Texture2D fond;
+        protected Curseur curseur;
 
         public OptionsScreen(ScreenManager screenManager)
             : base(screenManager)
         {
-            menu = new OptionsMenu(new Bouton[] { new Bouton("Vitesse du jeu", 75, 100), new Bouton("Sensibilite de la souris", 75, 200), new Bouton("Retour", 75, 300) });
+            graphics = screenManager.Graphics;
+            menu = new OptionsMenu(new Bouton[] { new Bouton("Volume", 75, 100), new Bouton("Sensibilite de la souris", 75, 200), new Bouton("Retour", 75, 300) });
+            curseur = new Curseur();
         }
 
         public override void LoadContent()
@@ -90,12 +103,12 @@ namespace ligne7
 
             foreach (Bouton bouton in menu.Boutons)
                 bouton.LoadFont(screenManager.Game.Content);
+
+            curseur.LoadContent(screenManager.Game.Content, graphics);
         }
 
         public override void Update(GameTime gameTime)
         {
-            screenManager.Clavier.Update();
-
             foreach (Bouton bouton in menu.Boutons)
                 bouton.Translation(gameTime);
 
@@ -106,7 +119,15 @@ namespace ligne7
                 menu.SetBoutonSelected(menu.Selected, -1);
 
             if (screenManager.Clavier.IsNewKeyPress(Keys.Enter))
-                menu.pressEnter(screenManager);
+                menu.PressEnter(screenManager);
+
+            if (screenManager.Souris.IsChangeState())
+                menu.focus(screenManager.Souris.CurrentMouseState.X, screenManager.Souris.CurrentMouseState.Y);
+
+            if (screenManager.Souris.IsNewClickPress())
+                menu.Click(screenManager, screenManager.Souris.CurrentMouseState.X, screenManager.Souris.CurrentMouseState.Y);
+
+            curseur.Update(screenManager.Souris.CurrentMouseState.X, screenManager.Souris.CurrentMouseState.Y);
         }
 
         public override void Draw(GameTime gameTime)
@@ -119,7 +140,7 @@ namespace ligne7
             spriteBatch.Draw(fond, new Vector2((screenManager.Game.GraphicsDevice.Viewport.Width - fond.Width) / 2 + 100, (screenManager.Game.GraphicsDevice.Viewport.Height - fond.Height) / 2 + 150), Color.White);
             foreach (Bouton bouton in menu.Boutons)
                 bouton.Draw(spriteBatch);
-
+            curseur.Draw(spriteBatch);
             spriteBatch.End();
         }
     }

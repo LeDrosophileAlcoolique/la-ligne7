@@ -85,7 +85,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Joueur\Clavier.cs" />
+    <Compile Include="Joueur\ClavierSouris.cs" />
     <Compile Include="Joueur\Curseur.cs" />
     <Compile Include="Ennemis.cs" />
     <Compile Include="Joueur\Joueur.cs" />

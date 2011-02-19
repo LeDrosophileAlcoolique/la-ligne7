@@ -42,6 +42,7 @@ namespace ligne7
     {
         protected float translation;
         protected bool isSelected;
+        protected Rectangle box;
 
         public Bouton(string name, float x, float y)
             : base(name, x, y)
@@ -49,6 +50,7 @@ namespace ligne7
             assetNameFont = "MenuFont";
             translation = x;
             isSelected = false;
+            box = new Rectangle((int)x - 100, (int)y, 400, 60);
         }
 
         public void Translation(GameTime gameTime)
@@ -74,6 +76,14 @@ namespace ligne7
             set 
             { 
                 isSelected = value; 
+            }
+        }
+
+        public Rectangle Box
+        {
+            get
+            {
+                return box;
             }
         }
     }

@@ -34,12 +34,45 @@ namespace ligne7
 
         public bool IsNewKeyPress(Keys key)
         {
-            return (currentKeyboardState.IsKeyDown(key) && lastKeyboardState.IsKeyUp(key));
+            return currentKeyboardState.IsKeyDown(key) && lastKeyboardState.IsKeyUp(key);
         }
 
         public KeyboardState CurrentKeyboardState
         {
             get { return currentKeyboardState; }
+        }
+    }
+
+    class Souris : GameComponent
+    {
+        protected MouseState currentMouseState;
+        protected MouseState lastMouseState;
+
+        public Souris(Game game)
+            : base(game)
+        {
+        }
+
+        public void Update()
+        {
+            lastMouseState = currentMouseState;
+
+            currentMouseState = Mouse.GetState();
+        }
+
+        public bool IsChangeState()
+        {
+            return currentMouseState.X != lastMouseState.X || currentMouseState.Y != lastMouseState.Y;
+        }
+
+        public bool IsNewClickPress()
+        {
+            return currentMouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton == ButtonState.Released;
+        }
+
+        public MouseState CurrentMouseState
+        {
+            get { return currentMouseState; }
         }
     }
 }
