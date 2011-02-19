@@ -18,11 +18,13 @@ namespace ligne7
         protected GraphicsDeviceManager graphics;
         protected GameTime gameTime;
         protected Clavier clavier;
+        protected Souris souris;
 
         public ScreenManager(Game game, GraphicsDeviceManager graphics)
             : base(game)
         {
             clavier = new Clavier(Game);
+            souris = new Souris(Game);
             this.graphics = graphics;
             gameScreen = new MenuScreen(this);
         }
@@ -35,6 +37,8 @@ namespace ligne7
 
         public void MiseJour()
         {
+            clavier.Update();
+            souris.Update();
             gameScreen.Update(gameTime);
         }
 
@@ -82,6 +86,14 @@ namespace ligne7
             get 
             { 
                 return clavier; 
+            }
+        }
+
+        public Souris Souris
+        {
+            get
+            {
+                return souris;
             }
         }
     }

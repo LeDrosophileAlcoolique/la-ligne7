@@ -46,7 +46,37 @@ namespace ligne7
             boutons[ieme].IsSelected = true;
         }
 
-        public abstract void pressEnter(ScreenManager screenManager);
+        public void PressEnter(ScreenManager screenManager)
+        {
+            Action(screenManager, selected);
+        }
+
+        public void Click(ScreenManager screenManager, int x, int y)
+        {
+            for (int i = 0; i < boutons.Length; i++)
+            {
+                if (boutons[i].Box.Contains(x, y))
+                {
+                    Action(screenManager, i);
+                }
+            }
+        }
+
+        public void focus(int x, int y)
+        {
+            for (int i = 0; i < boutons.Length; i++)
+            {
+                if (boutons[i].Box.Contains(x, y))
+                {
+                    boutons[selected].IsSelected = false;
+
+                    this.selected = i;
+                    boutons[i].IsSelected = true;
+                }
+            }
+        }
+
+        protected abstract void Action(ScreenManager screenManager, int selected);
 
         public int Selected
         { 
@@ -74,7 +104,7 @@ namespace ligne7
         {
         }
 
-        public override void pressEnter(ScreenManager screenManager)
+        protected override void Action(ScreenManager screenManager, int selected)
         {
             switch (selected)
             {
@@ -98,7 +128,7 @@ namespace ligne7
         {
         }
 
-        public override void pressEnter(ScreenManager screenManager)
+        protected override void Action(ScreenManager screenManager, int selected)
         {
             switch (selected)
             {

@@ -29,6 +29,11 @@ namespace ligne7
             position = new Vector2((graphics.GraphicsDevice.Viewport.Width - texture.Width) / 2, (graphics.GraphicsDevice.Viewport.Height - texture.Height) / 2);
         }
 
+        public void Update(int x, int y)
+        {
+            position = new Vector2(x - texture.Width / 2, y - texture.Height / 2);
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, Color.RoyalBlue);
