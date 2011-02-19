@@ -13,6 +13,7 @@ namespace ligne7
 {
     class MenuScreen : GameScreen
     {
+        protected GraphicsDeviceManager graphics;
         protected Menu menu;
         protected Ecrire author;
         protected Ecrire team;
@@ -21,6 +22,7 @@ namespace ligne7
         public MenuScreen(ScreenManager screenManager)
             : base(screenManager)
         {
+            graphics = screenManager.Graphics;
             menu = new MainMenu(new Bouton[] { new Bouton("Jouer !", 30, 100), new Bouton("Instructions", 130, 200), new Bouton("Options", 230, 300), new Bouton("Quitter, bye bye", 330, 400) });
             author = new Ecrire("Copyright - RETP - Arnaud, Jacques, Remi, Thibault", 0, screenManager.Game.GraphicsDevice.Viewport.Height - 100);
             team = new Ecrire("Les Rats Envahissent Tout Paris", 0, screenManager.Game.GraphicsDevice.Viewport.Height - 65);
@@ -51,6 +53,7 @@ namespace ligne7
 
             if (screenManager.Clavier.IsNewKeyPress(Keys.Enter))
                 menu.pressEnter(screenManager);
+            Mouse.SetPosition(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
         }
 
         public override void Draw(GameTime gameTime)

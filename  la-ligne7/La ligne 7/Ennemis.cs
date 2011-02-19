@@ -20,9 +20,10 @@ namespace ligne7
             : base()
         {
             speed = 0.03f;
-            position = new Vector3(0,10,0);
+            position = new Vector3(10,0,0);
 
             // On charge le modèle
+
             model = content.Load<Model>("Zombie");
         }
 
@@ -45,7 +46,7 @@ namespace ligne7
         {
             int direction_x, direction_z;
             float speed = gameTime.ElapsedGameTime.Milliseconds * this.speed;
-            Vector3 direction = position - joueur.Position;
+            Vector3 direction = position - joueur.Positioncam;
             Vector3 deplacement;
 
             direction_x = Direction(direction.X, speed);

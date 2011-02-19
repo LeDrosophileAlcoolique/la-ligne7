@@ -15,15 +15,16 @@ namespace ligne7
     {
         protected GraphicsDeviceManager graphics;
         protected Clavier clavier;
-        protected float aspectRatio;
+        public float aspectRatio;
 
         protected Son son;
-        protected Terrain field;
 
         protected Joueur joueur;
         protected Curseur curseur;
         protected List<Ennemis> listEnnemis;
         protected List<Tir> listTir;
+        protected List<modelTerrain> listdecor;
+        protected List<modelTerrain> listdecorinvers;
 
         protected Debug debug;
 
@@ -40,12 +41,13 @@ namespace ligne7
             // base.IsMouseVisible = true;
 
             son = new Son();
-            field = new Terrain();
 
             joueur = new Joueur(aspectRatio);
             curseur = new Curseur();
             listEnnemis = new List<Ennemis>();
             listTir = new List<Tir>();
+            listdecor = new List<modelTerrain>();
+            listdecorinvers = new List<modelTerrain>();
 
             debug = new Debug("Debug", 0, 0);
         }
@@ -54,10 +56,16 @@ namespace ligne7
         {
             son.LoadContentAndPlay(screenManager.Game.Content);
 
-            field.LoadContent(screenManager.Game.Content);
             curseur.LoadContent(screenManager.Game.Content, graphics);
-
+            
             listEnnemis.Add(new Ennemis(screenManager.Game.Content));
+            
+            listdecorinvers.Add(new modelTerrain(screenManager.Game.Content,new Vector3(0,0,0),90,100,90,"terrain"));
+            listdecor.Add(new modelTerrain(screenManager.Game.Content,new Vector3(0,0,0),5,100,5,"pillier"));
+            listdecor.Add(new modelTerrain(screenManager.Game.Content, new Vector3(100, 0, 100),5,100,5, "pillier"));
+            listdecor.Add(new modelTerrain(screenManager.Game.Content, new Vector3(0, 0, 100),5,100,5, "pillier"));
+            listdecor.Add(new modelTerrain(screenManager.Game.Content, new Vector3(100, 0, 0),5,100,5, "pillier"));
+            listdecor.Add(new modelTerrain(screenManager.Game.Content, new Vector3(50, 0, 50), 10, 10, 10, "box"));
 
             debug.LoadFont(screenManager.Game.Content);
         }
@@ -67,7 +75,7 @@ namespace ligne7
             clavier.Update();
 
             // Appel de la méthode Update dans la classe Joueur
-            joueur.Deplacement(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2, screenManager.Game.Content, listEnnemis);
+            joueur.Deplacement(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2, screenManager.Game.Content, listEnnemis, listdecor, listdecorinvers[0].boxModel);
 
             // On créé un modèle 3d si le joueur appuie sur M
             if (clavier.IsNewKeyPress(Keys.M))
@@ -75,7 +83,7 @@ namespace ligne7
 
             // Les ennemis qui nous suivent
             foreach (Ennemis ennemis in listEnnemis)
-                ennemis.Suivre(joueur, gameTime, listEnnemis);
+                //ennemis.Suivre(joueur, gameTime, listEnnemis);
 
             // On tire lorsque le joueur appuie sur clic gauche.
             if ((Mouse.GetState().LeftButton == ButtonState.Pressed))
@@ -89,15 +97,18 @@ namespace ligne7
             Mouse.SetPosition(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
 
             if (listEnnemis.Count > 0)
-                debug.Update(joueur.Box.Min + "," + joueur.Box.Max + ", \n" + listEnnemis[0].Box.Min + "," + listEnnemis[0].Box.Max);
+                debug.Update(joueur.Boxcam.Min + "," + joueur.Position + ", \n" + listEnnemis[0].Box.Min + "," + joueur.angl1 + "," + joueur.angl2 + "," + joueur.Boxcam.Intersects(listdecor[0].boxModel) + ",\n" + joueur.Target );
         }
 
         public override void Draw(GameTime gameTime)
         {
-            screenManager.Game.GraphicsDevice.Clear(Color.Black);
+            screenManager.Game.GraphicsDevice.Clear(Color.Blue);
 
             // Dessine modele 3D
-            field.Draw(joueur);
+            foreach (modelTerrain decor in listdecor)
+                decor.Draw(joueur);
+            foreach (modelTerrain decor in listdecorinvers)
+                decor.Draw(joueur);
 
             foreach (Ennemis ennemis in listEnnemis)
                 ennemis.Draw(joueur);

@@ -49,13 +49,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Station.FBX">
-      <Name>Station</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Field.FBX">
       <Name>Field</Name>
       <Importer>FbxImporter</Importer>
@@ -94,6 +87,27 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Balle.FBX">
+      <Name>Balle</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="test.FBX">
+      <Name>test</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Stucco Wall.jpg">
+      <Name>Stucco Wall</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Zombie.FBX">
       <Name>Zombie</Name>
       <Importer>FbxImporter</Importer>
@@ -101,8 +115,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Balle.FBX">
-      <Name>Balle</Name>
+    <Compile Include="Station.FBX">
+      <Name>Station</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="pillier.FBX">
+      <Name>pillier</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="box.FBX">
+      <Name>box</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="terrain.FBX">
+      <Name>terrain</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>

@@ -11,19 +11,23 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ligne7
 {
-    class Joueur
+    class Joueur : ModelDeplacement
     {
         protected Vector3 cible;
         protected Vector3 cameraTranslation;
         protected Vector3 cameraPosition;
         protected Vector3 cameraTarget;
+        protected Vector3 directionMouv;
+        protected Vector3 previsionPosition;
+        protected Vector3 oldcameraPosition;
         protected Matrix projection;
         protected Matrix view;
-        protected BoundingBox box;
-        protected BoundingBox nextBox;
+        protected BoundingBox boxcam;
+        protected BoundingBox nextBoxcam;
 
         protected double ang1;
         protected double ang2;
+        protected float sautmax;
 
         protected bool IsEnTrainDeSauter;
 
@@ -31,7 +35,7 @@ namespace ligne7
         {
             cible = new Vector3(0, 0, 1);
             cameraTranslation = new Vector3(0.04f);
-            cameraPosition = new Vector3(0, 20, -135f);
+            cameraPosition = new Vector3(20, 25, -20);
             cameraTarget = cameraPosition + cible;
             
             // Matrice de l'effet de vue en perspective
@@ -41,6 +45,7 @@ namespace ligne7
             view = Matrix.CreateLookAt(cameraPosition, cameraTarget, Vector3.Up);
 
             IsEnTrainDeSauter = false;
+            directionMouv = previsionPosition - cameraPosition;
         }
 
         public bool IsCollisionEnnemis(List<Ennemis> listEnnemis)
@@ -49,20 +54,19 @@ namespace ligne7
 
             for (int i = 0; i < listEnnemis.Count; i++)
             {
-                if (nextBox.Intersects(listEnnemis[i].Box))
+                if (nextBoxcam.Intersects(listEnnemis[i].Box))
                     isCollision = true;
             }
 
             return isCollision;
         }
 
-
-        public void Deplacement(int x, int y, ContentManager Content, List<Ennemis> listEnnemis)
+        public void Deplacement(int x, int y, ContentManager Content, List<Ennemis> listEnnemis, List<modelTerrain> listdecor, BoundingBox limit)
         {
             // Partie clavier
             KeyboardState clavier = Keyboard.GetState();
 
-            Vector3 previsionPosition = cameraPosition;
+            previsionPosition = cameraPosition;
 
             // Permet d'avancer
             if (clavier.IsKeyDown(Keys.Z))
@@ -73,7 +77,7 @@ namespace ligne7
 
             //Permet de reculer
             if (clavier.IsKeyDown(Keys.S))
-            {
+            {               
                 previsionPosition.X -= cible.X;
                 previsionPosition.Z -= cible.Z;
             }
@@ -92,71 +96,82 @@ namespace ligne7
                 previsionPosition.Z += (float)(Math.Cos(ang2 - (Math.PI / 2)));
             }
 
-            nextBox = new BoundingBox(previsionPosition - new Vector3(50, 50, 50), previsionPosition + new Vector3(50, 50, 50));
+            nextBoxcam = new BoundingBox(previsionPosition - new Vector3(5, 20, 5), previsionPosition + new Vector3(5, 20, 5));
 
-            if (!IsCollisionEnnemis(listEnnemis))
+            position = cameraPosition;
+            if (!IsCollisionEnnemis(listEnnemis) && !IsCollisiondecor(listdecor, nextBoxcam) && IsCollision(limit, (previsionPosition-cameraPosition)))
                 cameraPosition = previsionPosition;
 
             // Partie souris
             MouseState mouseste = Mouse.GetState();
 
             // fait pivoter la camera selon le deplacement de la souris
-            if (mouseste.Y > y + 10)
+            
+
+            if (mouseste.Y > y)
             {
-                if (ang1 > -(Math.PI / 2))
-                    ang1 -= (Math.PI / 90);
-                cible.X = (float)(1 * Math.Sin(ang2));
-                cible.Z = (float)(1 * Math.Cos(ang2));
-                cible.Y = (float)(1 * Math.Sin(ang1));
+                ang1 -= ((mouseste.Y -y)/10 *Math.PI / 80);
+                if (!(ang1 > -(Math.PI / 2 + 0.1)))
+                    cible.Y = (float)(1 * Math.Sin(ang1));
+                else
+                    ang1 += ((y - mouseste.Y) / 10 * Math.PI / 80);
             }
 
-            if (mouseste.Y < y - 10)
+            if (mouseste.Y < y)
             {
-                if (ang1 < (Math.PI / 2))
-                    ang1 += (Math.PI / 90);
-                cible.X = (float)(1 * Math.Sin(ang2));
-                cible.Z = (float)(1 * Math.Cos(ang2));
-                cible.Y = (float)(1 * Math.Sin(ang1));
+                ang1 += ((y-mouseste.Y)/10* Math.PI / 80);
+                if (!(ang1 < (Math.PI / 2) - 0.1))
+                    cible.Y = (float)(1 * Math.Sin(ang1));
+                else
+                    ang1 -= ((mouseste.Y - y) / 10 * Math.PI / 80);
             }
 
-            if (mouseste.X > x + 10)
+            if (mouseste.X > x)
             {
-                ang2 -= (Math.PI / 90);
-                cible.Z = (float)(1 * Math.Cos(ang2));
-                cible.X = (float)(1 * Math.Sin(ang2));
+                ang2 -= ((mouseste.X -x)/10 * Math.PI / 70);
+                cible.Z = (float)(1 * Math.Cos(ang2) * Math.Cos(ang1));
+                cible.X = (float)(1 * Math.Sin(ang2) * Math.Cos(ang1));
             }
 
-            if (mouseste.X < x - 10)
+            if (mouseste.X < x)
             {
-                ang2 += (Math.PI / 90);
-                cible.Z = (float)(1 * Math.Cos(ang2));
-                cible.X = (float)(1 * Math.Sin(ang2));
+                ang2 += ((x - mouseste.X)/ 10 * Math.PI / 70);
+                cible.Z = (float)(1 * Math.Cos(ang2) * Math.Cos(ang1));
+                cible.X = (float)(1 * Math.Sin(ang2) * Math.Cos(ang1));
             }
+
 
             // Saut optimisé mais à modifier si le jeu possede plusieurs étages
 
-            if (cameraPosition.Y <= 20)
+            if (cameraPosition.Y <= 25)
                 IsEnTrainDeSauter = clavier.IsKeyDown(Keys.Space);
+
+            if (!IsEnTrainDeSauter)
+                sautmax = cameraPosition.Y + 15;
 
             if (IsEnTrainDeSauter)
             {
                 cameraPosition.Y += 5f;
-                IsEnTrainDeSauter = cameraPosition.Y < 35;
+                IsEnTrainDeSauter = cameraPosition.Y <= sautmax;
             }
 
-            if (!IsEnTrainDeSauter && cameraPosition.Y > 20)
-                cameraPosition.Y -= 0.5f;
+            if (!IsEnTrainDeSauter && IsCollisionsol(listdecor, nextBox))
+                    cameraPosition.Y -= 1f;
 
             //positionne la cible de la camera en face de sa position
             cameraTarget = cameraPosition + cible;
 
+            directionMouv = previsionPosition - cameraPosition;
+
             // effect view = vue de la camera
             view = Matrix.CreateLookAt(cameraPosition, cameraTarget, Vector3.Up);
 
-            box = nextBox;
+            boxcam = nextBoxcam;
+
+            oldcameraPosition = cameraPosition;
         }
 
-        public Vector3 Position
+        public Vector3 Positioncam
         {
             get 
             { 
@@ -188,11 +203,26 @@ namespace ligne7
             }
         }
 
-        public BoundingBox Box
+        public BoundingBox Boxcam
         {
             get
             {
-                return box;
+                return boxcam;
+            }
+        }
+
+        public double angl1
+        {
+            get
+            {
+                return ang1;
+            }
+        }
+        public double angl2
+        {
+            get
+            {
+                return ang2;
             }
         }
     }
