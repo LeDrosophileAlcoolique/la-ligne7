@@ -23,8 +23,8 @@ namespace ligne7
         {
             speed = 1.0f;
 
-            position = joueur.Position - new Vector3(0.0f, 5.0f, 0.0f);
-            direction = joueur.Target - joueur.Position;
+            position = joueur.Positioncam - new Vector3(0.0f, 5.0f, 0.0f);
+            direction = joueur.Target - joueur.Positioncam;
 
             // On charge le model
             model = Content.Load<Model>("balle");
@@ -51,6 +51,7 @@ namespace ligne7
             foreach (Ennemis ennemis in listEnnemisASupprimer)
                 listEnnemis.Remove(ennemis);
         }
+        
     }
 }
 

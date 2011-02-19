@@ -20,6 +20,7 @@ namespace ligne7
         protected Vector3 position;
         protected BoundingBox box;
         protected string assetName;
+        protected Texture2D texture;
 
         public Modele3D()
         {
@@ -30,7 +31,9 @@ namespace ligne7
         {
             // On charge le model
             model = Content.Load<Model>(assetName);
+            texture = Content.Load<Texture2D>("Stucco Wall");
         }
+
 
         public void Draw(Joueur joueur)
         {
@@ -43,8 +46,11 @@ namespace ligne7
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
+                    effect.TextureEnabled = false;
+                    effect.Texture = texture;
                     // Lumiere
                     effect.EnableDefaultLighting();
+                    effect.AmbientLightColor = new Vector3(20f, 50f, 20f);
 
                     // Effect world = possibilite de faire rotation, translation...
                     effect.Parameters["World"].SetValue(true);
@@ -55,6 +61,7 @@ namespace ligne7
 
                     // Camera
                     effect.Parameters["View"].SetValue(joueur.View);
+                    
                 }
 
                 mesh.Draw();
@@ -66,6 +73,13 @@ namespace ligne7
             get
             {
                 return box;
+            }
+        }
+        public Vector3 Position
+        {
+            get
+            {
+                return position;
             }
         }
     }
@@ -85,7 +99,7 @@ namespace ligne7
         {
             Vector3 prevision = position + translation;
 
-            nextBox = new BoundingBox(prevision - new Vector3(50, 50, 50), prevision + new Vector3(50, 50, 50));
+            nextBox = new BoundingBox(prevision - new Vector3(5, 20, 5), prevision + new Vector3(5, 20, 5));
 
             return nextBox.Intersects(cible);
         }
@@ -96,15 +110,33 @@ namespace ligne7
 
             box = nextBox;
         }
-    }
 
-    class Terrain : Modele3D
-    {
-        public Terrain()
-            : base()
+        public bool IsCollisiondecor(List<modelTerrain> listdecor, BoundingBox nextBox)
         {
-            position = new Vector3(0, 0, 0);
-            assetName = "Field";
+            bool isCollision = false;
+
+            foreach (modelTerrain model in listdecor)
+            {
+                if (nextBox.Intersects(model.boxModel))
+                    isCollision = true;
+            }
+
+            return isCollision;
+        }
+
+        public bool IsCollisionsol(List<modelTerrain> list, BoundingBox box)
+        {
+            bool sol = false;
+            foreach (modelTerrain decors in list)
+            {
+                if (box.Intersects(decors.boxModel))
+                {
+                    if (box.Min.Y > decors.boxModel.Min.Y + (decors.boxModel.Max.Y - decors.boxModel.Min.Y / 2))
+                        sol = true;
+                }
+            }
+            return sol;
         }
     }
+
 }
