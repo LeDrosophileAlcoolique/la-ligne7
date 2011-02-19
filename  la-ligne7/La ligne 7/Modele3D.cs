@@ -50,7 +50,6 @@ namespace ligne7
                     effect.Texture = texture;
                     // Lumiere
                     effect.EnableDefaultLighting();
-                    effect.AmbientLightColor = new Vector3(20f, 50f, 20f);
 
                     // Effect world = possibilite de faire rotation, translation...
                     effect.Parameters["World"].SetValue(true);
@@ -111,6 +110,7 @@ namespace ligne7
             box = nextBox;
         }
 
+        // verifie la colision horizontal avec chaque objet du decor
         public bool IsCollisiondecor(List<modelTerrain> listdecor, BoundingBox nextBox)
         {
             bool isCollision = false;
@@ -124,6 +124,7 @@ namespace ligne7
             return isCollision;
         }
 
+        // verifie si la box se situe au dessus d'un objet du decor 
         public bool IsCollisionsol(List<modelTerrain> list, BoundingBox box)
         {
             bool sol = false;
@@ -131,12 +132,13 @@ namespace ligne7
             {
                 if (box.Intersects(decors.boxModel))
                 {
-                    if (box.Min.Y > decors.boxModel.Min.Y + (decors.boxModel.Max.Y - decors.boxModel.Min.Y / 2))
+                    if (box.Min.Y > decors.boxModel.Min.Y - 2)
                         sol = true;
                 }
             }
             return sol;
         }
+
     }
 
 }
