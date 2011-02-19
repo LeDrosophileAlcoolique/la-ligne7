@@ -60,12 +60,14 @@ namespace ligne7
             
             listEnnemis.Add(new Ennemis(screenManager.Game.Content));
             
-            listdecorinvers.Add(new modelTerrain(screenManager.Game.Content,new Vector3(0,0,0),90,100,90,"terrain"));
+            // en attendant un autre moyen de generer la carte en la creant piece par piece
+            listdecorinvers.Add(new modelTerrain(screenManager.Game.Content,new Vector3(0,0,0),90,100,95,"terrain"));
+            listdecorinvers.Add(new modelTerrain(screenManager.Game.Content, new Vector3(0, 0, 200), 90, 100, 95, "terrain"));
             listdecor.Add(new modelTerrain(screenManager.Game.Content,new Vector3(0,0,0),5,100,5,"pillier"));
             listdecor.Add(new modelTerrain(screenManager.Game.Content, new Vector3(100, 0, 100),5,100,5, "pillier"));
             listdecor.Add(new modelTerrain(screenManager.Game.Content, new Vector3(0, 0, 100),5,100,5, "pillier"));
             listdecor.Add(new modelTerrain(screenManager.Game.Content, new Vector3(100, 0, 0),5,100,5, "pillier"));
-            listdecor.Add(new modelTerrain(screenManager.Game.Content, new Vector3(50, 0, 50), 10, 10, 10, "box"));
+            listdecor.Add(new modelTerrain(screenManager.Game.Content, new Vector3(50, 0, 50), 5, 10, 10, "box"));
 
             debug.LoadFont(screenManager.Game.Content);
         }
@@ -75,7 +77,7 @@ namespace ligne7
             clavier.Update();
 
             // Appel de la méthode Update dans la classe Joueur
-            joueur.Deplacement(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2, screenManager.Game.Content, listEnnemis, listdecor, listdecorinvers[0].boxModel);
+            joueur.Deplacement(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2, screenManager.Game.Content, listEnnemis, listdecor, listdecorinvers);
 
             // On créé un modèle 3d si le joueur appuie sur M
             if (clavier.IsNewKeyPress(Keys.M))
@@ -97,7 +99,7 @@ namespace ligne7
             Mouse.SetPosition(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
 
             if (listEnnemis.Count > 0)
-                debug.Update(joueur.Boxcam.Min + "," + joueur.Position + ", \n" + listEnnemis[0].Box.Min + "," + joueur.angl1 + "," + joueur.angl2 + "," + joueur.Boxcam.Intersects(listdecor[0].boxModel) + ",\n" + joueur.Target );
+                debug.Update(joueur.Boxcam.Min + "," + joueur.Position + ", \n" + listEnnemis[0].Box.Min + "," + joueur.angl1 + "," + joueur.angl2 + ",\n" + joueur.Target );
         }
 
         public override void Draw(GameTime gameTime)

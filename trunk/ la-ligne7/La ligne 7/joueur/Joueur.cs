@@ -61,7 +61,7 @@ namespace ligne7
             return isCollision;
         }
 
-        public void Deplacement(int x, int y, ContentManager Content, List<Ennemis> listEnnemis, List<modelTerrain> listdecor, BoundingBox limit)
+        public void Deplacement(int x, int y, ContentManager Content, List<Ennemis> listEnnemis, List<modelTerrain> listdecor, List<modelTerrain> listdecorinvers)
         {
             // Partie clavier
             KeyboardState clavier = Keyboard.GetState();
@@ -98,8 +98,9 @@ namespace ligne7
 
             nextBoxcam = new BoundingBox(previsionPosition - new Vector3(5, 20, 5), previsionPosition + new Vector3(5, 20, 5));
 
+            //bloque les mouvement si collision pour chaque objet du decor
             position = cameraPosition;
-            if (!IsCollisionEnnemis(listEnnemis) && !IsCollisiondecor(listdecor, nextBoxcam) && IsCollision(limit, (previsionPosition-cameraPosition)))
+            if (!IsCollisionEnnemis(listEnnemis) && !IsCollisiondecor(listdecor, nextBoxcam) && IsCollisiondecor(listdecorinvers, nextBoxcam)) 
                 cameraPosition = previsionPosition;
 
             // Partie souris
@@ -110,20 +111,18 @@ namespace ligne7
 
             if (mouseste.Y > y)
             {
-                ang1 -= ((mouseste.Y -y)/10 *Math.PI / 80);
-                if (!(ang1 > -(Math.PI / 2 + 0.1)))
-                    cible.Y = (float)(1 * Math.Sin(ang1));
-                else
-                    ang1 += ((y - mouseste.Y) / 10 * Math.PI / 80);
+                
+                if (ang1 > -(Math.PI / 2 + 0.1))
+                    ang1 -= ((mouseste.Y -y)/10 *Math.PI / 80);
+                cible.Y = (float)(1 * Math.Sin(ang1));
             }
 
             if (mouseste.Y < y)
             {
-                ang1 += ((y-mouseste.Y)/10* Math.PI / 80);
-                if (!(ang1 < (Math.PI / 2) - 0.1))
-                    cible.Y = (float)(1 * Math.Sin(ang1));
-                else
-                    ang1 -= ((mouseste.Y - y) / 10 * Math.PI / 80);
+                
+                if (ang1 < (Math.PI / 2) - 0.1)
+                    ang1 += ((y-mouseste.Y)/10* Math.PI / 80);
+                cible.Y = (float)(1 * Math.Sin(ang1));
             }
 
             if (mouseste.X > x)
@@ -141,11 +140,12 @@ namespace ligne7
             }
 
 
-            // Saut optimisé mais à modifier si le jeu possede plusieurs étages
+            // Saut optimisé ais toujours a ameliorer lorsque l'on saut sur un objet en hauteur
 
             if (cameraPosition.Y <= 25)
                 IsEnTrainDeSauter = clavier.IsKeyDown(Keys.Space);
 
+            // defini la hauteur du saut , utilisable meme pour les environnement a plusieur niveau
             if (!IsEnTrainDeSauter)
                 sautmax = cameraPosition.Y + 15;
 
@@ -154,9 +154,10 @@ namespace ligne7
                 cameraPosition.Y += 5f;
                 IsEnTrainDeSauter = cameraPosition.Y <= sautmax;
             }
+             // gravite si le personnage n'est pas encore sur un objet
+            if ((nextBoxcam.Min.Y > listdecorinvers[0].boxModel.Min.Y) &&(!IsEnTrainDeSauter && !IsCollisionsol(listdecor, nextBoxcam)))
+                    cameraPosition.Y--;
 
-            if (!IsEnTrainDeSauter && IsCollisionsol(listdecor, nextBox))
-                    cameraPosition.Y -= 1f;
 
             //positionne la cible de la camera en face de sa position
             cameraTarget = cameraPosition + cible;
