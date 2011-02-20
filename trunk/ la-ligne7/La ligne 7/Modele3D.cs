@@ -111,11 +111,11 @@ namespace ligne7
         }
 
         // verifie la colision horizontal avec chaque objet du decor
-        public bool IsCollisiondecor(List<modelTerrain> listdecor, BoundingBox nextBox)
+        public bool IsCollisiondecor(List<ModelTerrain> listdecor, BoundingBox nextBox)
         {
             bool isCollision = false;
 
-            foreach (modelTerrain model in listdecor)
+            foreach (ModelTerrain model in listdecor)
             {
                 if (nextBox.Intersects(model.boxModel))
                     isCollision = true;
@@ -125,10 +125,10 @@ namespace ligne7
         }
 
         // verifie si la box se situe au dessus d'un objet du decor 
-        public bool IsCollisionsol(List<modelTerrain> list, BoundingBox box)
+        public bool IsCollisionsol(List<ModelTerrain> list, BoundingBox box)
         {
             bool sol = false;
-            foreach (modelTerrain decors in list)
+            foreach (ModelTerrain decors in list)
             {
                 if (box.Intersects(decors.boxModel))
                 {
