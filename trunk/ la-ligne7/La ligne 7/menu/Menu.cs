@@ -112,10 +112,10 @@ namespace ligne7
             switch (selected)
             {
                 case 0:
-                    screenManager.ChangeGameScreen(new MainScreen(screenManager));
+                    screenManager.ChargeMainScreen();
                     break;
                 case 2:
-                    screenManager.ChangeGameScreen(new OptionsScreen(screenManager));
+                    screenManager.ChangeGameScreen(new OptionsScreen(screenManager, true));
                     break;
                 case 3:
                     screenManager.Game.Exit();
@@ -124,14 +124,37 @@ namespace ligne7
         }
     }
 
+    class PauseMenu : Menu
+    {
+        public PauseMenu(Bouton[] boutons)
+            : base(boutons)
+        {
+        }
+
+        protected override void Action(ScreenManager screenManager, int selected)
+        {
+            switch (selected)
+            {
+                case 0:
+                    screenManager.ChargeMainScreen();
+                    break;
+                case 1:
+                    screenManager.ChangeGameScreen(new OptionsScreen(screenManager, false));
+                    break;
+            }
+        }
+    }
+
     class OptionsMenu : Menu
     {
         protected Option[] tabOptions;
+        protected bool returnMenu;
 
-        public OptionsMenu(Bouton[] boutons, Option[] tabOptions)
+        public OptionsMenu(Bouton[] boutons, Option[] tabOptions, bool returnMenu)
             : base(boutons)
         {
             this.tabOptions = tabOptions;
+            this.returnMenu = returnMenu;
         }
 
         protected override void Action(ScreenManager screenManager, int selected)
@@ -145,7 +168,10 @@ namespace ligne7
                     screenManager.Options.Niveau = screenManager.Options.Niveau + 1;
                     break;
                 case 2:
-                    screenManager.ChangeGameScreen(new MenuScreen(screenManager));
+                    if (returnMenu)
+                        screenManager.ChangeGameScreen(new MenuScreen(screenManager));
+                    else
+                        screenManager.ChangeGameScreen(new PauseScreen(screenManager));
                     break;
             }
         }

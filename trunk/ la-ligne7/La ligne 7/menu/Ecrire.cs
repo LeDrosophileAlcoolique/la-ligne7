@@ -95,7 +95,7 @@ namespace ligne7
 
     class Option : Bouton
     {
-        protected int valeur;
+        protected string valeur;
 
         public Option(string name, float x, float y)
             : base(name, x, y)
@@ -107,7 +107,7 @@ namespace ligne7
             spriteBatch.DrawString(font, name + " : " + valeur, position, fontColor());
         }
 
-        public int Valeur
+        public string Valeur
         {
             set
             {

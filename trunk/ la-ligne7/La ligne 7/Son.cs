@@ -16,15 +16,18 @@ namespace ligne7
 {
     class Son
     {
+        protected string assetName;
+
         public Son()
         {
+            assetName = "psycraft";
         }
 
         // Charge et joue une musique
 
         public void LoadContentAndPlay(ContentManager content)
         {
-            MediaPlayer.Play(content.Load<Song>("psycraft"));
+            MediaPlayer.Play(content.Load<Song>(assetName));
         }
     }
 }
