@@ -16,16 +16,23 @@ namespace ligne7
 {
     class Ennemis : ModelDeplacement
     {
+        Vector3 zombieView;   // la composante sur Y ne servira que de test pour que le zombie n'attaque pas le joueur en altitude.
+        bool iAmHungry;
+
         public Ennemis(ContentManager content)
             : base()
         {
             speed = 0.03f;
-            position = new Vector3(10,0,0);
+            position = new Vector3(70,0,70);
+            zombieView = new Vector3(0,0, -1);
+            iAmHungry = false;
+            //zombieJoueur = new Vector3 (position.X + 10.0f, position.Y, position.Z);
 
-            // On charge le modèle
+            //On charge le modèle
 
             model = content.Load<Model>("Zombie");
         }
+
 
         public bool IsCollisionEnnemis(List<Ennemis> listEnnemis)
         {
@@ -40,10 +47,29 @@ namespace ligne7
             return isCollision;
         }
 
+        public void RotationZombie(Vector3 dep, float produitScalaire)  
+        {
+            //this.angle += 0.0005f;
+            this.angle = (float)Math.Cos(dep.X);
+            //this.angle = (float)Math.Acos(produitScalaire);
+            zombieView.X = -(float)Math.Sin(Math.Cos(dep.X));
+            zombieView.Z = (float)Math.Cos(Math.Cos(dep.X));
+            zombieView.Y = 0;
+            zombieView.Normalize();
+            
+        }
+
+
+        // I.A.
+
+        
+        
+
         // Ennemis ne nous suivent pas en Y car les zombies ne sautent pas 
 
         public void Suivre(Joueur joueur, GameTime gameTime, List<Ennemis> listEnnemis)
         {
+            float produitScalaire;
             int direction_x, direction_z;
             float speed = gameTime.ElapsedGameTime.Milliseconds * this.speed;
             Vector3 direction = position - joueur.Positioncam;
@@ -54,8 +80,19 @@ namespace ligne7
 
             deplacement = new Vector3(direction_x * speed, 0, direction_z * speed);
 
-            if (!IsCollision(joueur.Box, deplacement) && !IsCollisionEnnemis(listEnnemis))  
-                Update(deplacement);
+            Vector3 dep = joueur.Position - this.Position;
+            dep.Normalize();
+            //RotationZombie(dep);
+            
+            produitScalaire = dep.Z * zombieView.Z + dep.X * zombieView.X;
+
+            if ((produitScalaire > 0.0f) || (iAmHungry))
+                if (!IsCollision(joueur.Box, deplacement) && !IsCollisionEnnemis(listEnnemis))
+                {
+                    RotationZombie(dep, produitScalaire);
+                    Update(deplacement);
+                    iAmHungry = true;
+                }
         }
 
         protected int Direction(float direction, float speed)
