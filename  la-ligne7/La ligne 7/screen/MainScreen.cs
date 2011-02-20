@@ -91,7 +91,12 @@ namespace ligne7
 
             // Les ennemis qui nous suivent
             foreach (Ennemis ennemis in listEnnemis)
-                // ennemis.Suivre(joueur, gameTime, listEnnemis);
+
+            {
+                //ennemis.RotationZombie();
+                ennemis.Suivre(joueur, gameTime, listEnnemis);
+            }
+
 
             // On tire lorsque le joueur appuie sur clic gauche.
             if (souris.IsNewClickPress())

@@ -18,6 +18,7 @@ namespace ligne7
     {
         protected Model model;
         protected Vector3 position;
+        public float angle; //pour la rotation
         protected BoundingBox box;
         protected string assetName;
         protected Texture2D texture;
@@ -37,7 +38,7 @@ namespace ligne7
 
         public void Draw(Joueur joueur)
         {
-            // Matrice squelette ? Surement lol
+            // Matrice squelette ? Surement lolaz\
             Matrix[] transforms = new Matrix[model.Bones.Count];
             model.CopyAbsoluteBoneTransformsTo(transforms);
 
@@ -53,7 +54,7 @@ namespace ligne7
 
                     // Effect world = possibilite de faire rotation, translation...
                     effect.Parameters["World"].SetValue(true);
-                    effect.World = transforms[mesh.ParentBone.Index] * Matrix.CreateTranslation(position);
+                    effect.World = transforms[mesh.ParentBone.Index] * Matrix.CreateRotationY(3 * angle) * Matrix.CreateTranslation(position);
 
                     // Vue du modèle en perspective
                     effect.Parameters["Projection"].SetValue(joueur.Projection);

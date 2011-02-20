@@ -69,7 +69,7 @@ namespace ligne7
             previsionPosition = cameraPosition;
 
             // Permet d'avancer
-            if (clavier.IsKeyDown(Keys.Z))
+            if (clavier.IsKeyDown(Keys.W))
             {
                 previsionPosition.X += cible.X;
                 previsionPosition.Z += cible.Z;
@@ -83,7 +83,7 @@ namespace ligne7
             }
 
             //Permet d'aller a gauche
-            if (clavier.IsKeyDown(Keys.Q))
+            if (clavier.IsKeyDown(Keys.A))
             {
                 previsionPosition.X += (float)(Math.Sin(ang2 + (Math.PI / 2)));
                 previsionPosition.Z += (float)(Math.Cos(ang2 + (Math.PI / 2)));
