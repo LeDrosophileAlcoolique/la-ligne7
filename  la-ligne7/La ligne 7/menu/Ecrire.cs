@@ -61,14 +61,19 @@ namespace ligne7
             }
         }
 
-        public new void Draw(SpriteBatch spriteBatch)
+        protected Color fontColor()
         {
             Color couleur = Color.Black;
 
             if (isSelected)
                 couleur = Color.Red;
 
-            spriteBatch.DrawString(font, name, position, couleur);
+            return couleur;
+        }
+
+        public new void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(font, name, position, fontColor());
         }
 
         public bool IsSelected
@@ -84,6 +89,33 @@ namespace ligne7
             get
             {
                 return box;
+            }
+        }
+    }
+
+    class Option : Bouton
+    {
+        protected int valeur;
+
+        public Option(string name, float x, float y)
+            : base(name, x, y)
+        {
+        }
+
+        public new void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(font, name + " : " + valeur, position, fontColor());
+        }
+
+        public int Valeur
+        {
+            set
+            {
+                valeur = value;
+            }
+            get
+            {
+                return valeur;
             }
         }
     }

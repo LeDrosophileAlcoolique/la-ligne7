@@ -56,7 +56,7 @@ namespace ligne7
                 menu.PressEnter(screenManager);
 
             if (screenManager.Souris.IsChangeState())
-                menu.focus(screenManager.Souris.CurrentMouseState.X, screenManager.Souris.CurrentMouseState.Y);
+                menu.Focus(screenManager.Souris.CurrentMouseState.X, screenManager.Souris.CurrentMouseState.Y);
 
             if (screenManager.Souris.IsNewClickPress())
                 menu.Click(screenManager, screenManager.Souris.CurrentMouseState.X, screenManager.Souris.CurrentMouseState.Y);
@@ -85,7 +85,7 @@ namespace ligne7
     class OptionsScreen : GameScreen
     {
         protected GraphicsDeviceManager graphics;
-        protected Menu menu;
+        protected OptionsMenu menu;
         protected Texture2D fond;
         protected Curseur curseur;
 
@@ -93,7 +93,7 @@ namespace ligne7
             : base(screenManager)
         {
             graphics = screenManager.Graphics;
-            menu = new OptionsMenu(new Bouton[] { new Bouton("Volume", 75, 100), new Bouton("Sensibilite de la souris", 75, 200), new Bouton("Retour", 75, 300) });
+            menu = new OptionsMenu(new Bouton[] { new Bouton("Retour", 75, 300) }, new Option[] { new Option("Volume", 75, 100), new Option("Niveau", 75, 200) });
             curseur = new Curseur();
         }
 
@@ -101,6 +101,8 @@ namespace ligne7
         {
             fond = screenManager.Game.Content.Load<Texture2D>("Bloody");
 
+            foreach (Option option in menu.TabOptions)
+                option.LoadFont(screenManager.Game.Content);
             foreach (Bouton bouton in menu.Boutons)
                 bouton.LoadFont(screenManager.Game.Content);
 
@@ -109,6 +111,11 @@ namespace ligne7
 
         public override void Update(GameTime gameTime)
         {
+            menu.TabOptions[0].Valeur = screenManager.Options.Volume;
+            menu.TabOptions[1].Valeur = screenManager.Options.Niveau;
+
+            foreach (Option option in menu.TabOptions)
+                option.Translation(gameTime);
             foreach (Bouton bouton in menu.Boutons)
                 bouton.Translation(gameTime);
 
@@ -122,7 +129,7 @@ namespace ligne7
                 menu.PressEnter(screenManager);
 
             if (screenManager.Souris.IsChangeState())
-                menu.focus(screenManager.Souris.CurrentMouseState.X, screenManager.Souris.CurrentMouseState.Y);
+                menu.Focus(screenManager.Souris.CurrentMouseState.X, screenManager.Souris.CurrentMouseState.Y);
 
             if (screenManager.Souris.IsNewClickPress())
                 menu.Click(screenManager, screenManager.Souris.CurrentMouseState.X, screenManager.Souris.CurrentMouseState.Y);
@@ -138,6 +145,8 @@ namespace ligne7
 
             spriteBatch.Begin();
             spriteBatch.Draw(fond, new Vector2((screenManager.Game.GraphicsDevice.Viewport.Width - fond.Width) / 2 + 100, (screenManager.Game.GraphicsDevice.Viewport.Height - fond.Height) / 2 + 150), Color.White);
+            foreach (Option option in menu.TabOptions)
+                option.Draw(spriteBatch);
             foreach (Bouton bouton in menu.Boutons)
                 bouton.Draw(spriteBatch);
             curseur.Draw(spriteBatch);

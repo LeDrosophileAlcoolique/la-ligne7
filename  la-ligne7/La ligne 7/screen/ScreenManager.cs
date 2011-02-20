@@ -19,6 +19,7 @@ namespace ligne7
         protected GameTime gameTime;
         protected Clavier clavier;
         protected Souris souris;
+        protected Options options;
 
         public ScreenManager(Game game, GraphicsDeviceManager graphics)
             : base(game)
@@ -27,6 +28,7 @@ namespace ligne7
             souris = new Souris(Game);
             this.graphics = graphics;
             gameScreen = new MenuScreen(this);
+            options = new Options();
         }
 
         public void ChargeContent(SpriteBatch spriteBatch)
@@ -94,6 +96,14 @@ namespace ligne7
             get
             {
                 return souris;
+            }
+        }
+
+        public Options Options
+        {
+            get
+            {
+                return options;
             }
         }
     }

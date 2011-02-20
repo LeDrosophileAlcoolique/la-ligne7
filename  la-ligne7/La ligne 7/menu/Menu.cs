@@ -25,11 +25,18 @@ namespace ligne7
             this.boutons[0].IsSelected = true;
         }
 
+        protected void Unselected(int i)
+        {
+            boutons[selected].IsSelected = false;
+
+            this.selected = i;
+            boutons[i].IsSelected = true;
+        }
+
         // La fonction SetBoutonSelected change le bouton qui est sélectionné
 
         public void SetBoutonSelected(int selected, int operation)
         {
-            boutons[selected].IsSelected = false;
             int ieme = selected + operation;
             
             if (ieme >= nbrBouton)
@@ -42,8 +49,7 @@ namespace ligne7
                 ieme = nbrBouton - 1;
             }
 
-            this.selected = ieme;
-            boutons[ieme].IsSelected = true;
+            Unselected(ieme);
         }
 
         public void PressEnter(ScreenManager screenManager)
@@ -62,16 +68,13 @@ namespace ligne7
             }
         }
 
-        public void focus(int x, int y)
+        public void Focus(int x, int y)
         {
             for (int i = 0; i < boutons.Length; i++)
             {
                 if (boutons[i].Box.Contains(x, y))
                 {
-                    boutons[selected].IsSelected = false;
-
-                    this.selected = i;
-                    boutons[i].IsSelected = true;
+                    Unselected(i);
                 }
             }
         }
@@ -123,18 +126,96 @@ namespace ligne7
 
     class OptionsMenu : Menu
     {
-        public OptionsMenu(Bouton[] boutons)
+        protected Option[] tabOptions;
+
+        public OptionsMenu(Bouton[] boutons, Option[] tabOptions)
             : base(boutons)
         {
+            this.tabOptions = tabOptions;
         }
 
         protected override void Action(ScreenManager screenManager, int selected)
         {
             switch (selected)
             {
+                case 0:
+                    screenManager.Options.Volume = screenManager.Options.Volume + 1;
+                    break;
+                case 1:
+                    screenManager.Options.Niveau = screenManager.Options.Niveau + 1;
+                    break;
                 case 2:
                     screenManager.ChangeGameScreen(new MenuScreen(screenManager));
                     break;
+            }
+        }
+
+        public new void Click(ScreenManager screenManager, int x, int y)
+        {
+            int j = 0;
+
+            for (int i = 0; i < tabOptions.Length; i++)
+            {
+                if (tabOptions[i].Box.Contains(x, y))
+                {
+                    Action(screenManager, j);
+                }
+
+                j++;
+            }
+
+            for (int i = 0; i < boutons.Length; i++)
+            {
+                if (boutons[i].Box.Contains(x, y))
+                {
+                    Action(screenManager, j);
+                }
+
+                j++;
+            }
+        }
+
+        public new void Focus(int x, int y)
+        {
+            if (selected < 2)
+            {
+                tabOptions[selected].IsSelected = false;
+            }
+            else 
+            {
+                boutons[selected - 2].IsSelected = false;
+            }
+
+            int j = 0;
+
+            for (int i = 0; i < tabOptions.Length; i++)
+            {
+                if (tabOptions[i].Box.Contains(x, y))
+                {
+                    this.selected = j;
+                    tabOptions[i].IsSelected = true;
+                }
+
+                j++;
+            }
+
+            for (int i = 0; i < boutons.Length; i++)
+            {
+                if (boutons[i].Box.Contains(x, y))
+                {
+                    this.selected = j;
+                    boutons[i].IsSelected = true;
+                }
+
+                j++;
+            }
+        }
+
+        public Option[] TabOptions
+        {
+            get
+            {
+                return tabOptions;
             }
         }
     }

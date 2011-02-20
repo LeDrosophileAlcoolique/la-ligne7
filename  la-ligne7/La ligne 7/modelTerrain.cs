@@ -12,15 +12,14 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 #endregion
 
-
 namespace ligne7
 {
-    class modelTerrain : ModelDeplacement
+    class ModelTerrain : ModelDeplacement
     {
         public BoundingBox boxModel;
 
         // methode pour cree chaque objet du decor ainsi que sa boundingbox
-        public modelTerrain(ContentManager content,Vector3 pos, int a2, int b2, int c2, string str)
+        public ModelTerrain(ContentManager content,Vector3 pos, int a2, int b2, int c2, string str)
             : base()
         {
             position = pos;

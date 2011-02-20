@@ -24,8 +24,8 @@ namespace ligne7
         protected Curseur curseur;
         protected List<Ennemis> listEnnemis;
         protected List<Tir> listTir;
-        protected List<modelTerrain> listdecor;
-        protected List<modelTerrain> listdecorinvers;
+        protected List<ModelTerrain> listdecor;
+        protected List<ModelTerrain> listdecorinvers;
 
         protected Debug debug;
 
@@ -48,8 +48,8 @@ namespace ligne7
             curseur = new Curseur();
             listEnnemis = new List<Ennemis>();
             listTir = new List<Tir>();
-            listdecor = new List<modelTerrain>();
-            listdecorinvers = new List<modelTerrain>();
+            listdecor = new List<ModelTerrain>();
+            listdecorinvers = new List<ModelTerrain>();
 
             debug = new Debug("Debug", 0, 0);
         }
@@ -63,13 +63,13 @@ namespace ligne7
             listEnnemis.Add(new Ennemis(screenManager.Game.Content));
             
             // en attendant un autre moyen de generer la carte en la creant piece par piece
-            listdecorinvers.Add(new modelTerrain(screenManager.Game.Content,new Vector3(0,0,0),90,100,95,"terrain"));
-            listdecorinvers.Add(new modelTerrain(screenManager.Game.Content, new Vector3(0, 0, 200), 90, 100, 95, "terrain"));
-            listdecor.Add(new modelTerrain(screenManager.Game.Content,new Vector3(0,0,0),5,100,5,"pillier"));
-            listdecor.Add(new modelTerrain(screenManager.Game.Content, new Vector3(100, 0, 100),5,100,5, "pillier"));
-            listdecor.Add(new modelTerrain(screenManager.Game.Content, new Vector3(0, 0, 100),5,100,5, "pillier"));
-            listdecor.Add(new modelTerrain(screenManager.Game.Content, new Vector3(100, 0, 0),5,100,5, "pillier"));
-            listdecor.Add(new modelTerrain(screenManager.Game.Content, new Vector3(50, 0, 50), 5, 10, 10, "box"));
+            listdecorinvers.Add(new ModelTerrain(screenManager.Game.Content,new Vector3(0,0,0),90,100,95,"terrain"));
+            listdecorinvers.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(0, 0, 200), 90, 100, 95, "terrain"));
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content,new Vector3(0,0,0),5,100,5,"pillier"));
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(100, 0, 100),5,100,5, "pillier"));
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(0, 0, 100),5,100,5, "pillier"));
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(100, 0, 0),5,100,5, "pillier"));
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(50, 0, 50), 5, 10, 10, "box"));
 
             debug.LoadFont(screenManager.Game.Content);
         }
@@ -110,9 +110,9 @@ namespace ligne7
             screenManager.Game.GraphicsDevice.Clear(Color.Blue);
 
             // Dessine modele 3D
-            foreach (modelTerrain decor in listdecor)
+            foreach (ModelTerrain decor in listdecor)
                 decor.Draw(joueur);
-            foreach (modelTerrain decor in listdecorinvers)
+            foreach (ModelTerrain decor in listdecorinvers)
                 decor.Draw(joueur);
 
             foreach (Ennemis ennemis in listEnnemis)

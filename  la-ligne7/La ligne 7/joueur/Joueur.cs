@@ -61,7 +61,7 @@ namespace ligne7
             return isCollision;
         }
 
-        public void Deplacement(int x, int y, ContentManager Content, List<Ennemis> listEnnemis, List<modelTerrain> listdecor, List<modelTerrain> listdecorinvers)
+        public void Deplacement(int x, int y, ContentManager Content, List<Ennemis> listEnnemis, List<ModelTerrain> listdecor, List<ModelTerrain> listdecorinvers)
         {
             // Partie clavier
             KeyboardState clavier = Keyboard.GetState();
