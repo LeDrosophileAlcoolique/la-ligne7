@@ -82,13 +82,16 @@ namespace ligne7
             // Appel de la méthode Update dans la classe Joueur
             joueur.Deplacement(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2, screenManager.Game.Content, listEnnemis, listdecor, listdecorinvers);
 
+            if (clavier.IsNewKeyPress(Keys.P))
+                screenManager.ChangeGameScreen(new PauseScreen(screenManager));
+
             // On créé un modèle 3d si le joueur appuie sur M
             if (clavier.IsNewKeyPress(Keys.M))
                 listEnnemis.Add(new Ennemis(screenManager.Game.Content));
 
             // Les ennemis qui nous suivent
             foreach (Ennemis ennemis in listEnnemis)
-                //ennemis.Suivre(joueur, gameTime, listEnnemis);
+                // ennemis.Suivre(joueur, gameTime, listEnnemis);
 
             // On tire lorsque le joueur appuie sur clic gauche.
             if (souris.IsNewClickPress())

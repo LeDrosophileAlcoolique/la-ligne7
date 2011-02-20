@@ -14,6 +14,7 @@ namespace ligne7
     class ScreenManager : DrawableGameComponent
     {
         protected GameScreen gameScreen;
+        protected MainScreen mainScreen;
         protected SpriteBatch spriteBatch;
         protected GraphicsDeviceManager graphics;
         protected GameTime gameTime;
@@ -28,6 +29,7 @@ namespace ligne7
             souris = new Souris(Game);
             this.graphics = graphics;
             gameScreen = new MenuScreen(this);
+            mainScreen = new MainScreen(this);
             options = new Options();
         }
 
@@ -35,6 +37,7 @@ namespace ligne7
         {
             this.spriteBatch = spriteBatch;
             gameScreen.LoadContent();
+            mainScreen.LoadContent();
         }
 
         public void MiseJour()
@@ -47,6 +50,11 @@ namespace ligne7
         public void Dessin()
         {
             gameScreen.Draw(gameTime);
+        }
+
+        public void ChargeMainScreen()
+        {
+            gameScreen = mainScreen;
         }
 
         public void ChangeGameScreen(GameScreen gameScreen)

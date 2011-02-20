@@ -20,7 +20,7 @@ namespace ligne7
         {
             set
             {
-                volume = value;
+                volume = value % 3;
             }
             get
             {
@@ -32,12 +32,33 @@ namespace ligne7
         {
             set
             {
-                niveau = value;
+                niveau = value % 3;
             }
             get
             {
                 return niveau;
             }
+        }
+
+        public string getNiveau()
+        {
+            string stringNiveau = "";
+
+            switch (niveau)
+            {
+                case 0:
+                    stringNiveau = "facile";
+                    break;
+                case 1:
+                    stringNiveau = "normal";
+                    break;
+                case 2:
+                    stringNiveau = "difficil";
+                    break;
+            }
+
+            return stringNiveau;
+
         }
     }
 }

@@ -82,6 +82,66 @@ namespace ligne7
         }
     }
 
+    class PauseScreen : GameScreen
+    {
+        protected GraphicsDeviceManager graphics;
+        protected Menu menu;
+        protected Curseur curseur;
+        
+        public PauseScreen(ScreenManager screenManager)
+            : base(screenManager)
+        {
+            graphics = screenManager.Graphics;
+            menu = new PauseMenu(new Bouton[] { new Bouton("Options", 75 , 300), new Bouton("Retour", 75, 200) });
+            curseur = new Curseur();
+        }
+
+        public override void LoadContent()
+        {
+            foreach (Bouton bouton in menu.Boutons)
+                bouton.LoadFont(screenManager.Game.Content);
+
+            curseur.LoadContent(screenManager.Game.Content, graphics);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            foreach (Bouton bouton in menu.Boutons)
+                bouton.Translation(gameTime);
+
+            if (screenManager.Clavier.IsNewKeyPress(Keys.Down))
+                menu.SetBoutonSelected(menu.Selected, 1);
+
+            if (screenManager.Clavier.IsNewKeyPress(Keys.Up))
+                menu.SetBoutonSelected(menu.Selected, -1);
+
+            if (screenManager.Clavier.IsNewKeyPress(Keys.Enter))
+                menu.PressEnter(screenManager);
+
+            if (screenManager.Souris.IsChangeState())
+                menu.Focus(screenManager.Souris.CurrentMouseState.X, screenManager.Souris.CurrentMouseState.Y);
+
+            if (screenManager.Souris.IsNewClickPress())
+                menu.Click(screenManager, screenManager.Souris.CurrentMouseState.X, screenManager.Souris.CurrentMouseState.Y);
+
+            curseur.Update(screenManager.Souris.CurrentMouseState.X, screenManager.Souris.CurrentMouseState.Y);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            screenManager.Game.GraphicsDevice.Clear(Color.White);
+
+            SpriteBatch spriteBatch = screenManager.SpriteBatch;
+
+            spriteBatch.Begin();
+            foreach (Bouton bouton in menu.Boutons)
+                bouton.Draw(spriteBatch);
+
+            curseur.Draw(spriteBatch);
+            spriteBatch.End();
+        }
+    }
+
     class OptionsScreen : GameScreen
     {
         protected GraphicsDeviceManager graphics;
@@ -89,11 +149,11 @@ namespace ligne7
         protected Texture2D fond;
         protected Curseur curseur;
 
-        public OptionsScreen(ScreenManager screenManager)
+        public OptionsScreen(ScreenManager screenManager, bool returnMenu)
             : base(screenManager)
         {
             graphics = screenManager.Graphics;
-            menu = new OptionsMenu(new Bouton[] { new Bouton("Retour", 75, 300) }, new Option[] { new Option("Volume", 75, 100), new Option("Niveau", 75, 200) });
+            menu = new OptionsMenu(new Bouton[] { new Bouton("Retour", 75, 300) }, new Option[] { new Option("Volume", 75, 100), new Option("Niveau", 75, 200) }, returnMenu);
             curseur = new Curseur();
         }
 
@@ -111,8 +171,8 @@ namespace ligne7
 
         public override void Update(GameTime gameTime)
         {
-            menu.TabOptions[0].Valeur = screenManager.Options.Volume;
-            menu.TabOptions[1].Valeur = screenManager.Options.Niveau;
+            menu.TabOptions[0].Valeur = screenManager.Options.Volume.ToString();
+            menu.TabOptions[1].Valeur = screenManager.Options.getNiveau();
 
             foreach (Option option in menu.TabOptions)
                 option.Translation(gameTime);
