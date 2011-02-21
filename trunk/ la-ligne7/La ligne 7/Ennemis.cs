@@ -89,11 +89,20 @@ namespace ligne7
             produitScalaire = dep.Z * zombieView.Z + dep.X * zombieView.X;
 
             if ((produitScalaire > 0.0f) || (iAmHungry))
-                if (!joueur.bbpos.Intersects(this.zombiebox) && !IsCollisionEnnemis(listEnnemis) && !IsCollisiondecor(listdecor, this.zombiebox))
+                if (!joueur.bbpos.Intersects(this.zombiebox))
                 {
-                    RotationZombie(dep, produitScalaire);
-                    Update(deplacement);
-                    iAmHungry = true;
+
+                    if (!IsCollisionEnnemis(listEnnemis) && !IsCollisiondecor(listdecor, this.zombiebox))
+                    {
+                        RotationZombie(dep, produitScalaire);
+                        Update(deplacement);
+                        iAmHungry = true;
+                    }
+                }
+                else 
+                {
+                    //Perdre des points de vie
+                    joueur.Vie = joueur.Vie - 1;    
                 }
         }
 

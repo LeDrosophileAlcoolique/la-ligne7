@@ -107,7 +107,6 @@ namespace ligne7
                 ennemis.Suivre(joueur, gameTime, listEnnemis, listdecor);
             }
 
-
             // On tire lorsque le joueur appuie sur clic gauche.
             if (souris.IsNewClickPress())
                 listTir.Add(new Tir(screenManager.Game.Content, joueur));
@@ -120,7 +119,7 @@ namespace ligne7
             Mouse.SetPosition(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
 
             if (listEnnemis.Count > 0)
-                debug.Update(joueur.Boxcam.Min + "," + joueur.sautmax + ", \n" + listEnnemis[0].IsCollisionEnnemis(listEnnemis) + listEnnemis[0].zombiebox.Intersects(joueur.bbpos) + "," + listEnnemis[0].iAmHungry + ",\n" + joueur.Target );
+                debug.Update(joueur.Boxcam.Min + "," + joueur.sautmax + ", \n" + listEnnemis[0].IsCollisionEnnemis(listEnnemis) + listEnnemis[0].zombiebox.Intersects(joueur.bbpos) + "," + listEnnemis[0].iAmHungry + ",\n" + joueur.Target + "\n" + joueur.Vie);
         }
 
         public override void Draw(GameTime gameTime)
