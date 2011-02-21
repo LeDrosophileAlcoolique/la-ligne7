@@ -24,19 +24,22 @@ namespace ligne7
         protected Matrix view;
         protected BoundingBox boxcam;
         protected BoundingBox nextBoxcam;
+        public BoundingBox bbpos;
 
         protected double ang1;
         protected double ang2;
-        protected float sautmax;
+        public float sautmax;
+        public bool estausol;
 
-        protected bool IsEnTrainDeSauter;
+        public bool IsEnTrainDeSauter;
 
         public Joueur(float aspectRatio)
         {
             cible = new Vector3(0, 0, 1);
             cameraTranslation = new Vector3(0.04f);
-            cameraPosition = new Vector3(20, 25, -20);
+            cameraPosition = new Vector3(50, 25, -20);
             cameraTarget = cameraPosition + cible;
+            estausol = true;
             
             // Matrice de l'effet de vue en perspective
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), aspectRatio, 1.0f, 10000.0f);
@@ -46,6 +49,7 @@ namespace ligne7
 
             IsEnTrainDeSauter = false;
             directionMouv = previsionPosition - cameraPosition;
+            sautmax = cameraPosition.Y + 15;
         }
 
         public bool IsCollisionEnnemis(List<Ennemis> listEnnemis)
@@ -54,7 +58,7 @@ namespace ligne7
 
             for (int i = 0; i < listEnnemis.Count; i++)
             {
-                if (nextBoxcam.Intersects(listEnnemis[i].Box))
+                if (nextBoxcam.Intersects(listEnnemis[i].zombiebox))
                     isCollision = true;
             }
 
@@ -63,13 +67,14 @@ namespace ligne7
 
         public void Deplacement(int x, int y, ContentManager Content, List<Ennemis> listEnnemis, List<ModelTerrain> listdecor, List<ModelTerrain> listdecorinvers)
         {
+            bbpos = new BoundingBox(cameraPosition - new Vector3(5, 20, 5), cameraPosition + new Vector3(5, 20, 5));
             // Partie clavier
             KeyboardState clavier = Keyboard.GetState();
 
             previsionPosition = cameraPosition;
 
             // Permet d'avancer
-            if (clavier.IsKeyDown(Keys.W))
+            if (clavier.IsKeyDown(Keys.Z))
             {
                 previsionPosition.X += cible.X;
                 previsionPosition.Z += cible.Z;
@@ -83,7 +88,7 @@ namespace ligne7
             }
 
             //Permet d'aller a gauche
-            if (clavier.IsKeyDown(Keys.A))
+            if (clavier.IsKeyDown(Keys.Q))
             {
                 previsionPosition.X += (float)(Math.Sin(ang2 + (Math.PI / 2)));
                 previsionPosition.Z += (float)(Math.Cos(ang2 + (Math.PI / 2)));
@@ -100,13 +105,13 @@ namespace ligne7
 
             //bloque les mouvement si collision pour chaque objet du decor
             position = cameraPosition;
-            if (!IsCollisionEnnemis(listEnnemis) && !IsCollisiondecor(listdecor, nextBoxcam) && IsCollisiondecor(listdecorinvers, nextBoxcam)) 
+            if (!IsCollisionEnnemis(listEnnemis) && !IsCollisiondecor(listdecor, nextBoxcam) && IsCollisiondecor(listdecorinvers, nextBoxcam) ) 
                 cameraPosition = previsionPosition;
 
             // Partie souris
             MouseState mouseste = Mouse.GetState();
 
-            // fait pivoter la camera selon le deplacement de la souris
+            // fait pivoter la camera selon le deplacement de la souris   
             
 
             if (mouseste.Y > y)
@@ -141,22 +146,31 @@ namespace ligne7
 
 
             // Saut optimisé ais toujours a ameliorer lorsque l'on saut sur un objet en hauteur
+            if (IsCollisionsol(listdecor, nextBoxcam))
+                estausol = true;
+            else
+                if( IsCollisionsol(listdecorinvers, nextBoxcam))
+                    estausol = true;
 
-            if (cameraPosition.Y <= 25)
+
+            if (estausol)
+            {
                 IsEnTrainDeSauter = clavier.IsKeyDown(Keys.Space);
-
-            // defini la hauteur du saut , utilisable meme pour les environnement a plusieur niveau
-            if (!IsEnTrainDeSauter)
                 sautmax = cameraPosition.Y + 15;
+            }
+                
 
             if (IsEnTrainDeSauter)
             {
+                estausol = false;
                 cameraPosition.Y += 5f;
                 IsEnTrainDeSauter = cameraPosition.Y <= sautmax;
             }
              // gravite si le personnage n'est pas encore sur un objet
-            if ((nextBoxcam.Min.Y > listdecorinvers[0].boxModel.Min.Y) &&(!IsEnTrainDeSauter && !IsCollisionsol(listdecor, nextBoxcam)))
-                    cameraPosition.Y--;
+            if ((cameraPosition.Y > (sautmax - 15)) && !IsEnTrainDeSauter && (!estausol || IsCollisionsol2(listdecorinvers, nextBoxcam)))
+            {
+                cameraPosition.Y--;
+            }
 
 
             //positionne la cible de la camera en face de sa position
