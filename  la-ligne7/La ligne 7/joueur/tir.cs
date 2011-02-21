@@ -18,6 +18,7 @@ namespace ligne7
     {
         Vector3 epaule = new Vector3(0, 0.0f, 0.0f);
         Vector3 direction = Vector3.Zero;
+        BoundingBox tirbox;
         
         public Tir(ContentManager Content, Joueur joueur)
         {
@@ -32,6 +33,7 @@ namespace ligne7
 
         public void PartirTresLoin(GameTime gameTime, List<Ennemis> listEnnemis)
         {
+            tirbox = new BoundingBox(position - new Vector3(5, 5, 5), position + new Vector3(5, 5, 5));
             List<Ennemis> listEnnemisASupprimer = new List<Ennemis>();
             float speed = gameTime.ElapsedGameTime.Milliseconds * this.speed;
             Vector3 deplacement;
@@ -42,7 +44,7 @@ namespace ligne7
 
             foreach (Ennemis ennemis in listEnnemis)
             {
-                if (IsCollision(ennemis.zombiebox, position))
+                if (ennemis.zombiebox.Intersects(tirbox))
                     listEnnemisASupprimer.Add(ennemis);
             }
 
