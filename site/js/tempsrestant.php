@@ -3,7 +3,7 @@
 header("Cache-Control: no-store, no-cache, must-revalidate");
  
 // Les includes
-require ("../include/include.php");
+require("../include/include.php");
 
 // $_GET
 if (isset($_GET['heure']) AND isset($_GET['minute']) AND isset($_GET['seconde']) AND isset($_GET['mois']) AND isset($_GET['jour']) AND isset($_GET['annee'])){
