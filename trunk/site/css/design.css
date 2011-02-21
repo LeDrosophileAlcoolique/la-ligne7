@@ -3,7 +3,11 @@ body{
   font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
   line-height:24px;
+  color: #e8eaeb; 
   text-align: center; 
+  background-color: #192d40;
+  background-image: url(../images/bg.jpg); 
+  background-repeat: repeat-x;
 }
 
 img{
@@ -18,24 +22,33 @@ img{
 
 #header{
   height: 130px;
-  padding-top: 20px; 
-  padding-bottom: 20px;
+  margin-top: 25px;
+  margin-left: 80px;
+  padding-bottom: 12px;
+  background-image: url(../images/logo.png);
+  background-repeat: no-repeat;
 }	
 
 #pres{	
   height: 75px;
   width: 430px;
-  padding-left: 430px; 
-  padding-top: 45px;
+  padding-left: 374px; 
+  padding-top: 31px;
 }
 
 
 #pres p{	
   font-size: 12px;
+  color: white;
   line-height: 16px;
 }
 
 #menu{
+  border-style: solid; 
+  border-color: #1a2735;
+  border-width: 2px;
+  border-right: none; 
+  border-left: none; 
   padding: 7px 0;
   height: 40px;
 }
@@ -61,7 +74,7 @@ img{
 #menu ul li a {
   font-size: 19px;
   font-weight: bold;
-  color: #A0A9B0;
+  color: #ffffff;
   text-decoration: none;
   line-height: 18px;
   display: block; 
@@ -70,10 +83,26 @@ img{
   outline-style: none;
 }
 
+#menu ul li a:hover {
+  background: #0a151f;
+  color: #E2790E;
+}
+
 #milieu{
   height: auto;
   margin-bottom: 20px;
 }
+
+#contenu ul{
+  margin: 0;
+  padding: 0;
+}
+
+#contenu ul.form li{
+  list-style: none;
+  margin: 15px 0 20px 0;
+  font-size: 10px;
+} 
 
 #contenu{
   float: left; 
@@ -91,7 +120,7 @@ img{
 }
 
 #contenu a, #contenu a:visited, #coldroite a, #coldroite a:visited{
-  color: #A0A9B0;
+  color: #E8EAEB;
   outline-style: none;
 }
 
@@ -126,7 +155,6 @@ img{
   text-align: right;
   margin-top: 0;
   margin-right: 3px; 
-  margin-bottom: 15px;
   width: 150px;
 }
 
@@ -138,7 +166,7 @@ img{
   padding-left: 2px;
 }
 
-#contenu input.fieldfocus{
+#contenu input.fieldfocus, #contenu textarea.fieldfocus{
   width: 140px;
   color: #5C5C5C;  
   border-width: 3px;
@@ -146,7 +174,7 @@ img{
   border-style: solid;    
 }
 
-#contenu input.fieldfocusvalide{
+#contenu input.fieldfocusvalide, #contenu textarea.fieldfocusvalide{
   color: darkgreen;
   background-color: #E7FFE7;
   border-width: 3px;
@@ -154,7 +182,7 @@ img{
   border-style: solid;  
 }
 
-#contenu input.fieldfocuserror{
+#contenu input.fieldfocuserror, #contenu textarea.fieldfocuserror{
   color: #FE0000;
   background-color: #FFEAE7;
   border-width: 3px;
@@ -162,7 +190,7 @@ img{
   border-style: solid;   
 }
 
-#contenu input:focus{
+#contenu input:focus, #contenu textarea:focus{
   color: #237DD8;
   background-color: #E0F3FC;
   border-width: 3px;
@@ -186,8 +214,8 @@ img{
   padding-left: 15px; 
   padding-right: 15px;
   background-color: #FFFFFF;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
 }
 
 #contenu input.submit:hover{
@@ -209,6 +237,12 @@ img{
 
 #coldroite p.date{
   text-indent: 3px;
+  border-style: solid; 
+  border-color: #1a2735;
+  border-width: 2px;
+  border-right: none; 
+  border-left: none; 
+  border-top: none;
   padding-bottom: 14px;
 }
 
@@ -235,6 +269,7 @@ div.clear{
   height: 40px;
   margin-left: auto;
   margin-right: auto;
+  border-top: 1px solid #324455;
   padding: 10px 3px;
   color: #a0a9b0;
   text-align: left;
