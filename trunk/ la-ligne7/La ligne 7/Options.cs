@@ -18,11 +18,13 @@ namespace ligne7
     {
         protected int volume;
         protected int niveau;
+        protected bool vie;
 
         public Options()
         {
             volume = 1;
             niveau = 1;
+            vie = false;
         }
 
         public int Volume
@@ -80,7 +82,30 @@ namespace ligne7
             }
 
             return stringNiveau;
+        }
 
+        public bool Vie
+        {
+            get
+            {
+                return vie;
+            }
+        }
+
+        public void setVie()
+        {
+            if (vie)
+                vie = false;
+            else
+                vie = true;
+        }
+
+        public string getVie()
+        {
+            if (vie)
+                return "oui";
+            else
+                return "non";
         }
     }
 }

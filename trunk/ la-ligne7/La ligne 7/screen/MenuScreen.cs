@@ -157,7 +157,7 @@ namespace ligne7
             : base(screenManager)
         {
             graphics = screenManager.Graphics;
-            menu = new OptionsMenu(new Bouton[] { new Bouton("Retour", 75, 300) }, new Option[] { new Option("Volume", 75, 100), new Option("Niveau", 75, 200) }, returnMenu);
+            menu = new OptionsMenu(new Bouton[] { new Bouton("Retour", 75, 400) }, new Option[] { new Option("Volume", 75, 100), new Option("Niveau", 75, 200), new Option("Vie", 75, 300) }, returnMenu);
             curseur = new Curseur();
         }
 
@@ -177,6 +177,7 @@ namespace ligne7
         {
             menu.TabOptions[0].Valeur = screenManager.Options.Volume.ToString();
             menu.TabOptions[1].Valeur = screenManager.Options.getNiveau();
+            menu.TabOptions[2].Valeur = screenManager.Options.getVie();
 
             foreach (Option option in menu.TabOptions)
                 option.Translation(gameTime);

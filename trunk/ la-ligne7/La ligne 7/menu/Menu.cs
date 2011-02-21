@@ -154,7 +154,7 @@ namespace ligne7
         public OptionsMenu(Bouton[] boutons, Option[] tabOptions, bool returnMenu)
             : base(boutons)
         {
-            selected = 2;
+            selected = 3;
             nbrOptions = tabOptions.Length;
             this.tabOptions = tabOptions;
             this.returnMenu = returnMenu;
@@ -162,24 +162,24 @@ namespace ligne7
 
         protected new void Unselected(int i)
         {
-            if (selected < 2)
+            if (selected < 3)
             {
                 tabOptions[selected].IsSelected = false;
             }
             else
             {
-                boutons[selected - 2].IsSelected = false;
+                boutons[selected - 3].IsSelected = false;
             }
 
             this.selected = i;
 
-            if (selected < 2)
+            if (selected < 3)
             {
                 tabOptions[i].IsSelected = true;
             }
             else
             {
-                boutons[i - 2].IsSelected = true;
+                boutons[i - 3].IsSelected = true;
             }
 
         }
@@ -212,6 +212,9 @@ namespace ligne7
                     screenManager.Options.Niveau = screenManager.Options.Niveau + 1;
                     break;
                 case 2:
+                    screenManager.Options.setVie();
+                    break;
+                case 3:
                     if (returnMenu)
                         screenManager.ChangeGameScreen(new MenuScreen(screenManager));
                     else
@@ -247,13 +250,13 @@ namespace ligne7
 
         public new void Focus(int x, int y)
         {
-            if (selected < 2)
+            if (selected < 3)
             {
                 tabOptions[selected].IsSelected = false;
             }
             else 
             {
-                boutons[selected - 2].IsSelected = false;
+                boutons[selected - 3].IsSelected = false;
             }
 
             int j = 0;
