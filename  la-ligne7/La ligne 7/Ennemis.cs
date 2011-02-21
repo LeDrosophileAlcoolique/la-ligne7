@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
+using System.Threading;
 #endregion
 
 namespace ligne7
@@ -19,6 +20,9 @@ namespace ligne7
         Vector3 zombieView;   // la composante sur Y ne servira que de test pour que le zombie n'attaque pas le joueur en altitude.
         public bool iAmHungry;
         public BoundingBox zombiebox;
+
+        protected bool isReadyAttack;
+        protected Thread threadAttack;
 
         public Ennemis(ContentManager content)
             : base()
@@ -30,8 +34,11 @@ namespace ligne7
             //zombieJoueur = new Vector3 (position.X + 10.0f, position.Y, position.Z);
 
             //On charge le modèle
-
             model = content.Load<Model>("Zombie");
+
+            isReadyAttack = true;
+            threadAttack = new Thread(new ThreadStart(funThreadAttack));
+            threadAttack.Start();
         }
 
 
@@ -57,14 +64,9 @@ namespace ligne7
             zombieView.Z = (float)Math.Cos(Math.Cos(dep.X));
             zombieView.Y = 0;
             zombieView.Normalize();
-            
         }
 
-
         // I.A.
-
-        
-        
 
         // Ennemis ne nous suivent pas en Y car les zombies ne sautent pas 
 
@@ -89,9 +91,9 @@ namespace ligne7
             produitScalaire = dep.Z * zombieView.Z + dep.X * zombieView.X;
 
             if ((produitScalaire > 0.0f) || (iAmHungry))
+            {
                 if (!joueur.bbpos.Intersects(this.zombiebox))
                 {
-
                     if (!IsCollisionEnnemis(listEnnemis) && !IsCollisiondecor(listdecor, this.zombiebox))
                     {
                         RotationZombie(dep, produitScalaire);
@@ -99,11 +101,16 @@ namespace ligne7
                         iAmHungry = true;
                     }
                 }
-                else 
+                else
                 {
-                    //Perdre des points de vie
-                    joueur.Vie = joueur.Vie - 1;    
+                    if (isReadyAttack)
+                    {
+                        //Perdre des points de vie
+                        joueur.Vie = joueur.Vie - 1;
+                        isReadyAttack = false;
+                    }
                 }
+            }
         }
 
         protected int Direction(float direction, float speed)
@@ -119,6 +126,21 @@ namespace ligne7
                 retourne = 0;
 
             return retourne;
+        }
+
+        public void funThreadAttack()
+        {
+            // Tant que le thread n'est pas tué, on travaille
+            while (Thread.CurrentThread.IsAlive)
+            {
+                if (!isReadyAttack)
+                {
+                    // Attente de 500 ms
+                    Thread.Sleep(500);
+
+                    isReadyAttack = true;
+                }
+            }
         }
     }
 }

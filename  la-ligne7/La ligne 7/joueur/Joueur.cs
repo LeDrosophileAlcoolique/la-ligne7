@@ -27,6 +27,7 @@ namespace ligne7
         public BoundingBox bbpos;
 
         protected int vie;
+        protected ScreenManager screenManager;
 
         protected double ang1;
         protected double ang2;
@@ -35,9 +36,10 @@ namespace ligne7
 
         public bool IsEnTrainDeSauter;
 
-        public Joueur(float aspectRatio)
+        public Joueur(float aspectRatio, ScreenManager screenManager)
         {
             vie = 10;
+            this.screenManager = screenManager;
 
             cible = new Vector3(0, 0, 1);
             cameraTranslation = new Vector3(0.04f);
@@ -249,7 +251,7 @@ namespace ligne7
         {
             set
             {
-                if (value > 0)
+                if (value >= 0 && screenManager.Options.Vie)
                 {
                     vie = value;
                 }
