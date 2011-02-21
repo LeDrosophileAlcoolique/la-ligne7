@@ -133,7 +133,21 @@ namespace ligne7
             {
                 if (box.Intersects(decors.boxModel))
                 {
-                    if (box.Min.Y > decors.boxModel.Min.Y - 2)
+                    if (box.Min.Y > decors.boxModel.Max.Y - 2)
+                        sol = true;
+                }
+            }
+            return sol;
+        }
+
+        public bool IsCollisionsol2(List<ModelTerrain> list, BoundingBox box)
+        {
+            bool sol = false;
+            foreach (ModelTerrain decors in list)
+            {
+                if (box.Intersects(decors.boxModel))
+                {
+                    if (box.Min.Y > decors.boxModel.Min.Y)
                         sol = true;
                 }
             }

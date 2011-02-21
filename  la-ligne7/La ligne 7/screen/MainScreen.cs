@@ -63,13 +63,24 @@ namespace ligne7
             listEnnemis.Add(new Ennemis(screenManager.Game.Content));
             
             // en attendant un autre moyen de generer la carte en la creant piece par piece
-            listdecorinvers.Add(new ModelTerrain(screenManager.Game.Content,new Vector3(0,0,0),90,100,95,"terrain"));
-            listdecorinvers.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(0, 0, 200), 90, 100, 95, "terrain"));
-            listdecor.Add(new ModelTerrain(screenManager.Game.Content,new Vector3(0,0,0),5,100,5,"pillier"));
-            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(100, 0, 100),5,100,5, "pillier"));
-            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(0, 0, 100),5,100,5, "pillier"));
-            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(100, 0, 0),5,100,5, "pillier"));
-            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(50, 0, 50), 5, 10, 10, "box"));
+            listdecorinvers.Add(new ModelTerrain(screenManager.Game.Content,new Vector3(0,0,0),150,70,250,"terrain"));
+
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(-105, 0, 60), 5, 100, 5, "pillier"));
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(-105, 0, 170), 5, 100, 5, "pillier"));
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(-105, 0, -45), 5, 100, 5, "pillier"));
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(-105, 0, -155), 10, 10, 10, "pillier"));
+
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(-10, 0, 60),5,100,5, "pillier"));
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(-10, 0, 170),5,100,5, "pillier"));
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(-10, 0, -45),5,100,5, "pillier"));
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(-10, 0, -155), 10, 10, 10, "pillier"));
+
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(105, 0, 60), 5, 100, 5, "pillier"));
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(105, 0, 170), 5, 100, 5, "pillier"));
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(105, 0, -45), 5, 100, 5, "pillier"));
+            listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(105, 0, -155), 10, 10, 10, "pillier"));
+            //listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(0, 0, 0), 0, 0, 0, "famas"));
+
 
             debug.LoadFont(screenManager.Game.Content);
         }
@@ -91,10 +102,9 @@ namespace ligne7
 
             // Les ennemis qui nous suivent
             foreach (Ennemis ennemis in listEnnemis)
-
             {
                 //ennemis.RotationZombie();
-                ennemis.Suivre(joueur, gameTime, listEnnemis);
+                ennemis.Suivre(joueur, gameTime, listEnnemis, listdecor);
             }
 
 
@@ -110,7 +120,7 @@ namespace ligne7
             Mouse.SetPosition(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
 
             if (listEnnemis.Count > 0)
-                debug.Update(joueur.Boxcam.Min + "," + joueur.Position + ", \n" + listEnnemis[0].Box.Min + "," + joueur.angl1 + "," + joueur.angl2 + ",\n" + joueur.Target );
+                debug.Update(joueur.Boxcam.Min + "," + joueur.sautmax + ", \n" + listEnnemis[0].IsCollisionEnnemis(listEnnemis) + listEnnemis[0].zombiebox.Intersects(joueur.bbpos) + "," + listEnnemis[0].iAmHungry + ",\n" + joueur.Target );
         }
 
         public override void Draw(GameTime gameTime)

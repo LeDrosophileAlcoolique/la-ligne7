@@ -129,13 +129,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="terrain.FBX">
-      <Name>terrain</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="escalier.FBX">
       <Name>escalier</Name>
       <Importer>FbxImporter</Importer>
@@ -152,6 +145,20 @@
   <ItemGroup>
     <Compile Include="box.FBX">
       <Name>box</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="terrain.FBX">
+      <Name>terrain</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="famas.FBX">
+      <Name>famas</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>

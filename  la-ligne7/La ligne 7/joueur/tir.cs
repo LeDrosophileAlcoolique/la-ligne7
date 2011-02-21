@@ -42,7 +42,7 @@ namespace ligne7
 
             foreach (Ennemis ennemis in listEnnemis)
             {
-                if (IsCollision(ennemis.Box, position))
+                if (IsCollision(ennemis.zombiebox, position))
                     listEnnemisASupprimer.Add(ennemis);
             }
 

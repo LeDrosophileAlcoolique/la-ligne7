@@ -17,7 +17,8 @@ namespace ligne7
     class Ennemis : ModelDeplacement
     {
         Vector3 zombieView;   // la composante sur Y ne servira que de test pour que le zombie n'attaque pas le joueur en altitude.
-        bool iAmHungry;
+        public bool iAmHungry;
+        public BoundingBox zombiebox;
 
         public Ennemis(ContentManager content)
             : base()
@@ -40,7 +41,7 @@ namespace ligne7
 
             for (int i = 0; i < listEnnemis.Count; i++)
             {
-                if (this != listEnnemis[i] && nextBox.Intersects(listEnnemis[i].Box))
+                if (this != listEnnemis[i] && nextBox.Intersects(listEnnemis[i].zombiebox))
                     isCollision = true;
             }
 
@@ -67,8 +68,9 @@ namespace ligne7
 
         // Ennemis ne nous suivent pas en Y car les zombies ne sautent pas 
 
-        public void Suivre(Joueur joueur, GameTime gameTime, List<Ennemis> listEnnemis)
+        public void Suivre(Joueur joueur, GameTime gameTime, List<Ennemis> listEnnemis, List<ModelTerrain> listdecor)
         {
+            zombiebox = new BoundingBox(position - new Vector3(5, 20, 5), position + new Vector3(5, 20, 5));
             float produitScalaire;
             int direction_x, direction_z;
             float speed = gameTime.ElapsedGameTime.Milliseconds * this.speed;
@@ -87,7 +89,7 @@ namespace ligne7
             produitScalaire = dep.Z * zombieView.Z + dep.X * zombieView.X;
 
             if ((produitScalaire > 0.0f) || (iAmHungry))
-                if (!IsCollision(joueur.Box, deplacement) && !IsCollisionEnnemis(listEnnemis))
+                if (!joueur.bbpos.Intersects(this.zombiebox) && !IsCollisionEnnemis(listEnnemis) && !IsCollisiondecor(listdecor, this.zombiebox))
                 {
                     RotationZombie(dep, produitScalaire);
                     Update(deplacement);
