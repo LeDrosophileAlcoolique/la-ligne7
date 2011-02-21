@@ -18,11 +18,18 @@ namespace ligne7
         protected SpriteFont font;
         protected string assetNameFont;
 
-        public Ecrire(string name, float x, float y)
+        public Ecrire(string name, float y)
         {
             this.name = name;
             assetNameFont = "Author";
             position = new Vector2(10, y);
+        }
+
+        public Ecrire(string name, float x, float y)
+        {
+            this.name = name;
+            assetNameFont = "Author";
+            position = new Vector2(x, y);
         }
 
         public void LoadFont(ContentManager content)
@@ -45,7 +52,7 @@ namespace ligne7
         protected Rectangle box;
 
         public Bouton(string name, float x, float y)
-            : base(name, x, y)
+            : base(name, y)
         {
             assetNameFont = "MenuFont";
             translation = x;

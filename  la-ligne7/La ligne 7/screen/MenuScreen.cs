@@ -25,8 +25,8 @@ namespace ligne7
         {
             graphics = screenManager.Graphics;
             menu = new MainMenu(new Bouton[] { new Bouton("Jouer !", 30, 100), new Bouton("Instructions", 130, 200), new Bouton("Options", 230, 300), new Bouton("Quitter, bye bye", 330, 400) });
-            author = new Ecrire("Copyright - RETP - Arnaud, Jacques, Remi, Thibault", 0, screenManager.Game.GraphicsDevice.Viewport.Height - 100);
-            team = new Ecrire("Les Rats Envahissent Tout Paris", 0, screenManager.Game.GraphicsDevice.Viewport.Height - 65);
+            author = new Ecrire("Copyright - RETP - Arnaud, Jacques, Remi, Thibault", screenManager.Game.GraphicsDevice.Viewport.Height - 100);
+            team = new Ecrire("Les Rats Envahissent Tout Paris", screenManager.Game.GraphicsDevice.Viewport.Height - 65);
             curseur = new Curseur();
         }
 
@@ -86,13 +86,15 @@ namespace ligne7
     {
         protected GraphicsDeviceManager graphics;
         protected Menu menu;
+        protected Ecrire pause;
         protected Curseur curseur;
         
         public PauseScreen(ScreenManager screenManager)
             : base(screenManager)
         {
             graphics = screenManager.Graphics;
-            menu = new PauseMenu(new Bouton[] { new Bouton("Options", 75 , 300), new Bouton("Retour", 75, 200) });
+            menu = new PauseMenu(new Bouton[] { new Bouton("Retour", 75, 200), new Bouton("Options", 75, 300) });
+            pause = new Ecrire("Pause", screenManager.Game.GraphicsDevice.Viewport.Width / 2 - 100, 125);
             curseur = new Curseur();
         }
 
@@ -101,6 +103,7 @@ namespace ligne7
             foreach (Bouton bouton in menu.Boutons)
                 bouton.LoadFont(screenManager.Game.Content);
 
+            pause.LoadFont(screenManager.Game.Content);
             curseur.LoadContent(screenManager.Game.Content, graphics);
         }
 
@@ -137,6 +140,7 @@ namespace ligne7
             foreach (Bouton bouton in menu.Boutons)
                 bouton.Draw(spriteBatch);
 
+            pause.Draw(spriteBatch);
             curseur.Draw(spriteBatch);
             spriteBatch.End();
         }
