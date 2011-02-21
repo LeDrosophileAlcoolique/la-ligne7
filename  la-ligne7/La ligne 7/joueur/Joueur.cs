@@ -26,6 +26,8 @@ namespace ligne7
         protected BoundingBox nextBoxcam;
         public BoundingBox bbpos;
 
+        protected int vie;
+
         protected double ang1;
         protected double ang2;
         public float sautmax;
@@ -35,6 +37,8 @@ namespace ligne7
 
         public Joueur(float aspectRatio)
         {
+            vie = 10;
+
             cible = new Vector3(0, 0, 1);
             cameraTranslation = new Vector3(0.04f);
             cameraPosition = new Vector3(50, 25, -20);
@@ -172,7 +176,6 @@ namespace ligne7
                 cameraPosition.Y--;
             }
 
-
             //positionne la cible de la camera en face de sa position
             cameraTarget = cameraPosition + cible;
 
@@ -233,11 +236,27 @@ namespace ligne7
                 return ang1;
             }
         }
+
         public double angl2
         {
             get
             {
                 return ang2;
+            }
+        }
+
+        public int Vie
+        {
+            set
+            {
+                if (value > 0)
+                {
+                    vie = value;
+                }
+            }
+            get
+            {
+                return vie;
             }
         }
     }
