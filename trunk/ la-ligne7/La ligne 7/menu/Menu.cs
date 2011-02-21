@@ -149,12 +149,56 @@ namespace ligne7
     {
         protected Option[] tabOptions;
         protected bool returnMenu;
+        protected int nbrOptions;
 
         public OptionsMenu(Bouton[] boutons, Option[] tabOptions, bool returnMenu)
             : base(boutons)
         {
+            selected = 2;
+            nbrOptions = tabOptions.Length;
             this.tabOptions = tabOptions;
             this.returnMenu = returnMenu;
+        }
+
+        protected new void Unselected(int i)
+        {
+            if (selected < 2)
+            {
+                tabOptions[selected].IsSelected = false;
+            }
+            else
+            {
+                boutons[selected - 2].IsSelected = false;
+            }
+
+            this.selected = i;
+
+            if (selected < 2)
+            {
+                tabOptions[i].IsSelected = true;
+            }
+            else
+            {
+                boutons[i - 2].IsSelected = true;
+            }
+
+        }
+
+        public new void SetBoutonSelected(int selected, int operation)
+        {
+            int ieme = selected + operation;
+
+            if (ieme >= nbrBouton + nbrOptions)
+            {
+                ieme = 0;
+            }
+
+            if (ieme < 0)
+            {
+                ieme = nbrBouton + nbrOptions - 1;
+            }
+
+            Unselected(ieme);
         }
 
         protected override void Action(ScreenManager screenManager, int selected)

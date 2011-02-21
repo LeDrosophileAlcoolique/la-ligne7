@@ -75,7 +75,7 @@ namespace ligne7
                     stringNiveau = "normal";
                     break;
                 case 2:
-                    stringNiveau = "difficil";
+                    stringNiveau = "difficile";
                     break;
             }
 
