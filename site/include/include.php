@@ -207,7 +207,7 @@ $miseHTML['header'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
 $miseHTML['footer'] = '</div>
           
           <div id="coldroite">
-              <p class="date">Début de la soutenance final : <br /> 
+              <p class="date">Début de la soutenance finale : <br /> 
               <span class="hasCountdown">'.tempsRestant(0, 0, 0, 6, 20, 2011).'</span>
               
               '.getDedicace().'
