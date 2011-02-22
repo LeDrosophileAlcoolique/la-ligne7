@@ -27,6 +27,7 @@ namespace ligne7
 
         public void LoadContentAndPlay(ContentManager content)
         {
+
             MediaPlayer.Volume = 0.1f;
             MediaPlayer.Play(content.Load<Song>(assetName));
         }
