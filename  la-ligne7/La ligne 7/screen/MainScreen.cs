@@ -115,6 +115,12 @@ namespace ligne7
             foreach (Tir tir in listTir)
                 tir.PartirTresLoin(gameTime, listEnnemis);
 
+            for (int i = 0; i < listTir.Count; i++)
+            {
+                if (listTir[i].IsCollisiondecor(listdecor, listTir[i].tirbox) || !listTir[i].IsCollisiondecor(listdecorinvers, listTir[i].tirbox))
+                    listTir.Remove(listTir[i]);
+            }
+
             // Remet la souris au centre de l'ecran
             Mouse.SetPosition(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
 

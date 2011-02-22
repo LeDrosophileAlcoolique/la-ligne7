@@ -20,6 +20,7 @@ namespace ligne7
         Vector3 zombieView;   // la composante sur Y ne servira que de test pour que le zombie n'attaque pas le joueur en altitude.
         public bool iAmHungry;
         public BoundingBox zombiebox;
+        public bool supr;
 
         protected bool isReadyAttack;
         protected Thread threadAttack;
@@ -39,6 +40,7 @@ namespace ligne7
             isReadyAttack = true;
             threadAttack = new Thread(new ThreadStart(funThreadAttack));
             threadAttack.Start();
+            supr = false;
         }
 
 

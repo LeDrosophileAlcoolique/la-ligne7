@@ -16,9 +16,9 @@ namespace ligne7
 {
     class Tir : ModelDeplacement
     {
-        Vector3 epaule = new Vector3(0, 0.0f, 0.0f);
+        Vector3 epaule = Vector3.Zero;
         Vector3 direction = Vector3.Zero;
-        BoundingBox tirbox;
+        public BoundingBox tirbox;
         
         public Tir(ContentManager Content, Joueur joueur)
         {
@@ -33,8 +33,7 @@ namespace ligne7
 
         public void PartirTresLoin(GameTime gameTime, List<Ennemis> listEnnemis)
         {
-            tirbox = new BoundingBox(position - new Vector3(5, 5, 5), position + new Vector3(5, 5, 5));
-            List<Ennemis> listEnnemisASupprimer = new List<Ennemis>();
+            tirbox = new BoundingBox(position - new Vector3(1, 1, 1), position + new Vector3(1, 1, 1));
             float speed = gameTime.ElapsedGameTime.Milliseconds * this.speed;
             Vector3 deplacement;
 
@@ -45,15 +44,17 @@ namespace ligne7
             foreach (Ennemis ennemis in listEnnemis)
             {
                 if (ennemis.zombiebox.Intersects(tirbox))
-                    listEnnemisASupprimer.Add(ennemis);
+                    ennemis.supr = true;
             }
-
+            
             // Gestion Tir, gros bourrin à améliorer 
 
-            foreach (Ennemis ennemis in listEnnemisASupprimer)
-                listEnnemis.Remove(ennemis);
+            for (int i = 0; i < listEnnemis.Count; i++)
+            {
+                if (listEnnemis[i].supr)
+                    listEnnemis.Remove(listEnnemis[i]);
+            }
         }
-        
     }
 }
 
