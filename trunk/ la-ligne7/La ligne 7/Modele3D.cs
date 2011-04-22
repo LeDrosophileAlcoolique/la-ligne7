@@ -21,7 +21,6 @@ namespace ligne7
         public float angle; //pour la rotation
         protected BoundingBox box;
         protected string assetName;
-        protected Texture2D texture;
 
         public Modele3D()
         {
@@ -32,11 +31,10 @@ namespace ligne7
         {
             // On charge le model
             model = Content.Load<Model>(assetName);
-            texture = Content.Load<Texture2D>("Stucco Wall");
         }
 
 
-        public void Draw(Joueur joueur)
+        public void Draw(Joueur joueur, string type)
         {
             // Matrice squelette ? Surement lolaz\
             Matrix[] transforms = new Matrix[model.Bones.Count];
@@ -47,14 +45,28 @@ namespace ligne7
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
-                    effect.TextureEnabled = false;
-                    effect.Texture = texture;
+
                     // Lumiere
                     effect.EnableDefaultLighting();
+                    effect.LightingEnabled = true;
+
+                    if (type == "ennemis")
+                        effect.DiffuseColor = Color.WhiteSmoke.ToVector3();
+                    else
+                    {
+                        effect.DirectionalLight0.DiffuseColor = Color.Black.ToVector3();
+                        effect.DirectionalLight0.Direction = new Vector3(1, 0, 1);
+                        effect.DirectionalLight0.SpecularColor = Color.Black.ToVector3();
+
+                        effect.DirectionalLight1.DiffuseColor = Color.Gray.ToVector3();
+                        effect.DirectionalLight1.Direction = new Vector3(-1, 0, -1);
+                        effect.DirectionalLight1.SpecularColor = Color.DarkGray.ToVector3();
+                     }
+                        
 
                     // Effect world = possibilite de faire rotation, translation...
                     effect.Parameters["World"].SetValue(true);
-                    effect.World = transforms[mesh.ParentBone.Index] * Matrix.CreateRotationY(3 * angle) * Matrix.CreateTranslation(position);
+                    effect.World = transforms[mesh.ParentBone.Index] * Matrix.CreateRotationY(angle) * Matrix.CreateTranslation(position);   //Matrix.CreateRotationY(3 * angle)
 
                     // Vue du modèle en perspective
                     effect.Parameters["Projection"].SetValue(joueur.Projection);

@@ -17,23 +17,27 @@ namespace ligne7
 {
     class Ennemis : ModelDeplacement
     {
-        Vector3 zombieView;   // la composante sur Y ne servira que de test pour que le zombie n'attaque pas le joueur en altitude.
-        public bool iAmHungry;
+        
         public BoundingBox zombiebox;
         public bool supr;
-
         protected bool isReadyAttack;
         protected Thread threadAttack;
+        protected float turnSpeed = 1.0f;  // 100.0f
 
-        public Ennemis(ContentManager content)
+
+
+        public Ennemis(ContentManager content, Joueur joueur)
             : base()
         {
             speed = 0.03f;
-            position = new Vector3(70,0,70);
-            zombieView = new Vector3(0,0, -1);
-            iAmHungry = false;
+            //position = new Vector3(225,0,225);
+            position = new Vector3(70, 0, 70);
+            
             //zombieJoueur = new Vector3 (position.X + 10.0f, position.Y, position.Z);
-
+            float dX = joueur.Position.X - this.Position.X;
+            float dZ = joueur.Position.Z - this.Position.Z;
+            angle = (float)Math.Atan(dX/dZ);
+            
             //On charge le modèle
             model = content.Load<Model>("Zombie");
 
@@ -42,8 +46,6 @@ namespace ligne7
             threadAttack.Start();
             supr = false;
         }
-
-
         public bool IsCollisionEnnemis(List<Ennemis> listEnnemis)
         {
             bool isCollision = false;
@@ -53,29 +55,56 @@ namespace ligne7
                 if (this != listEnnemis[i] && nextBox.Intersects(listEnnemis[i].zombiebox))
                     isCollision = true;
             }
-
             return isCollision;
         }
-
-        public void RotationZombie(Vector3 dep, float produitScalaire)  
-        {
-            //this.angle += 0.0005f;
-            this.angle = (float)Math.Cos(dep.X);
-            //this.angle = (float)Math.Acos(produitScalaire);
-            zombieView.X = -(float)Math.Sin(Math.Cos(dep.X));
-            zombieView.Z = (float)Math.Cos(Math.Cos(dep.X));
-            zombieView.Y = 0;
-            zombieView.Normalize();
-        }
-
         // I.A.
 
-        // Ennemis ne nous suivent pas en Y car les zombies ne sautent pas 
+        public float TuVasTournerConnard/*,ou pas?*/(Vector3 direction,
+            float currentAngle, float turnSpeed)  //Vector3 dep, float produitScalaire
+        {
+            
+            float x = direction.X;
+            float y = direction.Z;
 
+            float desiredAngle = (float)Math.Atan(x / y) /*+ MathHelper.PiOver2)*/;
+            //float difference = WrapAngle(desiredAngle - currentAngle);                      // reactive pour rotation elaborée
+            //difference = MathHelper.Clamp(difference, -turnSpeed, turnSpeed);               // reactive pour rotation elaborée
+            //return WrapAngle(currentAngle + difference);
+            //return droitDevant((direction, desiredAngle)+ MathHelper.Pi);  :fonctionnel mais inversée:
+
+            //desiredAngle = WrapAngle(currentAngle + difference);  // ajouté pour rotation elaborée
+
+            desiredAngle = droitDevant(direction, desiredAngle);
+            desiredAngle += MathHelper.Pi;
+            return desiredAngle;
+
+        }
+        private static float WrapAngle(float radians)
+        {
+            while (radians < -MathHelper.Pi)
+            {
+                radians += MathHelper.TwoPi;
+            }
+            while (radians > MathHelper.Pi)
+            {
+                radians -= MathHelper.TwoPi;
+            }
+            return radians;
+        }
+        private static float droitDevant(Vector3 direction, float angle)
+        {
+            float z = direction.Z;
+
+            if (z < 0)
+                angle += MathHelper.Pi;
+            return angle;
+        }
+
+        
         public void Suivre(Joueur joueur, GameTime gameTime, List<Ennemis> listEnnemis, List<ModelTerrain> listdecor)
         {
             zombiebox = new BoundingBox(position - new Vector3(5, 20, 5), position + new Vector3(5, 20, 5));
-            float produitScalaire;
+
             int direction_x, direction_z;
             float speed = gameTime.ElapsedGameTime.Milliseconds * this.speed;
             Vector3 direction = position - joueur.Positioncam;
@@ -83,24 +112,20 @@ namespace ligne7
 
             direction_x = Direction(direction.X, speed);
             direction_z = Direction(direction.Z, speed);
+            
 
             deplacement = new Vector3(direction_x * speed, 0, direction_z * speed);
 
             Vector3 dep = joueur.Position - this.Position;
-            dep.Normalize();
-            //RotationZombie(dep);
-            
-            produitScalaire = dep.Z * zombieView.Z + dep.X * zombieView.X;
 
-            if ((produitScalaire > 0.0f) || (iAmHungry))
-            {
+           
                 if (!joueur.bbpos.Intersects(this.zombiebox))
                 {
                     if (!IsCollisionEnnemis(listEnnemis) && !IsCollisiondecor(listdecor, this.zombiebox))
                     {
-                        RotationZombie(dep, produitScalaire);
-                        Update(deplacement);
-                        iAmHungry = true;
+                        angle = TuVasTournerConnard(dep, angle, turnSpeed);
+                        Update(deplacement);                                   // 15/04 test
+                        
                     }
                 }
                 else
@@ -112,7 +137,8 @@ namespace ligne7
                         isReadyAttack = false;
                     }
                 }
-            }
+            
+
         }
 
         protected int Direction(float direction, float speed)
