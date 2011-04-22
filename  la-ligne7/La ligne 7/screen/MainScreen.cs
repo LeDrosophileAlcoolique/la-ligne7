@@ -60,11 +60,12 @@ namespace ligne7
 
             curseur.LoadContent(screenManager.Game.Content, graphics);
             
-            listEnnemis.Add(new Ennemis(screenManager.Game.Content));
+            listEnnemis.Add(new Ennemis(screenManager.Game.Content, joueur));
             
             // en attendant un autre moyen de generer la carte en la creant piece par piece
+            
             listdecorinvers.Add(new ModelTerrain(screenManager.Game.Content,new Vector3(0,0,0),150,70,250,"terrain"));
-
+            
             listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(-105, 0, 60), 5, 100, 5, "pillier"));
             listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(-105, 0, 170), 5, 100, 5, "pillier"));
             listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(-105, 0, -45), 5, 100, 5, "pillier"));
@@ -79,8 +80,6 @@ namespace ligne7
             listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(105, 0, 170), 5, 100, 5, "pillier"));
             listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(105, 0, -45), 5, 100, 5, "pillier"));
             listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(105, 0, -155), 10, 10, 10, "pillier"));
-            //listdecor.Add(new ModelTerrain(screenManager.Game.Content, new Vector3(0, 0, 0), 0, 0, 0, "famas"));
-
 
             debug.LoadFont(screenManager.Game.Content);
         }
@@ -91,14 +90,14 @@ namespace ligne7
             souris.Update();
 
             // Appel de la méthode Update dans la classe Joueur
-            joueur.Deplacement(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2, screenManager.Game.Content, listEnnemis, listdecor, listdecorinvers);
+            joueur.Deplacement(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2, screenManager.Game.Content, listEnnemis, listdecor, listdecorinvers,gameTime);
 
             if (clavier.IsNewKeyPress(Keys.P))
                 screenManager.ChangeGameScreen(new PauseScreen(screenManager));
 
             // On créé un modèle 3d si le joueur appuie sur M
             if (clavier.IsNewKeyPress(Keys.M))
-                listEnnemis.Add(new Ennemis(screenManager.Game.Content));
+                listEnnemis.Add(new Ennemis(screenManager.Game.Content, joueur));
 
             // Les ennemis qui nous suivent
             foreach (Ennemis ennemis in listEnnemis)
@@ -106,6 +105,7 @@ namespace ligne7
                 //ennemis.RotationZombie();
                 ennemis.Suivre(joueur, gameTime, listEnnemis, listdecor);
             }
+
 
             // On tire lorsque le joueur appuie sur clic gauche.
             if (souris.IsNewClickPress())
@@ -142,15 +142,15 @@ namespace ligne7
 
             // Dessine modele 3D
             foreach (ModelTerrain decor in listdecor)
-                decor.Draw(joueur);
+                decor.Draw(joueur, "decor");
             foreach (ModelTerrain decor in listdecorinvers)
-                decor.Draw(joueur);
+                decor.Draw(joueur, "terrain");
 
             foreach (Ennemis ennemis in listEnnemis)
-                ennemis.Draw(joueur);
+                ennemis.Draw(joueur, "ennemis");
 
             foreach (Tir tir in listTir)
-                tir.Draw(joueur);
+                tir.Draw(joueur, "tir");
 
             // Dessin en 2D
             SpriteBatch spriteBatch = screenManager.SpriteBatch;

@@ -29,8 +29,7 @@ namespace ligne7
         protected int vie;
         protected ScreenManager screenManager;
 
-        protected double ang1;
-        protected double ang2;
+        protected float rotspeed = 0.3f;
         public float sautmax;
         public bool estausol;
 
@@ -44,6 +43,7 @@ namespace ligne7
             cible = new Vector3(0, 0, 1);
             cameraTranslation = new Vector3(0.04f);
             cameraPosition = new Vector3(50, 25, -20);
+            //cameraPosition = new Vector3(205, 25, 135);
             cameraTarget = cameraPosition + cible;
             estausol = true;
             
@@ -71,8 +71,13 @@ namespace ligne7
             return isCollision;
         }
 
-        public void Deplacement(int x, int y, ContentManager Content, List<Ennemis> listEnnemis, List<ModelTerrain> listdecor, List<ModelTerrain> listdecorinvers)
+        public void Deplacement(int x, int y, ContentManager Content, List<Ennemis> listEnnemis, List<ModelTerrain> listdecor, List<ModelTerrain> listdecorinvers, GameTime gametime)
         {
+            float timeDifference = (float)gametime.ElapsedGameTime.TotalMilliseconds / 1000.0f;
+            float updownRot = 0.0f;
+            float leftrightRot = 0.0f;
+            Vector3 axeHorizon = Vector3.Transform(cible, Matrix.CreateRotationY((float)(-Math.PI / 2)));
+
             bbpos = new BoundingBox(cameraPosition - new Vector3(5, 20, 5), cameraPosition + new Vector3(5, 20, 5));
             // Partie clavier
             KeyboardState clavier = Keyboard.GetState();
@@ -96,15 +101,15 @@ namespace ligne7
             //Permet d'aller a gauche
             if (clavier.IsKeyDown(Keys.Q))
             {
-                previsionPosition.X += (float)(Math.Sin(ang2 + (Math.PI / 2)));
-                previsionPosition.Z += (float)(Math.Cos(ang2 + (Math.PI / 2)));
+                previsionPosition.X -= axeHorizon.X;
+                previsionPosition.Z -= axeHorizon.Z;
             }
 
             //Permet d'aller a droite
             if (clavier.IsKeyDown(Keys.D))
             {
-                previsionPosition.X += (float)(Math.Sin(ang2 - (Math.PI / 2)));
-                previsionPosition.Z += (float)(Math.Cos(ang2 - (Math.PI / 2)));
+                previsionPosition.X += axeHorizon.X;
+                previsionPosition.Z += axeHorizon.Z;
             }
 
             nextBoxcam = new BoundingBox(previsionPosition - new Vector3(5, 20, 5), previsionPosition + new Vector3(5, 20, 5));
@@ -119,36 +124,16 @@ namespace ligne7
 
             // fait pivoter la camera selon le deplacement de la souris   
             
+            if (mouseste.Y != y && updownRot > -80  && updownRot < 80)
+                updownRot -= rotspeed * (mouseste.Y-y) * timeDifference;
 
-            if (mouseste.Y > y)
-            {
-                
-                if (ang1 > -(Math.PI / 2 + 0.1))
-                    ang1 -= ((mouseste.Y -y)/10 *Math.PI / 80);
-                cible.Y = (float)(1 * Math.Sin(ang1));
-            }
+            if (mouseste.X != x)
+                leftrightRot -= rotspeed * (mouseste.X-x) * timeDifference;
 
-            if (mouseste.Y < y)
-            {
-                
-                if (ang1 < (Math.PI / 2) - 0.1)
-                    ang1 += ((y-mouseste.Y)/10* Math.PI / 80);
-                cible.Y = (float)(1 * Math.Sin(ang1));
-            }
+            Matrix Rotation = Matrix.CreateFromAxisAngle(axeHorizon, updownRot) *Matrix.CreateRotationY(leftrightRot);
+            cible = Vector3.Transform(cible, Rotation);
 
-            if (mouseste.X > x)
-            {
-                ang2 -= ((mouseste.X -x)/10 * Math.PI / 70);
-                cible.Z = (float)(1 * Math.Cos(ang2) * Math.Cos(ang1));
-                cible.X = (float)(1 * Math.Sin(ang2) * Math.Cos(ang1));
-            }
-
-            if (mouseste.X < x)
-            {
-                ang2 += ((x - mouseste.X)/ 10 * Math.PI / 70);
-                cible.Z = (float)(1 * Math.Cos(ang2) * Math.Cos(ang1));
-                cible.X = (float)(1 * Math.Sin(ang2) * Math.Cos(ang1));
-            }
+            
 
 
             // Saut optimisé ais toujours a ameliorer lorsque l'on saut sur un objet en hauteur
@@ -228,22 +213,6 @@ namespace ligne7
             get
             {
                 return boxcam;
-            }
-        }
-
-        public double angl1
-        {
-            get
-            {
-                return ang1;
-            }
-        }
-
-        public double angl2
-        {
-            get
-            {
-                return ang2;
             }
         }
 

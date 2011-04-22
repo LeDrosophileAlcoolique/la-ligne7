@@ -20,7 +20,7 @@ namespace ligne7
 
         public Son()
         {
-            assetName = "psycraft";
+            assetName = "18";
         }
 
         // Charge et joue une musique
