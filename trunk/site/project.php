@@ -1,9 +1,12 @@
-<?php
+﻿<?php
 require("include/include.php");
 
 echo $miseHTML['header'];
 ?>
 <h1>Présentation du projet</h1>
+
+<img src="images/menu.jpg" />
+
 <p>Les zombies ont toujours été présents dans la plupart des jeux de survival
 horror, en effet la manière de les mettre en scène dans des lieux particuliers
 ont toujours su nous faire frissonner au moment le moins attendu. Prenant
@@ -23,6 +26,9 @@ arriver a la fin du délai imparti pour faire ce projet, c’est-à-dire environ
 mois.</p>
 
 <h1>Le coté défouloir du projet</h1>
+
+<img class="left" src="images/zombie.jpg" />
+
 <p>On ne peut faire intervenir des zombies si il n’y a pas un moyen de foncer
 dans le tas et de tous les tuer. C’est pourquoi nous avons mis à votre disposition
 un petit arsenal pour que vous puissiez exploiter au maximum cette
@@ -30,6 +36,9 @@ part du jeu, même si la plupart d’entre vous préférerons jouer la défense 
 l’attaque.</p>
 
 <h1>Une ambiance à glacer le sang</h1>
+
+<img src="images/terrain.jpg" />
+
 <p>Un survival horror n’est défini que par son ambiance, c’est pourquoi nous
 miserons beaucoup dessus. Le lieu dans lequel se déroule notre jeu est propice
 à une ambiance frissonnante. Nos petits ajouts permettront de renforcer
