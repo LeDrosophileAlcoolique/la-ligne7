@@ -1,22 +1,16 @@
--- phpMyAdmin SQL Dump
--- version 3.2.0.1
+﻿-- phpMyAdmin SQL Dump
+-- version 3.3.9
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Lun 21 Février 2011 à 15:27
--- Version du serveur: 5.1.36
--- Version de PHP: 5.3.0
+-- Généré le : Mar 26 Avril 2011 à 14:18
+-- Version du serveur: 5.5.8
+-- Version de PHP: 5.3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
--- Base de données: `game`
+-- Base de données: `test`
 --
 
 -- --------------------------------------------------------
@@ -52,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `news` mediumtext NOT NULL,
   `date` datetime NOT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Contenu de la table `news`
@@ -63,4 +57,9 @@ INSERT INTO `news` (`id`, `news`, `date`) VALUES
 (2, 'Finalement en utilisant la méthode citée au dernier post, nous avons réussi à appliquer une bounding box à chaque nouvel élément 3d importer dans notre jeu.', '2011-02-11 23:05:34'),
 (3, 'ba moi, arnaud, je me suis mis a la tache sur la réalisation des modèle 3D pour les ennemis et le décor ou je me suis bien énervé car les coordonnées 3Dsmax ne sont pas forcement celle de notre jeu.', '2011-01-30 00:30:31'),
 (4, 'Le weekend juste avant la soutenance j''ai du faire un rush  sur le projet car la collision ne fonctionnais toujours pas. j''ai passe la nuit a l''epita pour que cela marche et le matin j''ai travailler avec Jacques pour qu''il prenne le relais avant de partir dormir', '2011-02-20 08:12:37'),
-(6, 'Dernière modification du site avant la seconde soutenance avec la mise en place du design du site, du système de news et de message. Un site maintenant dynamique. Le système de news va maintenant vous permettre de suivre l''avancement et le système de message va vous permettre de donner votre avis sur notre jeu.', '2011-02-21 15:32:54');
+(6, 'Dernière modification du site avant la seconde soutenance avec la mise en place du design du site, du système de news et de message. Un site maintenant dynamique. Le système de news va maintenant vous permettre de suivre l''avancement et le système de message va vous permettre de donner votre avis sur notre jeu.', '2011-02-21 15:32:54'),
+(7, 'Ça y est ! Après toute une journée de travail les zombies se tournent enfin vers le joueur (ils ne nous attaquent plus de dos).', '2011-04-04 00:59:59'),
+(8, 'Les évitements d''obstacles sont désormais implémentés : les zombies ne deviendrons plus inerte dès qu''ils toucheront un pylône ou un mur. Des zombies un peu plus intelligent.', '2011-04-12 12:30:10'),
+(9, 'Notre équipe viens de perdre Thibault pour qui l''appel du Sud a été trop fort. Nous nous retrouvons donc à 3 pour finir le jeu. Nous venons de perdre un membre face aux zombies !', '2011-03-15 17:26:20'),
+(10, 'Une très grand avancée esthétique puisque nous avons intégré des textures aux modèles 3D. Un jeu radicalement plus beau !', '2011-04-22 22:25:18'),
+(11, 'Le jeu a été presque totalement recodé pour pouvoir chargé plus de zombie, tirer plus de fois sans aucun lag !', '2011-03-30 17:35:00');
