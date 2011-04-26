@@ -286,3 +286,13 @@ div.clear{
 #footer p{
   margin: 0;
 }
+
+img{
+  float: left;
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+img.left{
+  float: right;
+}

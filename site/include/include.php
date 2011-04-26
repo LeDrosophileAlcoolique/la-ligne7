@@ -1,4 +1,4 @@
-<?php                  
+﻿<?php                  
 require("bdd.php");
    
 function mysqlProtectAndHTML ($string, $method = "POST") {
