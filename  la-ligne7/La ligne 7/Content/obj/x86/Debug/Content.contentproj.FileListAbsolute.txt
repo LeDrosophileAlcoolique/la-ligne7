@@ -1,4 +1,0 @@
-C:\Users\Ixartz\Desktop\svn\Nouveau dossier\Soutenance 3 - Copie\La ligne 7\Content\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\Content\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\Ixartz\Desktop\svn\Soutenance3\La ligne 7\Content\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\Ixartz\Desktop\svn\Soutenance3 - Copie\La ligne 7\Content\obj\x86\Debug\ResolveAssemblyReference.cache
