@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Graphics="Microsoft.Xna.Framework.Content.Pipeline.Graphics" xmlns:Framework="Microsoft.Xna.Framework">
+  <Asset Type="Graphics:NodeContent">
+    <Name>RootNode</Name>
+    <Identity>
+      <SourceFilename>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\Content\FBX\zombie.FBX</SourceFilename>
+      <SourceTool>FbxImporter</SourceTool>
+    </Identity>
+    <Transform>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</Transform>
+    <Children>
+      <Child Type="Graphics:MeshContent">
+        <Name>Box01</Name>
+        <Transform>-1.116595E-06 -2.83274923E-16 1 0 -2.66631582E-06 1 -2.97691147E-12 0 -1 -2.66631582E-06 -1.116595E-06 0 -0.482898235 5.177463 0 1</Transform>
+        <Positions>-1.5 -5 0 1.5 -5 0 -1.5 5 0 1.5 5 0 -1.5 -5 3 1.5 -5 3 -1.5 5 3 1.5 5 3</Positions>
+        <Geometry>
+          <Batch>
+            <Material>#Resource1</Material>
+            <Indices>2 1 0 0 3 2 6 5 4 4 7 6 10 9 8 8 11 10 14 13 12 12 15 14 18 17 16 16 19 18 22 21 20 20 23 22</Indices>
+            <Vertices>
+              <PositionIndices>0 2 3 1 4 5 7 6 0 1 5 4 1 3 7 5 3 2 6 7 2 0 4 6</PositionIndices>
+              <Channels>
+                <VertexChannel Name="Normal0" ElementType="Framework:Vector3">0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0</VertexChannel>
+                <VertexChannel Name="TextureCoordinate0" ElementType="Framework:Vector2">0.06284947 0.9995682 0.062444903 0.6249396 -5.716621E-05 0.625344157 0.000347404741 0.999972761 0.128065154 0.9991375 0.188264534 0.998448849 0.187920332 0.6283671 0.128409475 0.6276785 0.125034213 0.6246991 0.18742457 0.624792635 0.18742457 0.499941 0.125034213 0.499847472 0.249651283 1.00015533 0.249607831 0.625160933 0.187561914 0.625003457 0.1876054 0.999997854 0.06254814 0.6240804 0.125158221 0.6240804 0.125158221 0.500253 0.06254814 0.500253 0.06467843 0.624022841 0.06408971 0.9998722 0.126571521 0.9998723 0.127160266 0.624022841</VertexChannel>
+              </Channels>
+            </Vertices>
+          </Batch>
+        </Geometry>
+      </Child>
+      <Child Type="Graphics:MeshContent">
+        <Name>Box02</Name>
+        <Transform>-1.116595E-06 -2.83274923E-16 1 0 -2.66631582E-06 1 -2.97691147E-12 0 -1 -2.66631582E-06 -1.116595E-06 0 3.473062 5.177463 0 1</Transform>
+        <Animations>
+          <Animation Key="Take 001">
+            <Name>Take 001</Name>
+            <Duration>PT0.167S</Duration>
+            <Channels>
+              <Channel Key="Box02">
+                <Keyframe>
+                  <Time>PT0S</Time>
+                  <Transform>-1.116595E-06 -2.83274923E-16 1 0 -2.66631582E-06 1 -2.97691147E-12 0 -1 -2.66631582E-06 -1.116595E-06 0 3.473062 5.177463 0 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.0166666S</Time>
+                  <Transform>-1.19842252E-06 -2.83274923E-16 1 0 -2.663161E-06 1 -3.191309E-12 0 -1 -2.663161E-06 -1.19842252E-06 0 3.473062 5.177463 0 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.0333333S</Time>
+                  <Transform>-1.19842252E-06 -2.83274923E-16 1 0 -2.663161E-06 1 -3.191309E-12 0 -1 -2.663161E-06 -1.19842252E-06 0 3.473062 5.177463 0 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.05S</Time>
+                  <Transform>-1.19842252E-06 -2.83274923E-16 1 0 -2.663161E-06 1 -3.191309E-12 0 -1 -2.663161E-06 -1.19842252E-06 0 3.473062 5.177463 0 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.0666666S</Time>
+                  <Transform>-1.19842252E-06 -2.83274923E-16 1 0 -2.663161E-06 1 -3.191309E-12 0 -1 -2.663161E-06 -1.19842252E-06 0 3.473062 5.177463 0 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.0833333S</Time>
+                  <Transform>-1.19842252E-06 -2.83274923E-16 1 0 -2.663161E-06 1 -3.191309E-12 0 -1 -2.663161E-06 -1.19842252E-06 0 3.473062 5.177463 0 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.0999999S</Time>
+                  <Transform>-1.19842252E-06 -2.83274923E-16 1 0 -2.663161E-06 1 -3.191309E-12 0 -1 -2.663161E-06 -1.19842252E-06 0 3.473062 5.177463 0 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.1166666S</Time>
+                  <Transform>-1.19842252E-06 -2.83274923E-16 1 0 -2.663161E-06 1 -3.191309E-12 0 -1 -2.663161E-06 -1.19842252E-06 0 3.473062 5.177463 0 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.1333333S</Time>
+                  <Transform>-1.19842252E-06 -2.83274923E-16 1 0 -2.663161E-06 1 -3.191309E-12 0 -1 -2.663161E-06 -1.19842252E-06 0 3.473062 5.177463 0 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.15S</Time>
+                  <Transform>-1.19842252E-06 -2.83274923E-16 1 0 -2.663161E-06 1 -3.191309E-12 0 -1 -2.663161E-06 -1.19842252E-06 0 3.473062 5.177463 0 1</Transform>
+                </Keyframe>
+              </Channel>
+            </Channels>
+          </Animation>
+        </Animations>
+        <Positions>-1.5 -5 0 1.5 -5 0 -1.5 5 0 1.5 5 0 -1.5 -5 3 1.5 -5 3 -1.5 5 3 1.5 5 3</Positions>
+        <Geometry>
+          <Batch>
+            <Material>#Resource1</Material>
+            <Indices>2 1 0 0 3 2 6 5 4 4 7 6 10 9 8 8 11 10 14 13 12 12 15 14 18 17 16 16 19 18 22 21 20 20 23 22</Indices>
+            <Vertices>
+              <PositionIndices>0 2 3 1 4 5 7 6 0 1 5 4 1 3 7 5 3 2 6 7 2 0 4 6</PositionIndices>
+              <Channels>
+                <VertexChannel Name="Normal0" ElementType="Framework:Vector3">0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0</VertexChannel>
+                <VertexChannel Name="TextureCoordinate0" ElementType="Framework:Vector2">0.06272054 0.999783039 0.06272057 0.6249559 3.20822E-05 0.6249558 3.20523977E-05 0.999783 0.1261961 1.00013685 0.1878098 1.00013685 0.1878098 0.6249973 0.1261961 0.6249973 0.125204355 0.624388635 0.187474236 0.624388635 0.187474236 0.500030041 0.125204355 0.500030041 0.250269443 0.9998479 0.249398857 0.6280619 0.186449915 0.6277064 0.1873205 0.9994924 0.06235915 0.624814868 0.125250891 0.624814868 0.125250891 0.5004589 0.06235915 0.5004589 0.064432025 0.6231128 0.06409988 0.9999322 0.1256151 0.9999322 0.125947133 0.6231128</VertexChannel>
+              </Channels>
+            </Vertices>
+          </Batch>
+        </Geometry>
+      </Child>
+      <Child Type="Graphics:MeshContent">
+        <Name>Box03</Name>
+        <Transform>1 0 0 0 0 2.83274923E-16 -1 0 0 1 2.83274923E-16 0 0 10.1709232 0 1</Transform>
+        <Positions>-3.5 -1.5 0 3.5 -1.5 0 -3.5 1.5 0 3.5 1.5 0 -3.5 -1.5 10 3.5 -1.5 10 -3.5 1.5 10 3.5 1.5 10</Positions>
+        <Geometry>
+          <Batch>
+            <Material>#Resource1</Material>
+            <Indices>2 1 0 0 3 2 6 5 4 4 7 6 10 9 8 8 11 10 14 13 12 12 15 14 18 17 16 16 19 18 22 21 20 20 23 22</Indices>
+            <Vertices>
+              <PositionIndices>0 2 3 1 4 5 7 6 0 1 5 4 1 3 7 5 3 2 6 7 2 0 4 6</PositionIndices>
+              <Channels>
+                <VertexChannel Name="Normal0" ElementType="Framework:Vector3">0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0</VertexChannel>
+                <VertexChannel Name="TextureCoordinate0" ElementType="Framework:Vector2">0.5623976 0.6231231 0.5623976 0.499800384 0.439074785 0.499800384 0.439074785 0.6231231 0.4395516 0.5011718 0.313978851 0.5011718 0.313978851 0.626365244 0.4395516 0.626365244 0.4996292 0.998813868 0.6243697 0.998813868 0.624805 0.625086069 0.5000645 0.625086069 0.249037132 0.99938637 0.311064959 0.99938637 0.311935544 0.6261244 0.249907717 0.6261244 0.3125801 0.9980912 0.4369769 0.9980912 0.437404484 0.626694262 0.313007653 0.626694262 0.437649041 0.9993653 0.499799967 0.9993653 0.5000503 0.6247786 0.4378995 0.6247786</VertexChannel>
+              </Channels>
+            </Vertices>
+          </Batch>
+        </Geometry>
+      </Child>
+      <Child Type="Graphics:MeshContent">
+        <Name>Box04</Name>
+        <Transform>6.123032E-17 1 2.83274923E-16 0 -1.54972088E-06 2.83275028E-16 -1 0 -1 6.122988E-17 1.54972088E-06 0 6.535618 18.39456 -3.520548 1</Transform>
+        <Animations>
+          <Animation Key="Take 001">
+            <Name>Take 001</Name>
+            <Duration>PT0.167S</Duration>
+            <Channels>
+              <Channel Key="Box04">
+                <Keyframe>
+                  <Time>PT0S</Time>
+                  <Transform>6.123032E-17 1 2.83274923E-16 0 -1.54972088E-06 2.83275028E-16 -1 0 -1 6.122988E-17 1.54972088E-06 0 6.535618 18.39456 -3.520548 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.0166666S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 6.535618 18.39456 -3.520548 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.0333333S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 6.535618 18.39456 -3.520548 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.05S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 6.535618 18.39456 -3.520548 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.0666666S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 6.535618 18.39456 -3.520548 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.0833333S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 6.535618 18.39456 -3.520548 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.0999999S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 6.535618 18.39456 -3.520548 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.1166666S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 6.535618 18.39456 -3.520548 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.1333333S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 6.535618 18.39456 -3.520548 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.15S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 6.535618 18.39456 -3.520548 1</Transform>
+                </Keyframe>
+              </Channel>
+            </Channels>
+          </Animation>
+        </Animations>
+        <Positions>-1.5 -5 0 1.5 -5 0 -1.5 5 0 1.5 5 0 -1.5 -5 3 1.5 -5 3 -1.5 5 3 1.5 5 3</Positions>
+        <Geometry>
+          <Batch>
+            <Material>#Resource1</Material>
+            <Indices>2 1 0 0 3 2 6 5 4 4 7 6 10 9 8 8 11 10 14 13 12 12 15 14 18 17 16 16 19 18 22 21 20 20 23 22</Indices>
+            <Vertices>
+              <PositionIndices>0 2 3 1 4 5 7 6 0 1 5 4 1 3 7 5 3 2 6 7 2 0 4 6</PositionIndices>
+              <Channels>
+                <VertexChannel Name="Normal0" ElementType="Framework:Vector3">0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0</VertexChannel>
+                <VertexChannel Name="TextureCoordinate0" ElementType="Framework:Vector2">0.6240788 0.62479645 0.624372244 0.999772549 0.687725365 1.00022388 0.687432 0.6252478 0.81293714 0.6244576 0.7507452 0.6244576 0.750745058 1.00092781 0.812937 1.00092781 0.687656343 0.6241164 0.750526965 0.6251639 0.750526965 0.4994473 0.687656343 0.498399854 0.687937438 0.626681566 0.687937438 0.999735 0.7498799 0.999735 0.7498799 0.626681566 0.8131302 0.6249554 0.8131302 0.499289632 0.75136596 0.499289632 0.75136596 0.6249554 0.813211 0.999127269 0.8744836 0.9985404 0.8744836 0.6238959 0.813211 0.624482751</VertexChannel>
+              </Channels>
+            </Vertices>
+          </Batch>
+        </Geometry>
+      </Child>
+      <Child Type="Graphics:MeshContent">
+        <Name>Box05</Name>
+        <Transform>6.123032E-17 1 2.83274923E-16 0 -1.54972088E-06 2.83275028E-16 -1 0 -1 6.122988E-17 1.54972088E-06 0 -3.53296423 18.3945446 -3.52057862 1</Transform>
+        <Animations>
+          <Animation Key="Take 001">
+            <Name>Take 001</Name>
+            <Duration>PT0.167S</Duration>
+            <Channels>
+              <Channel Key="Box05">
+                <Keyframe>
+                  <Time>PT0S</Time>
+                  <Transform>6.123032E-17 1 2.83274923E-16 0 -1.54972088E-06 2.83275028E-16 -1 0 -1 6.122988E-17 1.54972088E-06 0 -3.53296423 18.3945446 -3.52057862 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.0166666S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 -3.53296423 18.3945446 -3.52057862 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.0333333S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 -3.53296423 18.3945446 -3.52057862 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.05S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 -3.53296423 18.3945446 -3.52057862 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.0666666S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 -3.53296423 18.3945446 -3.52057862 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.0833333S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 -3.53296423 18.3945446 -3.52057862 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.0999999S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 -3.53296423 18.3945446 -3.52057862 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.1166666S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 -3.53296423 18.3945446 -3.52057862 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.1333333S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 -3.53296423 18.3945446 -3.52057862 1</Transform>
+                </Keyframe>
+                <Keyframe>
+                  <Time>PT0.15S</Time>
+                  <Transform>-7.337979E-23 1 3.4450524E-16 0 -1.4647386E-06 3.4450524E-16 -1 0 -1 -5.77989929E-22 1.4647386E-06 0 -3.53296423 18.3945446 -3.52057862 1</Transform>
+                </Keyframe>
+              </Channel>
+            </Channels>
+          </Animation>
+        </Animations>
+        <Positions>-1.5 -5 0 1.5 -5 0 -1.5 5 0 1.5 5 0 -1.5 -5 3 1.5 -5 3 -1.5 5 3 1.5 5 3</Positions>
+        <Geometry>
+          <Batch>
+            <Material>#Resource1</Material>
+            <Indices>2 1 0 0 3 2 6 5 4 4 7 6 10 9 8 8 11 10 14 13 12 12 15 14 18 17 16 16 19 18 22 21 20 20 23 22</Indices>
+            <Vertices>
+              <PositionIndices>0 2 3 1 4 5 7 6 0 1 5 4 1 3 7 5 3 2 6 7 2 0 4 6</PositionIndices>
+              <Channels>
+                <VertexChannel Name="Normal0" ElementType="Framework:Vector3">0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0</VertexChannel>
+                <VertexChannel Name="TextureCoordinate0" ElementType="Framework:Vector2">0.624953747 0.62556386 0.624953747 0.999695539 0.6875534 0.9996067 0.6875534 0.625475049 0.812934339 0.6243074 0.749988258 0.6243074 0.7498076 1.00087571 0.813355744 1.00087571 0.6875302 0.624135256 0.750279665 0.6243746 0.750399351 0.5002214 0.6876499 0.499982 0.6873499 0.625554442 0.6873499 0.999871135 0.7502258 0.999871135 0.7502258 0.625554442 0.8127018 0.6241907 0.8127018 0.4998976 0.750746 0.4998976 0.750746 0.6241907 0.8752536 1.00005376 0.874853 0.625056863 0.8131535 0.6247897 0.8135541 0.9997866</VertexChannel>
+              </Channels>
+            </Vertices>
+          </Batch>
+        </Geometry>
+      </Child>
+      <Child Type="Graphics:MeshContent">
+        <Name>Box06</Name>
+        <Transform>1 0 0 0 0 2.83274923E-16 -1 0 0 1 2.83274923E-16 0 0 20.171 0 1</Transform>
+        <Positions>-3 -3 0 3 -3 0 -3 3 0 3 3 0 -3 -3 6 3 -3 6 -3 3 6 3 3 6</Positions>
+        <Geometry>
+          <Batch>
+            <Material>#Resource1</Material>
+            <Indices>2 1 0 0 3 2 6 5 4 4 7 6 10 9 8 8 11 10 14 13 12 12 15 14 18 17 16 16 19 18 22 21 20 20 23 22</Indices>
+            <Vertices>
+              <PositionIndices>0 2 3 1 4 5 7 6 0 1 5 4 1 3 7 5 3 2 6 7 2 0 4 6</PositionIndices>
+              <Channels>
+                <VertexChannel Name="Normal0" ElementType="Framework:Vector3">0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 1 0 0 1 0 0 1 0 0 1 0 0 0 1 0 0 1 0 0 1 0 0 1 0 -1 0 0 -1 0 0 -1 0 0 -1 0 0</VertexChannel>
+                <VertexChannel Name="TextureCoordinate0" ElementType="Framework:Vector2">0.375082284 0.248523414 0.3748439 -0.0002514124 0.251505464 -0.000326633453 0.251743853 0.248448253 0.125158548 0.248076081 0.251109838 0.248076081 0.251109838 -9.572506E-05 0.125158548 -9.572506E-05 0.376219958 0.499708533 0.4995255 0.499708533 0.4995255 0.249190032 0.376219958 0.249190032 0.0003619194 0.499698043 0.126306146 0.499698043 0.125945047 0.249537826 8.26374162E-07 0.249537826 0.126228631 0.5001861 0.251485229 0.5001861 0.2510221 0.248957634 0.1257655 0.248957634 0.251509845 0.499593437 0.375083178 0.499593437 0.375083178 0.248982966 0.251509845 0.248982966</VertexChannel>
+              </Channels>
+            </Vertices>
+          </Batch>
+        </Geometry>
+      </Child>
+    </Children>
+  </Asset>
+  <Resources>
+    <Resource ID="#Resource1" Type="Graphics:BasicMaterialContent">
+      <Name>03 - Default</Name>
+      <Identity>
+        <SourceFilename>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\Content\FBX\zombie.FBX</SourceFilename>
+        <SourceTool>FbxImporter</SourceTool>
+      </Identity>
+      <OpaqueData>
+        <Data Key="DiffuseColor" Type="Framework:Vector3">0.5882353 0.5882353 0.5882353</Data>
+        <Data Key="EmissiveColor" Type="Framework:Vector3">0 0 0</Data>
+        <Data Key="Alpha" Type="float">1</Data>
+        <Data Key="SpecularColor" Type="Framework:Vector3">0 0 0</Data>
+        <Data Key="SpecularPower" Type="float">1.99999988</Data>
+      </OpaqueData>
+      <Textures>
+        <Texture Key="Texture">
+          <OpaqueData>
+            <Data Key="TextureCoordinate">TextureCoordinate0</Data>
+          </OpaqueData>
+          <Reference>#External1</Reference>
+        </Texture>
+      </Textures>
+    </Resource>
+  </Resources>
+  <ExternalReferences>
+    <ExternalReference ID="#External1" TargetType="Graphics:TextureContent">C36F1B36\zombie.fbm\zombie.png</ExternalReference>
+  </ExternalReferences>
+</XnaContent>

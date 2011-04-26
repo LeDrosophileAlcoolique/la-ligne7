@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline" xmlns:Graphics="Microsoft.Xna.Framework.Graphics" xmlns:Processors="Microsoft.Xna.Framework.Content.Pipeline.Processors">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>Musique\sound.mp3</Source>
+      <Name>Musique\sound</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\Musique\sound.xnb</Output>
+      <Extra>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\Musique\sound.wma</Extra>
+      <Time>2011-04-09T12:41:36.1637095+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Musique\psycraft.MP3</Source>
+      <Name>Musique\psycraft</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\Musique\psycraft.xnb</Output>
+      <Extra>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\Musique\psycraft.wma</Extra>
+      <Time>2011-04-25T12:25:45.4165398+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Musique\18.mp3</Source>
+      <Name>Musique\18</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\Musique\18.xnb</Output>
+      <Extra>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\Musique\18.wma</Extra>
+      <Time>2011-04-25T12:25:31.9693162+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Image\curseur.bmp</Source>
+      <Name>Image\curseur</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\Image\curseur.xnb</Output>
+      <Time>2011-04-09T12:41:36.2729097+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Police\author.bmp</Source>
+      <Name>Police\author</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>FontTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\Police\author.xnb</Output>
+      <Time>2011-04-09T12:41:36.1169094+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Image\bloody.jpg</Source>
+      <Name>Image\bloody</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\Image\bloody.xnb</Output>
+      <Time>2011-04-09T12:41:36.2885097+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Police\menufont.bmp</Source>
+      <Name>Police\menufont</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>FontTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\Police\menufont.xnb</Output>
+      <Time>2011-04-09T13:16:22.3506472+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Image\stuccoWall.jpg</Source>
+      <Name>Image\stuccowall</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\Image\stuccowall.xnb</Output>
+      <Time>2011-04-09T12:41:36.2261096+02:00</Time>
+    </Item>
+    <Item>
+      <Source>FBX\field.FBX</Source>
+      <Name>FBX\field</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\field.xnb</Output>
+      <Time>2011-04-09T12:41:36.2417097+02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\FBX\field_0.xml</Key>
+        <Value>2011-04-26T13:29:06.2834006+02:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>FBX\balle.FBX</Source>
+      <Name>FBX\balle</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\balle.xnb</Output>
+      <Time>2011-04-09T12:41:36.2105096+02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\FBX\balle_0.xml</Key>
+        <Value>2011-04-26T13:29:07.3910026+02:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>FBX\zombie.FBX</Source>
+      <Name>FBX\zombie</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\zombie.xnb</Output>
+      <Time>2011-04-23T01:16:46.4192929+02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\FBX\zombie_0.xml</Key>
+        <Value>2011-04-26T13:29:08.4674045+02:00</Value>
+      </Dependency>
+      <Request>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\C36F1B36\zombie.fbm\zombie_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>FBX\pillier.FBX</Source>
+      <Name>FBX\pillier</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\pillier.xnb</Output>
+      <Time>2011-04-24T01:30:02+02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\FBX\pillier_0.xml</Key>
+        <Value>2011-04-26T13:29:09.5906064+02:00</Value>
+      </Dependency>
+      <Request>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\DF0E1BA1\pillier.fbm\cranes_catacombes_gr_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>FBX\escalier.FBX</Source>
+      <Name>FBX\escalier</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\escalier.xnb</Output>
+      <Time>2011-04-09T12:41:36.2573097+02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\FBX\escalier_0.xml</Key>
+        <Value>2011-04-26T13:29:10.8386086+02:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>FBX\quai.FBX</Source>
+      <Name>FBX\quai</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\quai.xnb</Output>
+      <Time>2011-04-09T12:41:36.3197098+02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\FBX\quai_0.xml</Key>
+        <Value>2011-04-26T13:29:11.8526104+02:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>FBX\box.FBX</Source>
+      <Name>FBX\box</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\box.xnb</Output>
+      <Time>2011-04-09T12:41:36.2729097+02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\FBX\box_0.xml</Key>
+        <Value>2011-04-26T13:29:12.8666122+02:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>FBX\terrain.FBX</Source>
+      <Name>FBX\terrain</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\terrain.xnb</Output>
+      <Time>2011-04-23T01:16:46.2944926+02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\FBX\terrain_0.xml</Key>
+        <Value>2011-04-26T13:29:13.9274141+02:00</Value>
+      </Dependency>
+      <Request>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\DF441BA5\terrain.fbm\Landscape Stone4_0.xnb</Request>
+      <Request>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\DF441BA5\terrain.fbm\cranes_catacombes_gr_0.xnb</Request>
+    </Item>
+    <Item>
+      <Source>FBX\famas.FBX</Source>
+      <Name>FBX\famas</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\famas.xnb</Output>
+      <Time>2011-04-24T01:11:22+02:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\FBX\famas_0.xml</Key>
+        <Value>2011-04-26T13:29:15.4562168+02:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Police\debug.spritefont</Source>
+      <Name>Police\debug</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\Police\debug.xnb</Output>
+      <Time>2011-04-09T12:41:36.1169094+02:00</Time>
+    </Item>
+    <Item>
+      <Source>FBX\field.FBX</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\FBX\field_0.xml</Output>
+      <Time>2011-04-09T12:41:36.2417097+02:00</Time>
+    </Item>
+    <Item>
+      <Source>FBX\balle.FBX</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\FBX\balle_0.xml</Output>
+      <Time>2011-04-09T12:41:36.2105096+02:00</Time>
+    </Item>
+    <Item>
+      <Source>FBX\zombie.FBX</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\FBX\zombie_0.xml</Output>
+      <Time>2011-04-23T01:16:46.4192929+02:00</Time>
+    </Item>
+    <Item>
+      <Source>obj\x86\Debug\FBX\C36F1B36\zombie.fbm\zombie.png</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\C36F1B36\zombie.fbm\zombie_0.xnb</Output>
+      <Time>2011-04-26T13:29:08.4050044+02:00</Time>
+    </Item>
+    <Item>
+      <Source>FBX\pillier.FBX</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\FBX\pillier_0.xml</Output>
+      <Time>2011-04-24T01:30:02+02:00</Time>
+    </Item>
+    <Item>
+      <Source>obj\x86\Debug\FBX\DF0E1BA1\pillier.fbm\cranes_catacombes_gr.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\DF0E1BA1\pillier.fbm\cranes_catacombes_gr_0.xnb</Output>
+      <Time>2011-04-26T13:29:09.5750064+02:00</Time>
+    </Item>
+    <Item>
+      <Source>FBX\escalier.FBX</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\FBX\escalier_0.xml</Output>
+      <Time>2011-04-09T12:41:36.2573097+02:00</Time>
+    </Item>
+    <Item>
+      <Source>FBX\quai.FBX</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\FBX\quai_0.xml</Output>
+      <Time>2011-04-09T12:41:36.3197098+02:00</Time>
+    </Item>
+    <Item>
+      <Source>FBX\box.FBX</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\FBX\box_0.xml</Output>
+      <Time>2011-04-09T12:41:36.2729097+02:00</Time>
+    </Item>
+    <Item>
+      <Source>FBX\terrain.FBX</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\FBX\terrain_0.xml</Output>
+      <Time>2011-04-23T01:16:46.2944926+02:00</Time>
+    </Item>
+    <Item>
+      <Source>obj\x86\Debug\FBX\DF441BA5\terrain.fbm\Landscape Stone4.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\DF441BA5\terrain.fbm\Landscape Stone4_0.xnb</Output>
+      <Time>2011-04-26T13:29:13.896214+02:00</Time>
+    </Item>
+    <Item>
+      <Source>obj\x86\Debug\FBX\DF441BA5\terrain.fbm\cranes_catacombes_gr.jpg</Source>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Parameters>
+        <Data Key="ColorKeyColor" Type="Graphics:Color">FFFF00FF</Data>
+        <Data Key="ColorKeyEnabled" Type="bool">true</Data>
+        <Data Key="TextureFormat" Type="Processors:TextureProcessorOutputFormat">DxtCompressed</Data>
+        <Data Key="GenerateMipmaps" Type="bool">true</Data>
+        <Data Key="ResizeToPowerOfTwo" Type="bool">false</Data>
+      </Parameters>
+      <Options>None</Options>
+      <Output>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\FBX\DF441BA5\terrain.fbm\cranes_catacombes_gr_0.xnb</Output>
+      <Time>2011-04-26T13:29:13.896214+02:00</Time>
+    </Item>
+    <Item>
+      <Source>FBX\famas.FBX</Source>
+      <Importer>FbxImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\FBX\famas_0.xml</Output>
+      <Time>2011-04-24T01:11:22+02:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <TargetPlatform>Windows</TargetPlatform>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Ixartz\Desktop\Soutenance3\La ligne 7\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2009-05-14T12:13:52+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2009-05-14T12:13:52+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2009-05-14T12:13:52+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2009-05-14T12:13:52+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2009-05-14T12:13:52+02:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2011-03-01T20:52:53.1680508+01:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>
