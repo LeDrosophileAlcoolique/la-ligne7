@@ -24,9 +24,6 @@ namespace ligne7
         protected NetworkSession session;
         protected AvailableNetworkSessionCollection availableSessions;
 
-        protected PacketReader packetReader;
-        protected PacketWriter packetWriter;
-
         protected Clavier clavier;
         protected Souris souris;
 
@@ -38,7 +35,7 @@ namespace ligne7
             Components.Add(new GamerServicesComponent(this));
 
             // graphics.ToggleFullScreen();
-            // Window.Title = "La ligne 7";
+            Window.Title = "La ligne 7";
 
             clavier = new Clavier(this);
             souris = new Souris(this);
@@ -49,9 +46,6 @@ namespace ligne7
             screenManager = new ScreenManager(this, graphics);
 
             base.Initialize();
-
-            packetReader = new PacketReader();
-            packetWriter = new PacketWriter();
         }
 
         protected override void LoadContent()
@@ -62,21 +56,24 @@ namespace ligne7
 
         protected override void Update(GameTime gameTime)
         {
-            if (clavier.IsNewKeyPress(Keys.I) && !Guide.IsVisible && session == null)
+            if (clavier.IsNewKeyPress(Keys.I) && !Guide.IsVisible)
                 Guide.ShowSignIn(1, false);
 
-            /*
-            // Création du serveur
-            if (clavier.IsNewKeyPress(Keys.J) && session == null && SignedInGamer.SignedInGamers.Count >= 1)
-                session = NetworkSession.Create(NetworkSessionType.SystemLink, 1, 2);
+            if (SignedInGamer.SignedInGamers.Count >= 1 && clavier.IsNewKeyPress(Keys.J) && session == null)
+                session = NetworkSession.Create(NetworkSessionType.SystemLink, 2, 2);
 
-            // Gestion client
-            if (clavier.IsNewKeyPress(Keys.K) && session == null && SignedInGamer.SignedInGamers.Count >= 1)
+            if (SignedInGamer.SignedInGamers.Count >= 1 && clavier.IsNewKeyPress(Keys.K) && session == null)
             {
-                availableSessions = NetworkSession.Find(NetworkSessionType.SystemLink, 1, null);
+                availableSessions = NetworkSession.Find(NetworkSessionType.SystemLink, 2, null);
 
                 if (availableSessions != null && availableSessions.Count > 0)
-                    session = NetworkSession.Join(availableSessions[0]); // On rejoint le premier
+                    session = NetworkSession.Join(availableSessions[0]);
+            }
+
+            if (!Guide.IsVisible)
+            {
+                screenManager.GameTime = gameTime;
+                screenManager.MiseJour();
             }
 
             if (session != null)
@@ -87,13 +84,6 @@ namespace ligne7
                     Window.Title = "Client connecté sur " + session.Host.ToString();
 
                 session.Update();
-            }
-            */
-
-            if (!Guide.IsVisible)
-            {
-                screenManager.GameTime = gameTime;
-                screenManager.MiseJour();
             }
 
             // On update le clavier et la souris
