@@ -24,6 +24,9 @@ namespace ligne7
         protected NetworkSession session;
         protected AvailableNetworkSessionCollection availableSessions;
 
+        protected PacketReader packetReader;
+        protected PacketWriter packetWriter;
+
         protected Clavier clavier;
         protected Souris souris;
 
@@ -44,6 +47,9 @@ namespace ligne7
         protected override void Initialize()
         {
             screenManager = new ScreenManager(this, graphics);
+
+            packetReader = new PacketReader();
+            packetWriter = new PacketWriter();
 
             base.Initialize();
         }
@@ -79,9 +85,24 @@ namespace ligne7
             if (session != null)
             {
                 if (session.IsHost)
+                {
                     Window.Title = "Serveur lancé";
+                    packetWriter.Write(DateTime.Now.ToString());
+                    session.LocalGamers[0].SendData(packetWriter, SendDataOptions.ReliableInOrder);
+                }
                 else
-                    Window.Title = "Client connecté sur " + session.Host.ToString();
+                {
+                    LocalNetworkGamer gamer = session.LocalGamers[0];
+
+                    if (gamer.IsDataAvailable)
+                    {
+                        NetworkGamer sender;
+                        gamer.ReceiveData(packetReader, out sender);
+
+                        if (gamer != sender)
+                            Window.Title = packetReader.ReadString();
+                    }
+                }
 
                 session.Update();
             }
