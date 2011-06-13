@@ -33,26 +33,24 @@ namespace ligne7
             
             joueur = new Joueur(this, screenManager, 0, 0);
 
-            if (screenManager.Session == null || screenManager.Session.IsHost)
-            {
-                listEnemy = new MyList<Enemy>();
-                listTir = new MyList<Tir>();
-                listDeclancheur = new MyList<Declancheur>();
-                listMunition = new MyList<Munition>();
-                listDecor = new MyList<Modele3D>();
-            }
+            listEnemy = new MyList<Enemy>();
+            listTir = new MyList<Tir>();
+            listDeclancheur = new MyList<Declancheur>();
+            listMunition = new MyList<Munition>();
+            listDecor = new MyList<Modele3D>();
         }
 
         public void LoadContent()
         {
+            Enemy.FirstLoadContent(screenManager.Content3D);
+            Tir.FirstLoadContent(screenManager.Content3D);
+            Munition.FirstLoadContent(screenManager.Content3D);
+            Modele3D.FirstLoadContent(screenManager.Content3D);
+
+            terrain = new Terrain(this, screenManager, Vector3.Zero);
+
             if (screenManager.Session == null || screenManager.Session.IsHost)
             {
-                terrain = new Terrain(this, screenManager, Vector3.Zero);
-                Enemy.FirstLoadContent(screenManager.Content3D);
-                Tir.FirstLoadContent(screenManager.Content3D);
-                Munition.FirstLoadContent(screenManager.Content3D);
-                Modele3D.FirstLoadContent(screenManager.Content3D);
-
                 listDecor.Add(new Modele3D(this, screenManager, new Vector3(30, 0, 60), "FBX/pillier"));
                 listDecor.Add(new Modele3D(this, screenManager, new Vector3(30, 0, 30), "FBX/pillier"));
                 listDecor.Add(new Modele3D(this, screenManager, new Vector3(30, 0, -30), "FBX/pillier"));
@@ -134,11 +132,8 @@ namespace ligne7
 
         public void Draw(GameTime gameTime)
         {
-            if (screenManager.Session == null || screenManager.Session.IsHost)
-            {
-                foreach (Modele3D modele in ListModel())
-                    modele.Draw(joueur);
-            }
+            foreach (Modele3D modele in ListModel())
+                modele.Draw(joueur);
         }
 
         // Pour la collision donc on met pas le tir
