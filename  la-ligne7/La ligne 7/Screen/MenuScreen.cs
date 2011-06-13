@@ -130,6 +130,44 @@ namespace ligne7
         }
     }
 
+    class PlayScreen : MenuScreen
+    {
+        protected Menu menu;
+
+        public PlayScreen(ScreenManager screenManager)
+            : base(screenManager)
+        {
+            menu = new PlayMenu(new Bouton[] { new Bouton("Campagne solo", 75, 200), new Bouton("Multijoueur", 75, 300) });
+        }
+
+        public override void LoadContent()
+        {
+            base.LoadContent();
+
+            menu.Load(screenManager);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            menu.Update(screenManager);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            // On met l'écran en blanc
+            screenManager.Game.GraphicsDevice.Clear(Color.White);
+
+            screenManager.SpriteBatch.Begin();
+            menu.Draw(screenManager.SpriteBatch);
+
+            // Pour afficher le curseur
+            base.Draw(gameTime);
+            screenManager.SpriteBatch.End();
+        }
+    }
+
     class PauseScreen : MenuScreen
     {
         protected Menu menu;
