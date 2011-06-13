@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 #endregion
 
@@ -35,7 +36,11 @@ namespace ligne7
         // Config du jeu
         protected Options options;
 
-        public ScreenManager(Game1 game, GraphicsDeviceManager graphics)
+        // Multi
+        protected NetworkSession session;
+        protected GameReseau gameReseau;
+
+        public ScreenManager(Game1 game, GraphicsDeviceManager graphics, NetworkSession session)
             : base(game)
         {
             game1 = game;
@@ -53,6 +58,8 @@ namespace ligne7
             
             // On initialise le jeu
             options = new Options(son);
+
+            this.session = session;
         }
 
         public void ChargeContent(SpriteBatch spriteBatch)
@@ -87,6 +94,13 @@ namespace ligne7
             gameScreen.LoadContent();
         }
 
+        public void ChargeGameReseau(GameReseau gameReseau)
+        {
+            this.gameReseau = gameReseau;
+            this.gameScreen = gameReseau;
+            gameReseau.LoadContent();
+        }
+
         public SpriteBatch SpriteBatch
         {
             get 
@@ -116,6 +130,26 @@ namespace ligne7
             get
             {
                 return game1;
+            }
+        }
+
+        public NetworkSession Session
+        {
+            get
+            {
+                return session;
+            }
+            set
+            {
+                session = value;
+            }
+        }
+
+        public GameReseau GameReseau
+        {
+            get
+            {
+                return gameReseau;
             }
         }
     }

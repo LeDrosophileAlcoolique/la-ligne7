@@ -99,6 +99,7 @@
     <Compile Include="Menu\Ecrire.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Reseau\GameReseau.cs" />
     <Compile Include="Screen\GameScreen.cs" />
     <Compile Include="Screen\MainScreen.cs" />
     <Compile Include="Screen\MenuScreen.cs" />

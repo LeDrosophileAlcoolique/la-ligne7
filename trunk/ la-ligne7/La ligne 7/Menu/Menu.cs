@@ -127,13 +127,44 @@ namespace ligne7
             switch (selected)
             {
                 case 0:
-                    screenManager.ChargeMainScreen();
+                    screenManager.ChangeGameScreen(new PlayScreen(screenManager));
                     break;
                 case 2:
                     screenManager.ChangeGameScreen(new OptionsScreen(screenManager, true));
                     break;
                 case 3:
                     screenManager.Game.Exit();
+                    break;
+            }
+        }
+    }
+
+    class PlayMenu : Menu
+    {
+        public PlayMenu(Bouton[] boutons)
+            : base(boutons)
+        {
+        }
+
+        protected override void Action(ScreenManager screenManager, int selected)
+        {
+            switch (selected)
+            {
+                case 0:
+                    screenManager.ChargeMainScreen();
+                    break;
+                case 1:
+                    if (screenManager.Session != null)
+                    {
+                        if (screenManager.Session.IsHost)
+                        {
+                            screenManager.ChargeMainScreen();
+                        }
+                        else
+                        {
+                            screenManager.ChargeGameReseau(new GameReseau(screenManager));
+                        }
+                    }
                     break;
             }
         }

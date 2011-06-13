@@ -46,7 +46,7 @@ namespace ligne7
 
         protected override void Initialize()
         {
-            screenManager = new ScreenManager(this, graphics);
+            screenManager = new ScreenManager(this, graphics, session);
 
             packetReader = new PacketReader();
             packetWriter = new PacketWriter();
@@ -79,32 +79,22 @@ namespace ligne7
             if (!Guide.IsVisible)
             {
                 screenManager.GameTime = gameTime;
+                screenManager.Session = session;
                 screenManager.MiseJour();
             }
 
             if (session != null)
             {
+                session.Update();
+
                 if (session.IsHost)
                 {
-                    Window.Title = "Serveur lancé";
-                    packetWriter.Write(DateTime.Now.ToString());
-                    session.LocalGamers[0].SendData(packetWriter, SendDataOptions.ReliableInOrder);
+
                 }
                 else
                 {
-                    LocalNetworkGamer gamer = session.LocalGamers[0];
 
-                    if (gamer.IsDataAvailable)
-                    {
-                        NetworkGamer sender;
-                        gamer.ReceiveData(packetReader, out sender);
-
-                        if (gamer != sender)
-                            Window.Title = packetReader.ReadString();
-                    }
                 }
-
-                session.Update();
             }
 
             // On update le clavier et la souris
