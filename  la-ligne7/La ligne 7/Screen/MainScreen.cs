@@ -60,7 +60,7 @@ namespace ligne7
             screenManager.Game.GraphicsDevice.Clear(Color.White);
 
             map.Draw(gameTime);
-            
+
             screenManager.SpriteBatch.Begin();
             curseur.Draw(screenManager.SpriteBatch);
 

@@ -35,7 +35,7 @@ namespace ligne7
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, Color.RoyalBlue);
+            spriteBatch.Draw(texture, position, new Color(Color.RoyalBlue, 0.1f));
         }
     }
 }
