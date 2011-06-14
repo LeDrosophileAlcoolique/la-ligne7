@@ -152,5 +152,13 @@ namespace ligne7
                 return gameReseau;
             }
         }
+
+        public MainScreen MainScreen
+        {
+            get
+            {
+                return mainScreen;
+            }
+        }
     }
 }

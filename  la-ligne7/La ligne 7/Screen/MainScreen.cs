@@ -68,5 +68,13 @@ namespace ligne7
                 debug.Draw(screenManager.SpriteBatch);
             screenManager.SpriteBatch.End();
         }
+
+        public Map Map
+        {
+            get
+            {
+                return map;
+            }
+        }
     }
 }
