@@ -97,7 +97,9 @@ namespace ligne7
                         gamer.ReceiveData(packetReader, out sender);
 
                         if (gamer != sender)
-                            Window.Title = packetReader.ReadString();
+                        {
+                            screenManager.MainScreen.Map.Joueur2.Position = packetReader.ReadVector3();
+                        }
                     }
                 }
                 else

@@ -150,6 +150,10 @@ namespace ligne7
             {
                 return position;
             }
+            set
+            {
+                position = value;
+            }
         }
     }
 

@@ -27,6 +27,8 @@ namespace ligne7
         protected MyList<Modele3D> listDecor;
         protected Terrain terrain;
 
+        protected Modele3D joueur2;
+
         public Map(ScreenManager screenManager)
         {
             this.screenManager = screenManager;
@@ -38,6 +40,8 @@ namespace ligne7
             listDeclancheur = new MyList<Declancheur>();
             listMunition = new MyList<Munition>();
             listDecor = new MyList<Modele3D>();
+
+            joueur2 = new Modele3D(this, screenManager, Vector3.Zero, "FBX/zombie");
         }
 
         public void LoadContent()
@@ -147,6 +151,8 @@ namespace ligne7
         {
             yield return terrain;
 
+            yield return joueur2;
+
             foreach (Enemy enemy in listEnemy.EnumValue())
                 yield return enemy;
 
@@ -204,6 +210,18 @@ namespace ligne7
             get
             {
                 return terrain;
+            }
+        }
+
+        public Modele3D Joueur2
+        {
+            get
+            {
+                return joueur2;
+            }
+            set
+            {
+                joueur2 = value;
             }
         }
     }
