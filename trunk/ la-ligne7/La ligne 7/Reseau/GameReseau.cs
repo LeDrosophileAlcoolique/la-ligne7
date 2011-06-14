@@ -49,5 +49,13 @@ namespace ligne7
             curseur.Draw(screenManager.SpriteBatch);
             screenManager.SpriteBatch.End();
         }
+
+        public Map Map
+        {
+            get
+            {
+                return map;
+            }
+        }
     }
 }
