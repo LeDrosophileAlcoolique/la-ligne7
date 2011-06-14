@@ -228,5 +228,13 @@ namespace ligne7
                 return cameraYawY;
             }
         }
+
+        public Vector3 PositionReseau
+        {
+            get
+            {
+                return position - new Vector3(0, hauteur_des_yeux, 0);
+            }
+        }
     }
 }

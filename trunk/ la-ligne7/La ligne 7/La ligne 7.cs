@@ -102,7 +102,7 @@ namespace ligne7
                 }
                 else
                 {
-                    packetWriter.Write(screenManager.GameReseau.Map.Joueur.Position);
+                    packetWriter.Write(screenManager.GameReseau.Map.Joueur.PositionReseau);
                     session.LocalGamers[0].SendData(packetWriter, SendDataOptions.ReliableInOrder);
                 }
             }
