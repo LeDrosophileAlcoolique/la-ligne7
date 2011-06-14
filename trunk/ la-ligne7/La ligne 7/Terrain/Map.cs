@@ -150,8 +150,9 @@ namespace ligne7
         public IEnumerable<Modele3D> ListModel()
         {
             yield return terrain;
-
-            yield return joueur2;
+            
+            if (screenManager.Session != null)
+                yield return joueur2;
 
             foreach (Enemy enemy in listEnemy.EnumValue())
                 yield return enemy;
