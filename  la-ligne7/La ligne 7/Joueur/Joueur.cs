@@ -16,6 +16,7 @@ namespace ligne7
         // Constante
         protected const float hauteur_des_yeux = 5.75f;
         protected const int nbr_par_munition = 25;
+        public const int nbr_vie = 20;
 
         protected ScreenManager screenManager;
 
@@ -30,7 +31,7 @@ namespace ligne7
         protected int nbrBalle;
         public int NbrMunition { get; set; }
 
-        protected int vie = 10;
+        protected int vie = nbr_vie;
    
         public Joueur(Map map, ScreenManager screenManager, int x, int z)
             : base (map)
