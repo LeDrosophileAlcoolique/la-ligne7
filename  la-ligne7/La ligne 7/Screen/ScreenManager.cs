@@ -54,6 +54,7 @@ namespace ligne7
             
             // On initialise l'écran du jeu
             gameScreen = new MainMenuScreen(this);
+            gameReseau = new GameReseau(this);
             mainScreen = new MainScreen(this);
             
             // On initialise le jeu
@@ -94,9 +95,8 @@ namespace ligne7
             gameScreen.LoadContent();
         }
 
-        public void ChargeGameReseau(GameReseau gameReseau)
+        public void ChargeGameReseau()
         {
-            this.gameReseau = gameReseau;
             this.gameScreen = gameReseau;
             gameReseau.LoadContent();
         }

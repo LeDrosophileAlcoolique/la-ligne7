@@ -162,7 +162,7 @@ namespace ligne7
                         }
                         else
                         {
-                            screenManager.ChargeGameReseau(new GameReseau(screenManager));
+                            screenManager.ChargeGameReseau();
                         }
                     }
                     break;
