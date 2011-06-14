@@ -89,11 +89,21 @@ namespace ligne7
 
                 if (session.IsHost)
                 {
+                    LocalNetworkGamer gamer = session.LocalGamers[0];
 
+                    if (gamer.IsDataAvailable)
+                    {
+                        NetworkGamer sender;
+                        gamer.ReceiveData(packetReader, out sender);
+
+                        if (gamer != sender)
+                            Window.Title = packetReader.ReadString();
+                    }
                 }
                 else
                 {
-
+                    packetWriter.Write(screenManager.GameReseau.Map.Joueur.Position);
+                    session.LocalGamers[0].SendData(packetWriter, SendDataOptions.ReliableInOrder);
                 }
             }
 
