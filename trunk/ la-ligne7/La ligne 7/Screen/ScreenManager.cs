@@ -93,6 +93,12 @@ namespace ligne7
             gameScreen.LoadContent();
         }
 
+        public void InitMainScreen()
+        {
+            mainScreen = new MainScreen(this);
+            mainScreen.LoadContent();
+        }
+
         public SpriteBatch SpriteBatch
         {
             get 

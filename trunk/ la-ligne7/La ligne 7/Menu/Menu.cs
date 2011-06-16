@@ -11,221 +11,144 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ligne7
 {
-    abstract class Menu
+    class Menu
     {
         public Bouton[] Boutons { get; set; }
-        public int Selected { get; set; }
+        public Lien[] Liens { get; set; }
+        protected Bouton precSelectedBouton;
+        protected Lien precSelectedLien;
 
-        public Menu(Bouton[] boutons)
+        protected ScreenManager screenManager;
+
+        protected bool isOptions;
+
+        public Menu(ScreenManager screenManager)
         {
-            Boutons = boutons;
-            Selected = 0;
-            Boutons[Selected].IsSelected = true;
+            precSelectedBouton = null;
+            precSelectedLien = null;
+
+            this.screenManager = screenManager;
         }
 
-        protected void Unselected(int i)
-        {
-            Boutons[Selected].IsSelected = false;
-
-            Selected = i;
-            Boutons[i].IsSelected = true;
-        }
-
-        // La fonction SetBoutonSelected change le bouton qui est sélectionné
-        public void SetBoutonSelected(int selected, int operation)
-        {
-            int ieme = (selected + operation) % Boutons.Length;
-
-            Unselected(ieme);
-        }
-
-        // La fonction Contains retourne -1 si les rectangles ne contiennent pas sinon retourne la position de la souris dans le tableau
-        protected int Contains(int x, int y)
-        {
-            for (int i = 0; i < Boutons.Length; i++)
-            {
-                if (Boutons[i].Box.Contains(x, y))
-                {
-                    return i;
-                }
-            }
-
-            return -1;
-        }
-
-        public void Focus(int x, int y)
-        {
-            int i = Contains(x, y);
-
-            if (i >= 0)
-            {
-                Unselected(i);
-            }
-        }
-
-        public void PressEnter(ScreenManager screenManager)
-        {
-            Action(screenManager, Selected);
-        }
-
-        public void Click(ScreenManager screenManager, int x, int y)
-        {
-            int i = Contains(x, y);
-
-            if (i >= 0)
-            {
-                Action(screenManager, i);
-            }
-        }
-
-        protected abstract void Action(ScreenManager screenManager, int selected);
-
-        public void Load(ScreenManager screenManager)
-        {
+        public void LoadContent(ScreenManager screenManager)
+        { 
             foreach (Bouton bouton in Boutons)
-                bouton.LoadFont(screenManager.ContentFont);
+                bouton.LoadContent(screenManager.ContentImage);
+
+            foreach (Lien lien in Liens)
+                lien.LoadFont(screenManager.ContentFont);
         }
 
         public void Update(ScreenManager screenManager)
         {
+            Souris souris = screenManager.Game1.Souris;
+            Bouton selectedBouton = null;
+            Lien selectedLien = null;
+
             foreach (Bouton bouton in Boutons)
-                bouton.Translation(screenManager.GameTime);
+            {
+                if (bouton.Rec.Contains(souris.CurrentMouseState.X, souris.CurrentMouseState.Y))
+                    selectedBouton = bouton;
+            }
 
-            if (screenManager.Game1.Clavier.IsNewKeyPress(Keys.Down))
-                SetBoutonSelected(Selected, 1);
+            foreach (Lien lien in Liens)
+            {
+                if (lien.Rec.Contains(souris.CurrentMouseState.X, souris.CurrentMouseState.Y))
+                    selectedLien = lien;
+            }
 
-            if (screenManager.Game1.Clavier.IsNewKeyPress(Keys.Up))
-                SetBoutonSelected(Selected, -1);
+            if (precSelectedBouton != null)
+                precSelectedBouton.IsFocused = false;
 
-            if (screenManager.Game1.Clavier.IsNewKeyPress(Keys.Enter))
-                PressEnter(screenManager);
+            if (precSelectedLien != null)
+                precSelectedLien.IsFocused = false;
 
-            if (screenManager.Game1.Souris.IsChangeState())
-                Focus(screenManager.Game1.Souris.CurrentMouseState.X, screenManager.Game1.Souris.CurrentMouseState.Y);
+            if (selectedBouton != null)
+            {
+                selectedBouton.IsFocused = true;
+                precSelectedBouton = selectedBouton;
+                precSelectedLien = null;
 
-            if (screenManager.Game1.Souris.IsNewClickPress())
-                Click(screenManager, screenManager.Game1.Souris.CurrentMouseState.X, screenManager.Game1.Souris.CurrentMouseState.Y);
+                if (souris.IsNewClickPress())
+                    Action(selectedBouton.Fonction);
+            }
+            else if (selectedLien != null)
+            {
+                selectedLien.IsFocused = true;
+                precSelectedLien = selectedLien;
+                precSelectedBouton = null;
+
+                if (souris.IsNewClickPress())
+                    Action(selectedLien.Fonction);
+            }
+            else
+            {
+                precSelectedBouton = null;
+                precSelectedLien = null;
+            }
+
+            if (isOptions)
+            {
+                Liens[0].Name = "Volume : " + screenManager.Options.Volume.ToString();
+                Liens[1].Name = "Niveau : " + screenManager.Options.GetNiveau();
+                Liens[2].Name = "Vie : " + screenManager.Options.GetVie();
+            }
+        }
+
+        public void Action(string fonction)
+        {
+            switch (fonction)
+            { 
+                case "Jouer":
+                    screenManager.ChargeMainScreen();
+                    break;
+                case "Main menu":
+                    screenManager.ChangeGameScreen(new MainMenuScreen(screenManager));
+                    break;
+                case "Instructions":
+                    break;
+                case "Pause":
+                    screenManager.ChangeGameScreen(new PauseScreen(screenManager));
+                    break;
+                case "Options main menu":
+                    screenManager.ChangeGameScreen(new OptionsScreen(screenManager, "main"));
+                    break;
+                case "Options pause menu":
+                    screenManager.ChangeGameScreen(new OptionsScreen(screenManager, "pause"));
+                    break;
+                case "Modif volume":
+                    screenManager.Options.ChangeOptionIncrement(fonction);
+                    break;
+                case "Modif niveau":
+                    screenManager.Options.ChangeOptionIncrement(fonction);
+                    break;
+                case "Modif vie":
+                    screenManager.Options.ChangeOptionIncrement(fonction);
+                    break;
+                case "Abondonner":
+                    screenManager.InitMainScreen();
+                    screenManager.ChangeGameScreen(new MainMenuScreen(screenManager));
+                    break;
+                case "Exit":
+                    screenManager.Game.Exit();
+                    break;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (Bouton bouton in Boutons)
-                bouton.Draw(spriteBatch);
-        }
-    }
+                bouton.Draw(spriteBatch, Color.White);
 
-    // Le comportement du menu pricipal affiché au lancement du jeu
-    class MainMenu : Menu
-    {
-        public MainMenu(Bouton[] boutons)
-            : base(boutons)
-        {
+            foreach (Lien lien in Liens)
+                lien.Draw(spriteBatch);
         }
 
-        protected override void Action(ScreenManager screenManager, int selected)
+        public bool IsOptions
         {
-            switch (selected)
+            set
             {
-                case 0:
-                    screenManager.ChangeGameScreen(new PlayScreen(screenManager));
-                    break;
-                case 2:
-                    screenManager.ChangeGameScreen(new OptionsScreen(screenManager, true));
-                    break;
-                case 3:
-                    screenManager.Game.Exit();
-                    break;
-            }
-        }
-    }
-
-    class PlayMenu : Menu
-    {
-        public PlayMenu(Bouton[] boutons)
-            : base(boutons)
-        {
-        }
-
-        protected override void Action(ScreenManager screenManager, int selected)
-        {
-            switch (selected)
-            {
-                case 0:
-                    screenManager.ChargeMainScreen();
-                    break;
-                case 1:
-                    if (screenManager.Session != null)
-                    {
-                        screenManager.ChargeMainScreen();
-                    }
-                    break;
-            }
-        }
-    }
-
-    class PauseMenu : Menu
-    {
-        public PauseMenu(Bouton[] boutons)
-            : base(boutons)
-        {
-        }
-
-        protected override void Action(ScreenManager screenManager, int selected)
-        {
-            switch (selected)
-            {
-                case 0:
-                    screenManager.ChargeMainScreen();
-                    break;
-                case 1:
-                    screenManager.ChangeGameScreen(new OptionsScreen(screenManager, false));
-                    break;
-            }
-        }
-    }
-
-    class OptionsMenu : Menu
-    {
-        protected bool returnMenu;
-
-        public OptionsMenu(Bouton[] boutons, int nbr, bool returnMenu)
-            : base(boutons)
-        {
-            this.returnMenu = returnMenu;
-        }
-
-        protected override void Action(ScreenManager screenManager, int selected)
-        {
-            switch (selected)
-            {
-                case 0:
-                    screenManager.Options.ChangeOptionIncrement(selected);
-                    break;
-                case 1:
-                    screenManager.Options.ChangeOptionIncrement(selected);
-                    break;
-                case 2:
-                    screenManager.Options.ChangeOptionIncrement(selected);
-                    break;
-                case 3:
-                    if (returnMenu)
-                        screenManager.ChangeGameScreen(new MainMenuScreen(screenManager));
-                    else
-                        screenManager.ChangeGameScreen(new PauseScreen(screenManager));
-                    break;
-            }
-        }
-
-        public void Draw(SpriteBatch spriteBatch, ScreenManager screenManager)
-        {
-            for (int i = 0; i < Boutons.Length && i < screenManager.Options.NbrOptions; i++)
-            { 
-                Boutons[i].Draw(spriteBatch, screenManager.Options.GetOption(i));
-            }
-
-            for (int i = screenManager.Options.NbrOptions; i < Boutons.Length; i++)
-            {
-                Boutons[i].Draw(spriteBatch);
+                isOptions = value;
             }
         }
     }

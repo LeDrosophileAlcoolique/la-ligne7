@@ -25,8 +25,8 @@ namespace ligne7
         public MainScreen(ScreenManager screenManager)
             : base(screenManager)
         {
-            curseur = new Curseur("Image/curseur");
-            ptDeVie = new Ptdevie("Image/ptdevie", Vector2.Zero);
+            curseur = new Curseur();
+            ptDeVie = new Ptdevie();
             map = new Map(screenManager);
 
             debug = new Debug("Debug", 0, 0);
@@ -35,7 +35,7 @@ namespace ligne7
         public override void LoadContent()
         {
             curseur.LoadContent(screenManager.ContentImage, screenManager.Graphics);
-            ptDeVie.LoadContent(screenManager.ContentImage, screenManager.Graphics);
+            ptDeVie.LoadContent(screenManager.ContentImage);
             map.LoadContent();
 
             debug.LoadFont(screenManager.ContentFont);
@@ -66,7 +66,7 @@ namespace ligne7
 
             screenManager.SpriteBatch.Begin();
             ptDeVie.Draw(screenManager.SpriteBatch, map.Joueur);
-            curseur.Draw(screenManager.SpriteBatch);
+            curseur.Draw(screenManager.SpriteBatch, Color.RoyalBlue, 0.6f);
 
             if (screenManager.Options.Debug == 1)
                 debug.Draw(screenManager.SpriteBatch);
