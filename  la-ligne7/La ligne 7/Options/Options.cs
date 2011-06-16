@@ -35,41 +35,21 @@ namespace ligne7
             this.son = son;
         }
 
-        public void ChangeOptionIncrement(int i)
+        public void ChangeOptionIncrement(string modif)
         {
-            switch (i)
+            switch (modif)
             { 
-                case 0:
+                case "Modif volume":
                     Volume++;
                     son.ChangeVolume(GetVolume());
                     break;
-                case 1:
+                case "Modif niveau":
                     Niveau++;
                     break;
-                case 2:
+                case "Modif vie":
                     Vie++;
                     break;
             }
-        }
-
-        public string GetOption(int i)
-        {
-            string result = "";
-
-            switch (i)
-            {
-                case 0:
-                    result = Volume.ToString(); 
-                    break;
-                case 1:
-                    result = GetNiveau();
-                    break;
-                case 2:
-                    result = GetVie();
-                    break;
-            }
-
-            return result;
         }
 
         public int Volume

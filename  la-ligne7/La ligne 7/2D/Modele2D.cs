@@ -28,7 +28,7 @@ namespace ligne7
             this.position = position;
         }
 
-        public void LoadContent(RessourceManager<Texture2D> ressourceManager, GraphicsDeviceManager graphics)
+        public void LoadContent(RessourceManager<Texture2D> ressourceManager)
         {
             texture = ressourceManager.GetElement(assetName);
         }
@@ -38,16 +38,34 @@ namespace ligne7
             position = new Vector2(x - texture.Width / 2, y - texture.Height / 2);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Color color)
         {
-            spriteBatch.Draw(texture, position, new Color(Color.RoyalBlue, 0.1f));
+            spriteBatch.Draw(texture, position, color);
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Color color, float alpha)
+        {
+            spriteBatch.Draw(texture, position, new Color(color, alpha));
+        }
+    }
+
+    class Train : Modele2D
+    {
+        public Train(Vector2 position)
+            : base("Image/train", position)
+        {
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            position.X += gameTime.ElapsedGameTime.Milliseconds * 2;
         }
     }
 
     class Ptdevie : Modele2D
     {
-        public Ptdevie(string assetName, Vector2 position)
-            : base(assetName, position)
+        public Ptdevie()
+            : base("Image/ptdevie", Vector2.Zero)
         { 
         }
 
@@ -59,15 +77,63 @@ namespace ligne7
 
     class Curseur : Modele2D
     {
-        public Curseur(string assetName)
-            : base(assetName)
-        { 
+        public Curseur()
+            : base ("Image/curseur")
+        {
         }
 
-        public new void LoadContent(RessourceManager<Texture2D> ressourceManager, GraphicsDeviceManager graphics)
+        public void LoadContent(RessourceManager<Texture2D> ressourceManager, GraphicsDeviceManager graphics)
         {
             texture = ressourceManager.GetElement(assetName);
             position = new Vector2((graphics.GraphicsDevice.Viewport.Width - texture.Width) / 2, (graphics.GraphicsDevice.Viewport.Height - texture.Height) / 2);
+        }
+    }
+
+    class Bouton : Modele2D
+    {
+        protected Rectangle rec;
+        protected string fonction;
+
+        protected Texture2D imgFocused;
+
+        public bool IsFocused { get; set; }
+        
+        public Bouton(string fonction, string assetName, Vector2 position)
+            : base (assetName, position)
+        {
+            this.fonction = fonction;
+            IsFocused = false;
+        }
+
+        public new void LoadContent(RessourceManager<Texture2D> ressourceManager)
+        {
+            base.LoadContent(ressourceManager);
+            imgFocused = ressourceManager.GetElement(assetName + " - active");
+            rec = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+        }
+
+        public new void Draw(SpriteBatch spriteBatch, Color color)
+        {
+            if (IsFocused)
+                spriteBatch.Draw(imgFocused, position, color);
+            else
+                spriteBatch.Draw(texture, position, color);
+        }
+
+        public Rectangle Rec
+        {
+            get
+            {
+                return rec;
+            }
+        }
+
+        public string Fonction
+        {
+            get
+            {
+                return fonction;
+            }
         }
     }
 }

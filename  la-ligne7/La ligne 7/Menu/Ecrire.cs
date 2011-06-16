@@ -20,23 +20,19 @@ namespace ligne7
 
         protected Color couleur;
 
-        protected void Init(string name)
+        public Ecrire(string name, string assetNameFont, float y)
         {
             this.name = name;
-            assetNameFont = "Police/author";
-        }
-
-        public Ecrire(string name, float y)
-        {
-            Init(name);
             position = new Vector2(10, y);
             couleur = Color.Black;
+            this.assetNameFont = assetNameFont;
         }
 
-        public Ecrire(string name, float x, float y)
+        public Ecrire(string name, string assetNameFont, float x, float y)
         {
-            Init(name);
+            this.name = name;
             position = new Vector2(x, y);
+            this.assetNameFont = assetNameFont;
         }
 
         public void LoadFont(RessourceManager<SpriteFont> ressourceManager)
@@ -48,58 +44,65 @@ namespace ligne7
         {
             spriteBatch.DrawString(font, name, position, couleur);
         }
-    }
 
-    class Bouton : Ecrire
-    {
-        protected float translation;
-        public bool IsSelected { get; set; }
-        public Rectangle Box { get; set; }
-
-        public Bouton(string name, float x, float y)
-            : base(name, y)
+        public string Name
         {
-            assetNameFont = "Police/menufont";
-            translation = x;
-            IsSelected = false;
-            Box = new Rectangle((int)x - 200, (int)y, 500, 60);
-        }
-
-        public void Translation(GameTime gameTime)
-        {
-            if (position.X < translation)
+            set
             {
-                position += new Vector2(gameTime.ElapsedGameTime.Milliseconds * 0.2f, 0);
+                name = value;
             }
         }
+    }
 
-        protected Color fontColor()
+    class Lien : Ecrire
+    {
+        protected string fonction;
+        protected Rectangle rec;
+
+        protected Color colorFocused;
+
+        public bool IsFocused { get; set; }
+
+        public Lien(string name, string fonction, float x, float y)
+            : base(name, "Police/menu", x, y)
         {
-            Color couleur = Color.Black;
-
-            if (IsSelected)
-                couleur = Color.Red;
-
-            return couleur;
+            this.fonction = fonction;
+            couleur = Color.Black;
+            colorFocused = new Color(237, 8, 8);
+            IsFocused = false;
+            rec = new Rectangle(0, (int)y, 265, 35);
         }
 
         public new void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, name, position, fontColor());
+            if (IsFocused)
+                spriteBatch.DrawString(font, name, position, colorFocused);
+            else
+                spriteBatch.DrawString(font, name, position, couleur);
         }
 
-        public void Draw(SpriteBatch spriteBatch, string value)
+        public string Fonction
         {
-            spriteBatch.DrawString(font, name + " : " + value, position, fontColor());
+            get
+            {
+                return fonction;
+            }
+        }
+
+        public Rectangle Rec
+        {
+            get
+            {
+                return rec;
+            }
         }
     }
 
     class Debug : Ecrire
     {
         public Debug(string name, float x, float y)
-            : base(name, x, y)
+            : base(name, "Police/debug", x, y)
         {
-            assetNameFont = "Police/debug";
             couleur = Color.White;
         }
 

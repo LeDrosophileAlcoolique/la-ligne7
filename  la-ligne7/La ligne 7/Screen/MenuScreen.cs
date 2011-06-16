@@ -19,190 +19,98 @@ namespace ligne7
     {
         protected GraphicsDeviceManager graphics;
         protected Curseur curseur;
+        protected Modele2D fond;
+        protected Train train;
+
+        protected Menu menu;
 
         public MenuScreen(ScreenManager screenManager)
             : base(screenManager)
         {
             graphics = screenManager.Graphics;
-            curseur = new Curseur("Image/curseur");
+            curseur = new Curseur();
+            fond = new Modele2D("Image/menu", Vector2.Zero);
+            train = new Train(new Vector2(-3200, 0));
+
+            menu = new Menu(screenManager);
         }
 
         public override void LoadContent()
         {
             curseur.LoadContent(screenManager.ContentImage, graphics);
+            fond.LoadContent(screenManager.ContentImage);
+            train.LoadContent(screenManager.ContentImage);
+
+            menu.LoadContent(screenManager);
         }
 
         public override void Update(GameTime gameTime)
         {
+            train.Update(gameTime);
             curseur.Update(screenManager.Game1.Souris.CurrentMouseState.X, screenManager.Game1.Souris.CurrentMouseState.Y);
+
+            menu.Update(screenManager);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            curseur.Draw(screenManager.SpriteBatch);
+            // On met l'écran en blanc
+            screenManager.Game.GraphicsDevice.Clear(Color.White);
+
+            screenManager.SpriteBatch.Begin();
+            fond.Draw(screenManager.SpriteBatch, Color.White);
+            menu.Draw(screenManager.SpriteBatch);
+            train.Draw(screenManager.SpriteBatch, Color.White);
+
+            // Pour afficher le curseur
+            curseur.Draw(screenManager.SpriteBatch, Color.RoyalBlue, 0.75f);
+            screenManager.SpriteBatch.End();
         }
     }
 
     class MainMenuScreen : MenuScreen
     {
-        protected Menu menu;
-        protected Ecrire author;
-        protected Ecrire team;
-        protected Texture2D fond;
-
         public MainMenuScreen(ScreenManager screenManager)
             : base (screenManager)
         {
-            menu = new MainMenu(new Bouton[] { new Bouton("Jouer !", 30, 100), new Bouton("Instructions", 130, 200), new Bouton("Options", 230, 300), new Bouton("Quitter, bye bye", 330, 400) });
-            author = new Ecrire("Copyright - RETP - Arnaud, Jacques, Remi, Thibault", screenManager.Game.GraphicsDevice.Viewport.Height - 100);
-            team = new Ecrire("Les Rats Envahissent Tout Paris", screenManager.Game.GraphicsDevice.Viewport.Height - 65);
-        }
-
-        public override void LoadContent()
-        {
-            base.LoadContent();
-
-            menu.Load(screenManager);
-            author.LoadFont(screenManager.ContentFont);
-            team.LoadFont(screenManager.ContentFont);
-            fond = screenManager.ContentImage.GetElement("Image/bloody");
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-
-            menu.Update(screenManager);
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            // On met l'écran en blanc
-            screenManager.Game.GraphicsDevice.Clear(Color.White);
-
-            screenManager.SpriteBatch.Begin();
-            screenManager.SpriteBatch.Draw(fond, new Vector2((screenManager.Game.GraphicsDevice.Viewport.Width - fond.Width) / 2 + 135, (screenManager.Game.GraphicsDevice.Viewport.Height - fond.Height) / 2 - 75), Color.White);
-            author.Draw(screenManager.SpriteBatch);
-            team.Draw(screenManager.SpriteBatch);
-            menu.Draw(screenManager.SpriteBatch);
-
-            // Pour afficher le curseur
-            base.Draw(gameTime);
-            screenManager.SpriteBatch.End();
-        }
-    }
-
-    class OptionsScreen : MenuScreen
-    { 
-        protected OptionsMenu menu;
-
-        public OptionsScreen(ScreenManager screenManager, bool returnMenu)
-            : base (screenManager)
-        {
-            menu = new OptionsMenu(new Bouton[] { new Bouton("Volume", 75, 100), new Bouton("Niveau", 75, 200), new Bouton("Vie", 75, 300), new Bouton("Retour", 75, 400) }, screenManager.Options.NbrOptions, returnMenu); 
-        }
-
-        public override void LoadContent()
-        {
-            base.LoadContent();
-
-            menu.Load(screenManager);
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-
-            menu.Update(screenManager);
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            // On met l'écran en blanc
-            screenManager.Game.GraphicsDevice.Clear(Color.White);
-
-            screenManager.SpriteBatch.Begin();
-            menu.Draw(screenManager.SpriteBatch, screenManager);
-
-            // Pour afficher le curseur
-            base.Draw(gameTime);
-            screenManager.SpriteBatch.End();
-        }
-    }
-
-    class PlayScreen : MenuScreen
-    {
-        protected Menu menu;
-
-        public PlayScreen(ScreenManager screenManager)
-            : base(screenManager)
-        {
-            menu = new PlayMenu(new Bouton[] { new Bouton("Campagne solo", 75, 200), new Bouton("Multijoueur", 75, 300) });
-        }
-
-        public override void LoadContent()
-        {
-            base.LoadContent();
-
-            menu.Load(screenManager);
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-
-            menu.Update(screenManager);
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            // On met l'écran en blanc
-            screenManager.Game.GraphicsDevice.Clear(Color.White);
-
-            screenManager.SpriteBatch.Begin();
-            menu.Draw(screenManager.SpriteBatch);
-
-            // Pour afficher le curseur
-            base.Draw(gameTime);
-            screenManager.SpriteBatch.End();
+            menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("Jouer", "Image/jeu", new Vector2(370, 215)) };
+            menu.Liens = new Lien[] { new Lien("Coopération", "Jouer", 30, 150), new Lien("Instructions", "Instructions", 30, 250), new Lien("Options", "Options main menu", 30, 350) };
         }
     }
 
     class PauseScreen : MenuScreen
     {
-        protected Menu menu;
-
         public PauseScreen(ScreenManager screenManager)
             : base(screenManager)
         {
-            menu = new PauseMenu(new Bouton[] { new Bouton("Reprendre le jeu", 75, 200), new Bouton("Options", 75, 300) });
+            menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("Jouer", "Image/jeu", new Vector2(370, 215)) };
+            menu.Liens = new Lien[] { new Lien("Options", "Options pause menu", 30, 150), new Lien("Abondonner", "Abondonner", 30, 250) };
         }
+    }
 
-        public override void LoadContent()
+    class OptionsScreen : MenuScreen
+    {
+        public OptionsScreen(ScreenManager screenManager, string retour)
+            : base(screenManager)
         {
-            base.LoadContent();
+            menu.IsOptions = true;
 
-            menu.Load(screenManager);
-        }
+            menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("Jouer", "Image/jeu", new Vector2(370, 215)) };
+            menu.Liens = new Lien[4];
 
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
+            menu.Liens[0] = new Lien("Volume : " + screenManager.Options.Volume.ToString(), "Modif volume", 30, 150);
+            menu.Liens[1] = new Lien("Niveau : " + screenManager.Options.GetNiveau(), "Modif niveau", 30, 225);
+            menu.Liens[2] = new Lien("Vie : " + screenManager.Options.GetVie(), "Modif vie", 30, 300);
 
-            menu.Update(screenManager);
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            // On met l'écran en blanc
-            screenManager.Game.GraphicsDevice.Clear(Color.White);
-
-            screenManager.SpriteBatch.Begin();
-            menu.Draw(screenManager.SpriteBatch);
-
-            // Pour afficher le curseur
-            base.Draw(gameTime);
-            screenManager.SpriteBatch.End();
+            switch (retour)
+            {
+                case "main":
+                    menu.Liens[3] = new Lien("Retour", "Main menu", 30, 375);
+                    break;
+                case "pause":
+                    menu.Liens[3] = new Lien("Retour", "Pause", 30, 375);
+                    break;
+            }
         }
     }
 }
