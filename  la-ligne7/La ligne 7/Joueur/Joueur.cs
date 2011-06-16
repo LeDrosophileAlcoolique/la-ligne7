@@ -16,7 +16,7 @@ namespace ligne7
         // Constante
         protected const float hauteur_des_yeux = 5.75f;
         protected const int nbr_par_munition = 25;
-        public const int nbr_vie = 20;
+        public const int nbr_vie = 21;
 
         protected ScreenManager screenManager;
 

@@ -24,7 +24,7 @@ namespace ligne7
             : base(screenManager)
         {
             graphics = screenManager.Graphics;
-            curseur = new Curseur();
+            curseur = new Curseur("Image/curseur");
         }
 
         public override void LoadContent()
