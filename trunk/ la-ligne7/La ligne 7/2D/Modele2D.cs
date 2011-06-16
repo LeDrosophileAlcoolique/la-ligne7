@@ -11,30 +11,24 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ligne7
 {
-    class Curseur
+    class Modele2D
     {
         protected Vector2 position;
         protected Texture2D texture;
         protected string assetName;
 
-        public Curseur() 
+        public Modele2D(string assetName) 
         {
-            assetName = "Image/curseur";
+            this.assetName = assetName;
         }
 
-        public Curseur(string assetName, Vector2 position)
+        public Modele2D(string assetName, Vector2 position)
         {
             this.assetName = assetName;
             this.position = position;
         }
 
         public void LoadContent(RessourceManager<Texture2D> ressourceManager, GraphicsDeviceManager graphics)
-        {
-            texture = ressourceManager.GetElement(assetName);
-            position = new Vector2((graphics.GraphicsDevice.Viewport.Width - texture.Width) / 2, (graphics.GraphicsDevice.Viewport.Height - texture.Height) / 2);
-        }
-
-        public void LoadContentModel(RessourceManager<Texture2D> ressourceManager, GraphicsDeviceManager graphics)
         {
             texture = ressourceManager.GetElement(assetName);
         }
@@ -48,10 +42,32 @@ namespace ligne7
         {
             spriteBatch.Draw(texture, position, new Color(Color.RoyalBlue, 0.1f));
         }
+    }
 
-        public void DrawModel(SpriteBatch spriteBatch, Joueur joueur)
+    class Ptdevie : Modele2D
+    {
+        public Ptdevie(string assetName, Vector2 position)
+            : base(assetName, position)
+        { 
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Joueur joueur)
         {
             spriteBatch.Draw(texture, position, new Color(Color.Black, 0.1f * (Joueur.nbr_vie - joueur.Vie)));
+        }
+    }
+
+    class Curseur : Modele2D
+    {
+        public Curseur(string assetName)
+            : base(assetName)
+        { 
+        }
+
+        public new void LoadContent(RessourceManager<Texture2D> ressourceManager, GraphicsDeviceManager graphics)
+        {
+            texture = ressourceManager.GetElement(assetName);
+            position = new Vector2((graphics.GraphicsDevice.Viewport.Width - texture.Width) / 2, (graphics.GraphicsDevice.Viewport.Height - texture.Height) / 2);
         }
     }
 }

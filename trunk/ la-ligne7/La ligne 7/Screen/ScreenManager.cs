@@ -38,7 +38,6 @@ namespace ligne7
 
         // Multi
         protected NetworkSession session;
-        protected GameReseau gameReseau;
 
         public ScreenManager(Game1 game, GraphicsDeviceManager graphics, NetworkSession session)
             : base(game)
@@ -54,7 +53,6 @@ namespace ligne7
             
             // On initialise l'écran du jeu
             gameScreen = new MainMenuScreen(this);
-            gameReseau = new GameReseau(this);
             mainScreen = new MainScreen(this);
             
             // On initialise le jeu
@@ -93,12 +91,6 @@ namespace ligne7
         {
             this.gameScreen = gameScreen;
             gameScreen.LoadContent();
-        }
-
-        public void ChargeGameReseau()
-        {
-            this.gameScreen = gameReseau;
-            gameReseau.LoadContent();
         }
 
         public SpriteBatch SpriteBatch
@@ -142,14 +134,6 @@ namespace ligne7
             set
             {
                 session = value;
-            }
-        }
-
-        public GameReseau GameReseau
-        {
-            get
-            {
-                return gameReseau;
             }
         }
 

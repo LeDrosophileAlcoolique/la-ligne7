@@ -156,14 +156,7 @@ namespace ligne7
                 case 1:
                     if (screenManager.Session != null)
                     {
-                        if (screenManager.Session.IsHost)
-                        {
-                            screenManager.ChargeMainScreen();
-                        }
-                        else
-                        {
-                            screenManager.ChargeGameReseau();
-                        }
+                        screenManager.ChargeMainScreen();
                     }
                     break;
             }
