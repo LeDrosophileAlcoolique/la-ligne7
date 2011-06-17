@@ -2,11 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Net;
+using Microsoft.Xna.Framework.Storage;
 #endregion
 
 namespace ligne7
@@ -20,10 +24,12 @@ namespace ligne7
 
         protected ScreenManager screenManager;
 
-        protected bool isOptions;
+        protected string page;
 
         public Menu(ScreenManager screenManager)
         {
+            page = "";
+
             precSelectedBouton = null;
             precSelectedLien = null;
 
@@ -87,11 +93,22 @@ namespace ligne7
                 precSelectedLien = null;
             }
 
-            if (isOptions)
+            if (page == "options")
             {
                 Liens[0].Name = "Volume : " + screenManager.Options.Volume.ToString();
                 Liens[1].Name = "Niveau : " + screenManager.Options.GetNiveau();
                 Liens[2].Name = "Vie : " + screenManager.Options.GetVie();
+            }
+
+            if (page == "reseau" && SignedInGamer.SignedInGamers.Count >= 1)
+            {
+                Liens[0].Fonction = "Heberger";
+                Liens[1].Fonction = "Rejoindre";
+            }
+
+            if (page == "reseau att" && screenManager.Session != null && screenManager.Session.AllGamers.Count == 2)
+            {
+                screenManager.ChargeMainScreen();
             }
         }
 
@@ -106,6 +123,15 @@ namespace ligne7
                     screenManager.ChangeGameScreen(new MainMenuScreen(screenManager));
                     break;
                 case "Instructions":
+                    break;
+                case "Multi":
+                    screenManager.ChangeGameScreen(new ReseauScreen(screenManager));
+                    break;
+                case "Heberger":
+                    screenManager.ChangeGameScreen(new ReseauAttScreen(screenManager));
+                    break;
+                case "Rejoindre":
+                    screenManager.ChangeGameScreen(new ReseauRejoindreScreen(screenManager));
                     break;
                 case "Pause":
                     screenManager.ChangeGameScreen(new PauseScreen(screenManager));
@@ -144,11 +170,11 @@ namespace ligne7
                 lien.Draw(spriteBatch);
         }
 
-        public bool IsOptions
+        public string Page
         {
             set
             {
-                isOptions = value;
+                page = value;
             }
         }
     }

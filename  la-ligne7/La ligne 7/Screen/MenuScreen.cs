@@ -74,7 +74,62 @@ namespace ligne7
             : base (screenManager)
         {
             menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("Jouer", "Image/jeu", new Vector2(370, 215)) };
-            menu.Liens = new Lien[] { new Lien("Coopération", "Jouer", 30, 150), new Lien("Instructions", "Instructions", 30, 250), new Lien("Options", "Options main menu", 30, 350) };
+            menu.Liens = new Lien[] { new Lien("Coopération", "Multi", 30, 150), new Lien("Instructions", "Instructions", 30, 250), new Lien("Options", "Options main menu", 30, 350) };
+        }
+    }
+
+    class ReseauScreen : MenuScreen
+    {
+        public ReseauScreen(ScreenManager screenManager)
+            : base(screenManager)
+        {
+            menu.Page = "reseau";
+
+            menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("", "Image/jeu", new Vector2(370, 215)) };
+            menu.Liens = new Lien[] { new Lien("Héberger", "", 30, 150), new Lien("Rejoindre", "", 30, 250), new Lien("Retour", "Abondonner", 30, 350) };
+        }
+    }
+
+    class ReseauAttScreen : MenuScreen
+    {
+        public ReseauAttScreen(ScreenManager screenManager)
+            : base(screenManager)
+        {
+            screenManager.Session = NetworkSession.Create(NetworkSessionType.SystemLink, 2, 2);
+
+            menu.Page = "Reseau att";
+            menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("", "Image/jeu", new Vector2(370, 215)) };
+            menu.Liens = new Lien[] { new Lien("Attente ...", "", 30, 250) };
+        }
+    }
+
+    class ReseauRejoindreScreen : MenuScreen
+    {
+        public ReseauRejoindreScreen(ScreenManager screenManager)
+            : base(screenManager)
+        {
+            menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("", "Image/jeu", new Vector2(370, 215)) };
+
+            screenManager.Game1.AvailableSessions = NetworkSession.Find(NetworkSessionType.SystemLink, 2, null);
+
+            if (screenManager.Game1.AvailableSessions != null && screenManager.Game1.AvailableSessions.Count > 0)
+            {
+                menu.Liens = new Lien[screenManager.Game1.AvailableSessions.Count + 1];
+
+                int y = 150;
+
+                for (int i = 0; i < screenManager.Game1.AvailableSessions.Count; ++i)
+                {
+                    menu.Liens[i] = new Lien(screenManager.Game1.AvailableSessions[i].HostGamertag, "Rejoindre seveur", 30, y);
+                    y += 100;
+                }
+
+                menu.Liens[screenManager.Game1.AvailableSessions.Count + 1] = new Lien("Retour", "Multi", 30, y);
+            }
+            else
+            {
+                menu.Liens = new Lien[] { new Lien("Retour", "Multi", 30, 150) };
+            }
         }
     }
 
@@ -93,7 +148,7 @@ namespace ligne7
         public OptionsScreen(ScreenManager screenManager, string retour)
             : base(screenManager)
         {
-            menu.IsOptions = true;
+            menu.Page = "options";
 
             menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("Jouer", "Image/jeu", new Vector2(370, 215)) };
             menu.Liens = new Lien[4];

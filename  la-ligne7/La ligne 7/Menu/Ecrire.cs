@@ -87,6 +87,10 @@ namespace ligne7
             {
                 return fonction;
             }
+            set
+            {
+                fonction = value;
+            }
         }
 
         public Rectangle Rec
