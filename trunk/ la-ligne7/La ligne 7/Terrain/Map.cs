@@ -53,26 +53,22 @@ namespace ligne7
 
             terrain = new Terrain(this, screenManager, Vector3.Zero);
 
-            if (screenManager.Session == null || screenManager.Session.IsHost)
-            {
-                listDecor.Add(new Modele3D(this, screenManager, new Vector3(30, 0, 60), "FBX/pillier"));
-                listDecor.Add(new Modele3D(this, screenManager, new Vector3(30, 0, 30), "FBX/pillier"));
-                listDecor.Add(new Modele3D(this, screenManager, new Vector3(30, 0, -30), "FBX/pillier"));
-                listDecor.Add(new Modele3D(this, screenManager, new Vector3(30, 0, -60), "FBX/pillier"));
+            listDecor.Add(new Modele3D(this, screenManager, new Vector3(30, 0, 60), "FBX/pillier"));
+            listDecor.Add(new Modele3D(this, screenManager, new Vector3(30, 0, 30), "FBX/pillier"));
+            listDecor.Add(new Modele3D(this, screenManager, new Vector3(30, 0, -30), "FBX/pillier"));
+            listDecor.Add(new Modele3D(this, screenManager, new Vector3(30, 0, -60), "FBX/pillier"));
 
-                listDecor.Add(new Modele3D(this, screenManager, new Vector3(0, 0, 60), "FBX/pillier"));
-                listDecor.Add(new Modele3D(this, screenManager, new Vector3(0, 0, 30), "FBX/pillier"));
-                listDecor.Add(new Modele3D(this, screenManager, new Vector3(0, 0, -30), "FBX/pillier"));
-                listDecor.Add(new Modele3D(this, screenManager, new Vector3(0, 0, -60), "FBX/pillier"));
+            listDecor.Add(new Modele3D(this, screenManager, new Vector3(0, 0, 60), "FBX/pillier"));
+            listDecor.Add(new Modele3D(this, screenManager, new Vector3(0, 0, 30), "FBX/pillier"));
+            listDecor.Add(new Modele3D(this, screenManager, new Vector3(0, 0, -30), "FBX/pillier"));
+            listDecor.Add(new Modele3D(this, screenManager, new Vector3(0, 0, -60), "FBX/pillier"));
 
-                listDecor.Add(new Modele3D(this, screenManager, new Vector3(-30, 0, 60), "FBX/pillier"));
-                listDecor.Add(new Modele3D(this, screenManager, new Vector3(-30, 0, 30), "FBX/pillier"));
-                listDecor.Add(new Modele3D(this, screenManager, new Vector3(-30, 0, -30), "FBX/pillier"));
-                listDecor.Add(new Modele3D(this, screenManager, new Vector3(-30, 0, -60), "FBX/pillier"));
-                listDecor.Add(new Modele3D(this, screenManager, new Vector3(-40, 0, -60), "FBX/pillier"));
+            listDecor.Add(new Modele3D(this, screenManager, new Vector3(-30, 0, 60), "FBX/pillier"));
+            listDecor.Add(new Modele3D(this, screenManager, new Vector3(-30, 0, 30), "FBX/pillier"));
+            listDecor.Add(new Modele3D(this, screenManager, new Vector3(-30, 0, -30), "FBX/pillier"));
+            listDecor.Add(new Modele3D(this, screenManager, new Vector3(-30, 0, -60), "FBX/pillier"));
 
-                listDeclancheur.Add(new Declancheur(this, screenManager));
-            }
+            listDeclancheur.Add(new Declancheur(this, screenManager));
         }
 
         public void Update(GameTime gameTime)
@@ -102,6 +98,7 @@ namespace ligne7
 
                 foreach (MyList<Declancheur>.Element declancheur in listDeclancheur.Enum())
                 {
+                    /*
                     if (declancheur.Value.IsCollision(joueur))
                     {
                         listEnemy.Add(new Enemy(this, screenManager, new Vector3(0, 0, -75)));
@@ -121,6 +118,7 @@ namespace ligne7
 
                         listDeclancheur.Delete(declancheur);
                     }
+                    */
                 }
 
                 foreach (MyList<Munition>.Element munition in listMunition.Enum())

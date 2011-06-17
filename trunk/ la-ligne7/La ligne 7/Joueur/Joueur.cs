@@ -151,6 +151,7 @@ namespace ligne7
         {
             if (screenManager.Game1.Souris.IsNewClickPress() && nbrBalle >= 1)
             {
+                screenManager.Son.LoadContentAndPlay("famas tir");
                 map.ListTir.Add(new Tir(map, screenManager, this));
                 nbrBalle--;
             }
