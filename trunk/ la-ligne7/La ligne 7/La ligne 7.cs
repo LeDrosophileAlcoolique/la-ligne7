@@ -21,8 +21,8 @@ namespace ligne7
         protected SpriteBatch spriteBatch;
         private ScreenManager screenManager;
 
-        protected NetworkSession session;
-        protected AvailableNetworkSessionCollection availableSessions;
+        public NetworkSession Session { get; set; }
+        public AvailableNetworkSessionCollection AvailableSessions { get; set; }
 
         protected PacketReader packetReader;
         protected PacketWriter packetWriter;
@@ -46,7 +46,7 @@ namespace ligne7
 
         protected override void Initialize()
         {
-            screenManager = new ScreenManager(this, graphics, session);
+            screenManager = new ScreenManager(this, graphics, Session);
 
             packetReader = new PacketReader();
             packetWriter = new PacketWriter();
@@ -65,48 +65,11 @@ namespace ligne7
             if (clavier.IsNewKeyPress(Keys.I) && !Guide.IsVisible)
                 Guide.ShowSignIn(1, false);
 
-            if (SignedInGamer.SignedInGamers.Count >= 1 && clavier.IsNewKeyPress(Keys.J) && session == null)
-                session = NetworkSession.Create(NetworkSessionType.SystemLink, 2, 2);
-
-            if (SignedInGamer.SignedInGamers.Count >= 1 && clavier.IsNewKeyPress(Keys.K) && session == null)
-            {
-                availableSessions = NetworkSession.Find(NetworkSessionType.SystemLink, 2, null);
-
-                if (availableSessions != null && availableSessions.Count > 0)
-                    session = NetworkSession.Join(availableSessions[0]);
-            }
-
             if (!Guide.IsVisible)
             {
                 screenManager.GameTime = gameTime;
-                screenManager.Session = session;
+                screenManager.Session = Session;
                 screenManager.MiseJour();
-            }
-
-            if (session != null)
-            {
-                session.Update();
-
-                if (session.IsHost)
-                {
-                    LocalNetworkGamer gamer = session.LocalGamers[0];
-
-                    if (gamer.IsDataAvailable)
-                    {
-                        NetworkGamer sender;
-                        gamer.ReceiveData(packetReader, out sender);
-
-                        if (gamer != sender)
-                        {
-                            screenManager.MainScreen.Map.Joueur2.Position = packetReader.ReadVector3();
-                        }
-                    }
-                }
-                else
-                {
-                    packetWriter.Write(screenManager.MainScreen.Map.Joueur.PositionReseau);
-                    session.LocalGamers[0].SendData(packetWriter, SendDataOptions.ReliableInOrder);
-                }
             }
 
             // On update le clavier et la souris
