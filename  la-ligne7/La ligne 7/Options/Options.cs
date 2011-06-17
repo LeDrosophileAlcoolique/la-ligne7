@@ -26,7 +26,7 @@ namespace ligne7
 
         public Options(Son son)
         {
-            volume = 1;
+            volume = 2;
             niveau = 0;
             vie = 1;
             debug = 0;
@@ -71,7 +71,7 @@ namespace ligne7
             switch (volume)
             {
                 case 1:
-                    result = 0.1f;
+                    result = 0.5f;
                     break;
                 case 2:
                     result = 1;

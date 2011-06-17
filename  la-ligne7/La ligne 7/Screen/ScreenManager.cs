@@ -27,11 +27,11 @@ namespace ligne7
         public RessourceManager<SpriteFont> ContentFont { get; set; }
         public RessourceManager<Song> ContentSong { get; set; }
 
-        protected Son son;
-
         // Ecran de jeu (screen)
         protected GameScreen gameScreen;
         protected MainScreen mainScreen;
+
+        public Son Son { get; set; }
 
         // Config du jeu
         protected Options options;
@@ -49,14 +49,14 @@ namespace ligne7
             ContentFont = new RessourceManager<SpriteFont>(this.Game.Content);
             ContentSong = new RessourceManager<Song>(this.Game.Content);
 
-            son = new Son(this);
-            
+            Son = new Son();
+
             // On initialise l'écran du jeu
             gameScreen = new MainMenuScreen(this);
             mainScreen = new MainScreen(this);
             
             // On initialise le jeu
-            options = new Options(son);
+            options = new Options(Son);
 
             this.session = session;
         }
@@ -65,7 +65,7 @@ namespace ligne7
         {
             this.spriteBatch = spriteBatch;
 
-            son.LoadContentAndPlay();
+            Son.LoadContentAndPlay("18");
 
             // On charge l'écran de jeu
             gameScreen.LoadContent();

@@ -16,27 +16,40 @@ namespace ligne7
 {
     class Son
     {
-        protected ScreenManager screenManager;
+        AudioEngine engine;
+        SoundBank soundBank;
+        WaveBank waveBank;
+        AudioCategory musicCategory;
+        Cue cue;
 
-        protected Song son;
-        protected string assetName;
+        string assetName;
 
-        public Son(ScreenManager screenManager)
+        public Son()
         {
-            this.screenManager = screenManager;
-            assetName = "Musique/18";
+            // Initialize audio objects.
+            engine = new AudioEngine("Content/Musique/lignesond.xgs");
+            waveBank = new WaveBank(engine, "Content/Musique/wave.xwb");
+            soundBank = new SoundBank(engine, "Content/Musique/sond.xsb");
         }
 
-        public void LoadContentAndPlay()
+        public void LoadContentAndPlay(string assetName)
         {
-            MediaPlayer.Volume = screenManager.Options.GetVolume();
-            son = screenManager.ContentSong.GetElement(assetName);
-            MediaPlayer.Play(son);
+            // Play the sound.
+            this.assetName = assetName;
+            cue = soundBank.GetCue(assetName);
+            cue.Play();
         }
 
         public void ChangeVolume(float volume)
         {
-            MediaPlayer.Volume = volume;
+            engine.Update();
+            musicCategory = engine.GetCategory("Default");
+            musicCategory.SetVolume(volume);
+        }
+
+        public void StopSon()
+        {
+            cue.Stop(AudioStopOptions.Immediate);
         }
     }
 }
