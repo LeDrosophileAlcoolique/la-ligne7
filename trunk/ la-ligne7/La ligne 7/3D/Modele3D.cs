@@ -169,6 +169,40 @@ namespace ligne7
         }
     }
 
+    class Joueur2 : Modele3D
+    {
+        public Joueur2(Map map, ScreenManager screenManager, Vector3 position)
+            : base(map, screenManager, position, "FBX/zombie")
+        {
+            box = GenerateBoundingBox(position);
+        }
+
+        public void Update()
+        {
+            box = GenerateBoundingBox(position);
+        }
+
+        public new BoundingBox GenerateBoundingBox(Vector3 nextPosition)
+        {
+            Matrix[] transforms = new Matrix[model.Bones.Count];
+            model.CopyAbsoluteBoneTransformsTo(transforms);
+
+            BoundingBox genereBox = new BoundingBox();
+            BoundingSphere sphere;
+
+            foreach (ModelMesh mesh in model.Meshes)
+            {
+                sphere = mesh.BoundingSphere.Transform(transforms[mesh.ParentBone.Index] * Matrix.CreateRotationY(rotation) * Matrix.CreateScale(taille));
+                genereBox = BoundingBox.CreateMerged(genereBox, BoundingBox.CreateFromSphere(sphere));
+            }
+
+            genereBox.Min += nextPosition;
+            genereBox.Max += nextPosition;
+
+            return genereBox;
+        }
+    }
+
     class ModelDeplacement : Modele3D
     {
         // Vitesse
@@ -242,9 +276,9 @@ namespace ligne7
             return 1;
         }
 
-        public bool IsCollision(Joueur joueur)
+        public bool IsCollision(Modele3D cible)
         {
-            return box.Intersects(joueur.Box);
+            return box.Intersects(cible.Box);
         }
     }
 
