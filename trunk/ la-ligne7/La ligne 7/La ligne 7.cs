@@ -65,14 +65,14 @@ namespace ligne7
             if (clavier.IsNewKeyPress(Keys.I) && !Guide.IsVisible)
                 Guide.ShowSignIn(1, false);
 
+            if (Session != null)
+                Session.Update();
+
             if (!Guide.IsVisible)
             {
                 screenManager.GameTime = gameTime;
                 screenManager.MiseJour();
             }
-
-            if (Session != null)
-                Session.Update();
 
             // On update le clavier et la souris
             clavier.Update();

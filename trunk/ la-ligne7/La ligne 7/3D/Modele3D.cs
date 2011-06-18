@@ -158,6 +158,10 @@ namespace ligne7
 
         public float Rotation
         {
+            get
+            {
+                return rotation;
+            }
             set
             {
                 rotation = value;
