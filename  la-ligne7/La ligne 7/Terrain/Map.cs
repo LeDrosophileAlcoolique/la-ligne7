@@ -96,6 +96,13 @@ namespace ligne7
                     {
                         screenManager.Game1.PacketWriter.Write(tir.Position);
                     }
+
+                    screenManager.Game1.PacketWriter.Write(listMunition.Longueur);
+
+                    foreach (Munition munition in listMunition.EnumValue())
+                    {
+                        screenManager.Game1.PacketWriter.Write(munition.Position);
+                    }
                 }
                   
                 screenManager.Game1.Session.LocalGamers[0].SendData(screenManager.Game1.PacketWriter, SendDataOptions.InOrder, screenManager.Game1.Session.RemoteGamers[0]);
@@ -127,6 +134,14 @@ namespace ligne7
                         for (int i = 0; i < nbrTir; ++i)
                         {
                             listTir.Add(new Tir(this, screenManager, packetReader.ReadVector3()));
+                        }
+
+                        int nbrMunition = packetReader.ReadInt32();
+                        listMunition = new MyList<Munition>();
+
+                        for (int i = 0; i < nbrMunition; ++i)
+                        {
+                            listMunition.Add(new Munition(this, screenManager, packetReader.ReadVector3()));
                         }
                     }
                 }

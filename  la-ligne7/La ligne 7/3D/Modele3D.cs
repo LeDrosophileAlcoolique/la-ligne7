@@ -195,14 +195,16 @@ namespace ligne7
     class Munition : Modele3D
     {
         protected new const string asset_name = "FBX/famas";
+        public const int init_rotation = 0;
+        public const float init_taille = 0.25f;
 
         public Munition(Map map, ScreenManager screenManager)
             : base (map)
         {
             this.map = map;
             this.assetName = asset_name;
-            rotation = 0;
-            taille = 0.25f;
+            rotation = init_rotation;
+            taille = init_taille;
 
             LoadContent(screenManager.Content3D);
 
@@ -216,6 +218,20 @@ namespace ligne7
                 this.position = new Vector3(signeX * rand.Next((int)map.Terrain.Box.Max.X), 0, signeY * rand.Next((int)map.Terrain.Box.Max.Z));
                 box = GenerateBoundingBox(position);
             } while (IsCollision(box, map.ListDecor()) || IsCollision(map.Joueur));
+        }
+
+        public Munition(Map map, ScreenManager screenManager, Vector3 position)
+            : base(map)
+        {
+            this.map = map;
+            this.assetName = asset_name;
+            rotation = init_rotation;
+            taille = init_taille;
+
+            LoadContent(screenManager.Content3D);
+
+            this.position = position;
+            box = GenerateBoundingBox(position);
         }
 
         public int CalculSigne(int rand)
