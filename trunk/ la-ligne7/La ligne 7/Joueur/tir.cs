@@ -17,6 +17,9 @@ namespace ligne7
     class Tir : ModelDeplacement
     {
         protected new const string asset_name = "FBX/balle";
+        protected const int init_rotation = 0;
+        protected const float init_taille = 0.10f;
+        protected const float init_moveSpeed = 0.1f;
 
         protected Vector3 direction;
 
@@ -26,9 +29,22 @@ namespace ligne7
             assetName = asset_name;
             position = new Vector3(joueur.Position.X, joueur.Position.Y - 0.15f, joueur.Position.Z);
             direction = Vector3.Transform(Vector3.Backward, joueur.CameraRotation());
-            rotation = 0;
-            taille = 0.10f;
-            moveSpeed = 0.1f;
+            rotation = init_rotation;
+            taille = init_taille;
+            moveSpeed = init_moveSpeed;
+
+            LoadContent(screenManager.Content3D);
+            box = GenerateBoundingBox(position);
+        }
+
+        public Tir(Map map, ScreenManager screenManager, Vector3 position)
+            : base(map)
+        {
+            assetName = asset_name;
+            this.position = position;
+            rotation = init_rotation;
+            taille = init_taille;
+            moveSpeed = init_moveSpeed;
 
             LoadContent(screenManager.Content3D);
             box = GenerateBoundingBox(position);
