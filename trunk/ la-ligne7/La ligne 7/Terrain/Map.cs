@@ -88,6 +88,7 @@ namespace ligne7
                     if (gamer != sender)
                     {
                         Joueur2.Position = packetReader.ReadVector3();
+                        joueur2.Rotation = (float)packetReader.ReadDouble();
                     }
                 }
 
@@ -148,6 +149,7 @@ namespace ligne7
             else
             {
                 screenManager.Game1.PacketWriter.Write(screenManager.MainScreen.Map.Joueur.PositionReseau);
+                screenManager.Game1.PacketWriter.Write(screenManager.MainScreen.Map.Joueur.CameraYawY);
                 screenManager.Game1.Session.LocalGamers[0].SendData(screenManager.Game1.PacketWriter, SendDataOptions.ReliableInOrder);
             }
         }

@@ -155,6 +155,14 @@ namespace ligne7
                 position = value;
             }
         }
+
+        public float Rotation
+        {
+            set
+            {
+                rotation = value;
+            }
+        }
     }
 
     class ModelDeplacement : Modele3D
