@@ -46,7 +46,7 @@ namespace ligne7
 
         protected override void Initialize()
         {
-            screenManager = new ScreenManager(this, graphics, Session);
+            screenManager = new ScreenManager(this, graphics);
 
             packetReader = new PacketReader();
             packetWriter = new PacketWriter();
@@ -68,9 +68,11 @@ namespace ligne7
             if (!Guide.IsVisible)
             {
                 screenManager.GameTime = gameTime;
-                screenManager.Session = Session;
                 screenManager.MiseJour();
             }
+
+            if (Session != null)
+                Session.Update();
 
             // On update le clavier et la souris
             clavier.Update();

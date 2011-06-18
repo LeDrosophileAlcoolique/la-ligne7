@@ -95,9 +95,9 @@ namespace ligne7
         public ReseauAttScreen(ScreenManager screenManager)
             : base(screenManager)
         {
-            screenManager.Session = NetworkSession.Create(NetworkSessionType.SystemLink, 2, 2);
+            screenManager.Game1.Session = NetworkSession.Create(NetworkSessionType.SystemLink, 2, 2);
 
-            menu.Page = "Reseau att";
+            menu.Page = "reseau att";
             menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("", "Image/jeu", new Vector2(370, 215)) };
             menu.Liens = new Lien[] { new Lien("Attente ...", "", 30, 250) };
         }
@@ -124,7 +124,7 @@ namespace ligne7
                     y += 100;
                 }
 
-                menu.Liens[screenManager.Game1.AvailableSessions.Count + 1] = new Lien("Retour", "Multi", 30, y);
+                menu.Liens[screenManager.Game1.AvailableSessions.Count] = new Lien("Retour", "Multi", 30, y);
             }
             else
             {

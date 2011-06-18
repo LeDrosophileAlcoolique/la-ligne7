@@ -106,9 +106,10 @@ namespace ligne7
                 Liens[1].Fonction = "Rejoindre";
             }
 
-            if (page == "reseau att" && screenManager.Session != null && screenManager.Session.AllGamers.Count == 2)
+            if (page == "reseau att" && screenManager.Game1.Session != null)
             {
-                screenManager.ChargeMainScreen();
+                screenManager.Game1.Window.Title = screenManager.Game1.Session.AllGamers.Count.ToString();
+                //screenManager.ChargeMainScreen();
             }
         }
 
