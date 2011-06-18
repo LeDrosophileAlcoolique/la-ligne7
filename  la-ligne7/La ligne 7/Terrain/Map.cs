@@ -77,6 +77,21 @@ namespace ligne7
 
             if (screenManager.Game1.Session == null || screenManager.Game1.Session.IsHost)
             {
+                LocalNetworkGamer gamer = screenManager.Game1.Session.LocalGamers[0];
+
+                if (gamer.IsDataAvailable)
+                {
+                    NetworkGamer sender;
+                    PacketReader packetReader = new PacketReader();
+                    gamer.ReceiveData(packetReader, out sender);
+
+                    if (gamer != sender)
+                    {
+                        Joueur2.Position = packetReader.ReadVector3();
+                    }
+                }
+
+                // Pop arme et zombie
                 if (screenManager.Game1.Clavier.IsNewKeyPress(Keys.H))
                     listDeclancheur.Add(new Declancheur(this, screenManager));
 
@@ -129,6 +144,11 @@ namespace ligne7
                         joueur.NbrMunition++;
                     }
                 }
+            }
+            else
+            {
+                screenManager.Game1.PacketWriter.Write(screenManager.MainScreen.Map.Joueur.PositionReseau);
+                screenManager.Game1.Session.LocalGamers[0].SendData(screenManager.Game1.PacketWriter, SendDataOptions.ReliableInOrder);
             }
         }
 
