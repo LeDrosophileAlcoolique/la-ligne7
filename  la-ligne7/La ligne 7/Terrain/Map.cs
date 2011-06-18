@@ -27,13 +27,16 @@ namespace ligne7
         protected MyList<Modele3D> listDecor;
         protected Terrain terrain;
 
-        protected Modele3D joueur2;
+        protected Joueur2 joueur2;
 
         public Map(ScreenManager screenManager)
         {
             this.screenManager = screenManager;
-            
-            joueur = new Joueur(this, screenManager, 0, 0);
+
+            if (screenManager.Game1.Session == null || !screenManager.Game1.Session.IsHost)
+                joueur = new Joueur(this, screenManager, 0, 0);
+            else
+                joueur = new Joueur(this, screenManager, 0, 10);
 
             listEnemy = new MyList<Enemy>();
             listTir = new MyList<Tir>();
@@ -41,7 +44,8 @@ namespace ligne7
             listMunition = new MyList<Munition>();
             listDecor = new MyList<Modele3D>();
 
-            joueur2 = new Modele3D(this, screenManager, Vector3.Zero, "FBX/zombie");
+            if (screenManager.Game1.Session != null)
+                joueur2 = new Joueur2(this, screenManager, Vector3.Zero);
         }
 
         public void LoadContent()
@@ -117,6 +121,7 @@ namespace ligne7
 
                     joueur2.Position = packetReader.ReadVector3();
                     joueur2.Rotation = (float)packetReader.ReadDouble();
+                    joueur2.Update();
 
                     if (!screenManager.Game1.Session.IsHost)
                     {
@@ -196,7 +201,7 @@ namespace ligne7
 
                 foreach (MyList<Munition>.Element munition in listMunition.Enum())
                 {
-                    if (munition.Value.IsCollision(joueur))
+                    if (munition.Value.IsCollision(joueur) || munition.Value.IsCollision(joueur2))
                     {
                         listMunition.Delete(munition);
                         joueur.NbrMunition++;
@@ -214,6 +219,9 @@ namespace ligne7
         // Pour la collision donc on met pas le tir
         public IEnumerable<Modele3D> ListModelDeplacement()
         {
+            if (screenManager.Game1.Session != null)
+                yield return joueur2;
+
             foreach (Enemy enemy in listEnemy.EnumValue())
                 yield return enemy;
         }
@@ -285,7 +293,7 @@ namespace ligne7
             }
         }
 
-        public Modele3D Joueur2
+        public Joueur2 Joueur2
         {
             get
             {
