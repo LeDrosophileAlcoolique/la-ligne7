@@ -68,7 +68,7 @@ namespace ligne7
             : base(map)
         {
             assetName = asset_name;
-            rotation = rotation;
+            this.rotation = rotation;
             taille = init_taille;
 
             moveSpeed = init_moveSpeed;

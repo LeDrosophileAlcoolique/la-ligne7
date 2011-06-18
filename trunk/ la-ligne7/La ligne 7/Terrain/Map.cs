@@ -90,7 +90,7 @@ namespace ligne7
                         screenManager.Game1.PacketWriter.Write((double)enemy.Rotation);
                     }
                 }
-
+                  
                 screenManager.Game1.Session.LocalGamers[0].SendData(screenManager.Game1.PacketWriter, SendDataOptions.InOrder, screenManager.Game1.Session.RemoteGamers[0]);
 
                 LocalNetworkGamer gamer = screenManager.Game1.Session.LocalGamers[0];
