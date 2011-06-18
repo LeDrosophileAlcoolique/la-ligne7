@@ -80,26 +80,13 @@ namespace ligne7
                 screenManager.Game1.PacketWriter.Write(joueur.PositionReseau);
                 screenManager.Game1.PacketWriter.Write((double)joueur.CameraYawX + Math.PI);
 
-                /*
-                if (screenManager.Game1.Session.IsHost)
-                {
-                    screenManager.Game1.PacketWriter.Write(listEnemy.Longueur);
-
-                    foreach (Enemy enemy in listEnemy.EnumValue())
-                    {
-                        screenManager.Game1.PacketWriter.Write(enemy.Position);
-                        screenManager.Game1.PacketWriter.Write((double)enemy.Rotation);
-                    }
-                }
-                */
-
-                screenManager.Game1.Session.LocalGamers[0].SendData(screenManager.Game1.PacketWriter, SendDataOptions.InOrder, networkSession.RemoteGamers[0]);
+                screenManager.Game1.Session.LocalGamers[0].SendData(screenManager.Game1.PacketWriter, SendDataOptions.InOrder, screenManager.Game1.Session.RemoteGamers[0]);
 
                 LocalNetworkGamer gamer = screenManager.Game1.Session.LocalGamers[0];
 
                 if (gamer.IsDataAvailable)
                 {
-                    NetworkGamer sender = RemoteGamers[0];
+                    NetworkGamer sender = screenManager.Game1.Session.RemoteGamers[0];
                     PacketReader packetReader = new PacketReader();
                     gamer.ReceiveData(packetReader, out sender);
 

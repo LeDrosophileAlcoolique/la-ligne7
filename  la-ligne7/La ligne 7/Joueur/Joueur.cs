@@ -132,7 +132,7 @@ namespace ligne7
             Avancement(rotatedVector);
         }
 
-        protected void Rotation(GameTime gameTime)
+        protected new void Rotation(GameTime gameTime)
         {
             Souris souris = new Souris(screenManager.Game, Mouse.GetState());
 
