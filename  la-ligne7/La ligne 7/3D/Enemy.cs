@@ -64,6 +64,22 @@ namespace ligne7
             box = GenerateBoundingBox(position);
         }
 
+        public Enemy(Map map, ScreenManager screenManager, Vector3 position, float rotation)
+            : base(map)
+        {
+            assetName = asset_name;
+            rotation = rotation;
+            taille = init_taille;
+
+            moveSpeed = init_moveSpeed;
+            rotationSpeed = init_rotationSpeed;
+
+            LoadContent(screenManager.Content3D);
+
+            this.position = position;
+            box = GenerateBoundingBox(position);
+        }
+
         public int CalculSigne(int rand)
         {
             if (rand == 0)
