@@ -238,13 +238,5 @@ namespace ligne7
                 return position - new Vector3(0, hauteur_des_yeux, 0);
             }
         }
-
-        public float CameraYawXReseau
-        {
-            get
-            {
-                return cameraYawX + Math.PI;
-            }
-        }
     }
 }

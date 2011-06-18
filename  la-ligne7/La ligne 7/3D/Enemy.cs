@@ -17,6 +17,10 @@ namespace ligne7
     class Enemy : ModelDeplacement
     {
         protected new const string asset_name = "FBX/zombie";
+        protected const int init_rotation = 0;
+        protected const float init_taille = 0.25f;
+        protected const float init_moveSpeed = 0.005f;
+        protected const float init_rotationSpeed = 0.00035f;
 
         protected int timerAttack = 2000;
 
@@ -24,11 +28,11 @@ namespace ligne7
             : base (map)
         {
             assetName = asset_name;
-            rotation = 0;
-            taille = 0.25f;
+            rotation = init_rotation;
+            taille = init_taille;
 
-            moveSpeed = 0.005f;
-            rotationSpeed = 0.00035f;
+            moveSpeed = init_moveSpeed;
+            rotationSpeed = init_rotationSpeed;
 
             LoadContent(screenManager.Content3D);
 
@@ -48,14 +52,15 @@ namespace ligne7
             : base(map)
         {
             assetName = asset_name;
-            rotation = 0;
-            taille = 0.25f;
-            this.position = position;
+            rotation = init_rotation;
+            taille = init_taille;
 
-            moveSpeed = 0.005f;
-            rotationSpeed = 0.00035f;
+            moveSpeed = init_moveSpeed;
+            rotationSpeed = init_rotationSpeed;
 
             LoadContent(screenManager.Content3D);
+
+            this.position = position;
             box = GenerateBoundingBox(position);
         }
 
@@ -166,14 +171,6 @@ namespace ligne7
                 Vector3 avance = new Vector3(delta.X * speedParUpdate, 0, delta.Z * speedParUpdate);
                 nextPosition = position - avance;
                 Avancement(nextPosition, joueur, avance);
-            }
-        }
-
-        public float Rotation123
-        {
-            get
-            {
-                return rotation;
             }
         }
     }

@@ -75,26 +75,53 @@ namespace ligne7
         {
             joueur.Update(gameTime);
 
-            if (screenManager.Game1.Session == null || screenManager.Game1.Session.IsHost)
+            if (screenManager.Game1.Session != null)
             {
-                if (screenManager.Game1.Session != null)
+                screenManager.Game1.PacketWriter.Write(Joueur.PositionReseau);
+                screenManager.Game1.PacketWriter.Write((double)Joueur.CameraYawX + Math.PI);
+
+                if (screenManager.Game1.Session.IsHost)
                 {
-                    LocalNetworkGamer gamer = screenManager.Game1.Session.LocalGamers[0];
+                    screenManager.Game1.PacketWriter.Write(listEnemy.Longueur);
 
-                    if (gamer.IsDataAvailable)
+                    foreach (Enemy enemy in listEnemy.EnumValue())
                     {
-                        NetworkGamer sender;
-                        PacketReader packetReader = new PacketReader();
-                        gamer.ReceiveData(packetReader, out sender);
-
-                        if (gamer != sender)
-                        {
-                            Joueur2.Position = packetReader.ReadVector3();
-                            joueur2.Rotation = (float)packetReader.ReadDouble();
-                        }
+                        screenManager.Game1.PacketWriter.Write(enemy.Position);
+                        screenManager.Game1.PacketWriter.Write((double)enemy.Rotation);
                     }
                 }
 
+                screenManager.Game1.Session.LocalGamers[0].SendData(screenManager.Game1.PacketWriter, SendDataOptions.ReliableInOrder);
+
+                LocalNetworkGamer gamer = screenManager.Game1.Session.LocalGamers[0];
+
+                if (gamer.IsDataAvailable)
+                {
+                    NetworkGamer sender;
+                    PacketReader packetReader = new PacketReader();
+                    gamer.ReceiveData(packetReader, out sender);
+
+                    if (gamer != sender)
+                    {
+                        Joueur2.Position = packetReader.ReadVector3();
+                        joueur2.Rotation = (float)packetReader.ReadDouble();
+
+                        if (!screenManager.Game1.Session.IsHost)
+                        {
+                            int nbrZombie = packetReader.ReadInt32();
+                            listEnemy = new MyList<Enemy>();
+
+                            for (int i = 0; i < nbrZombie; ++i)
+                            {
+                                listEnemy.Add(new Enemy(this, screenManager, packetReader.ReadVector3()));
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (screenManager.Game1.Session == null || screenManager.Game1.Session.IsHost)
+            {
                 // Pop arme et zombie
                 if (screenManager.Game1.Clavier.IsNewKeyPress(Keys.H))
                     listDeclancheur.Add(new Declancheur(this, screenManager));
@@ -151,9 +178,6 @@ namespace ligne7
             }
             else
             {
-                screenManager.Game1.PacketWriter.Write(Joueur.PositionReseau);
-                screenManager.Game1.PacketWriter.Write((double)Joueur.CameraYawXReseau);
-                screenManager.Game1.Session.LocalGamers[0].SendData(screenManager.Game1.PacketWriter, SendDataOptions.ReliableInOrder);
             }
         }
 
