@@ -24,8 +24,8 @@ namespace ligne7
         public NetworkSession Session { get; set; }
         public AvailableNetworkSessionCollection AvailableSessions { get; set; }
 
-        protected PacketReader packetReader;
-        protected PacketWriter packetWriter;
+        public PacketReader PacketReader { get; set; }
+        public PacketWriter PacketWriter { get; set; }
 
         protected Clavier clavier;
         protected Souris souris;
@@ -48,8 +48,8 @@ namespace ligne7
         {
             screenManager = new ScreenManager(this, graphics);
 
-            packetReader = new PacketReader();
-            packetWriter = new PacketWriter();
+            PacketReader = new PacketReader();
+            PacketWriter = new PacketWriter();
 
             base.Initialize();
         }

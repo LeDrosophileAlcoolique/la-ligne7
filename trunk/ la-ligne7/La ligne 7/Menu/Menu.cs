@@ -106,10 +106,10 @@ namespace ligne7
                 Liens[1].Fonction = "Rejoindre";
             }
 
-            if (page == "reseau att" && screenManager.Game1.Session != null)
+            if (page == "reseau att" && screenManager.Game1.Session != null && screenManager.Game1.Session.AllGamers.Count >= 2)
             {
-                screenManager.Game1.Window.Title = screenManager.Game1.Session.AllGamers.Count.ToString();
-                //screenManager.ChargeMainScreen();
+                screenManager.InitMainScreen();
+                screenManager.ChargeMainScreen();
             }
         }
 
@@ -136,6 +136,7 @@ namespace ligne7
                     break;
                 case "Rejoindre serveur":
                     screenManager.Game1.Session = NetworkSession.Join(screenManager.Game1.AvailableSessions[0]);
+                    screenManager.InitMainScreen();
                     screenManager.ChargeMainScreen();
                     break;
                 case "Pause":
