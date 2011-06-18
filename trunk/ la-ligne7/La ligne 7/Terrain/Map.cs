@@ -75,7 +75,7 @@ namespace ligne7
         {
             joueur.Update(gameTime);
 
-            if (screenManager.Session == null || screenManager.Session.IsHost)
+            if (screenManager.Game1.Session == null || screenManager.Game1.Session.IsHost)
             {
                 if (screenManager.Game1.Clavier.IsNewKeyPress(Keys.H))
                     listDeclancheur.Add(new Declancheur(this, screenManager));
@@ -149,7 +149,7 @@ namespace ligne7
         {
             yield return terrain;
             
-            if (screenManager.Session != null)
+            if (screenManager.Game1.Session != null)
                 yield return joueur2;
 
             foreach (Enemy enemy in listEnemy.EnumValue())

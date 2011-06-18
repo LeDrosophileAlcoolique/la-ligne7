@@ -36,10 +36,7 @@ namespace ligne7
         // Config du jeu
         protected Options options;
 
-        // Multi
-        protected NetworkSession session;
-
-        public ScreenManager(Game1 game, GraphicsDeviceManager graphics, NetworkSession session)
+        public ScreenManager(Game1 game, GraphicsDeviceManager graphics)
             : base(game)
         {
             game1 = game;
@@ -57,8 +54,6 @@ namespace ligne7
             
             // On initialise le jeu
             options = new Options(Son);
-
-            this.session = session;
         }
 
         public void ChargeContent(SpriteBatch spriteBatch)
@@ -128,18 +123,6 @@ namespace ligne7
             get
             {
                 return game1;
-            }
-        }
-
-        public NetworkSession Session
-        {
-            get
-            {
-                return session;
-            }
-            set
-            {
-                session = value;
             }
         }
 
