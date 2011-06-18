@@ -29,7 +29,7 @@ namespace ligne7
             volume = 2;
             niveau = 0;
             vie = 1;
-            debug = 0;
+            debug = 1;
             nbrOptions = 3;
 
             this.son = son;
@@ -127,7 +127,7 @@ namespace ligne7
 
         public int GetNiveauNbrZombie()
         {
-            int result = 1;
+            int result = 0;
 
             switch (niveau)
             {
