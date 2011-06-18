@@ -134,6 +134,10 @@ namespace ligne7
                 case "Rejoindre":
                     screenManager.ChangeGameScreen(new ReseauRejoindreScreen(screenManager));
                     break;
+                case "Rejoindre serveur":
+                    screenManager.Game1.Session = NetworkSession.Join(screenManager.Game1.AvailableSessions[0]);
+                    screenManager.ChargeMainScreen();
+                    break;
                 case "Pause":
                     screenManager.ChangeGameScreen(new PauseScreen(screenManager));
                     break;
