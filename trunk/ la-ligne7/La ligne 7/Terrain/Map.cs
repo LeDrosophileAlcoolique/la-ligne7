@@ -77,9 +77,10 @@ namespace ligne7
 
             if (screenManager.Game1.Session != null)
             {
-                screenManager.Game1.PacketWriter.Write(Joueur.PositionReseau);
-                screenManager.Game1.PacketWriter.Write((double)Joueur.CameraYawX + Math.PI);
+                screenManager.Game1.PacketWriter.Write(joueur.PositionReseau);
+                screenManager.Game1.PacketWriter.Write((double)joueur.CameraYawX + Math.PI);
 
+                /*
                 if (screenManager.Game1.Session.IsHost)
                 {
                     screenManager.Game1.PacketWriter.Write(listEnemy.Longueur);
@@ -90,33 +91,20 @@ namespace ligne7
                         screenManager.Game1.PacketWriter.Write((double)enemy.Rotation);
                     }
                 }
+                */
 
-                screenManager.Game1.Session.LocalGamers[0].SendData(screenManager.Game1.PacketWriter, SendDataOptions.ReliableInOrder);
+                screenManager.Game1.Session.LocalGamers[0].SendData(screenManager.Game1.PacketWriter, SendDataOptions.InOrder, networkSession.RemoteGamers[0]);
 
                 LocalNetworkGamer gamer = screenManager.Game1.Session.LocalGamers[0];
 
                 if (gamer.IsDataAvailable)
                 {
-                    NetworkGamer sender;
+                    NetworkGamer sender = RemoteGamers[0];
                     PacketReader packetReader = new PacketReader();
                     gamer.ReceiveData(packetReader, out sender);
 
-                    if (gamer != sender)
-                    {
-                        Joueur2.Position = packetReader.ReadVector3();
-                        joueur2.Rotation = (float)packetReader.ReadDouble();
-
-                        if (!screenManager.Game1.Session.IsHost)
-                        {
-                            int nbrZombie = packetReader.ReadInt32();
-                            listEnemy = new MyList<Enemy>();
-
-                            for (int i = 0; i < nbrZombie; ++i)
-                            {
-                                listEnemy.Add(new Enemy(this, screenManager, packetReader.ReadVector3()));
-                            }
-                        }
-                    }
+                    joueur2.Position = packetReader.ReadVector3();
+                    joueur2.Rotation = (float)packetReader.ReadDouble();
                 }
             }
 
