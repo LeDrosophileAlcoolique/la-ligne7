@@ -77,18 +77,21 @@ namespace ligne7
 
             if (screenManager.Game1.Session == null || screenManager.Game1.Session.IsHost)
             {
-                LocalNetworkGamer gamer = screenManager.Game1.Session.LocalGamers[0];
-
-                if (gamer.IsDataAvailable)
+                if (screenManager.Game1.Session != null)
                 {
-                    NetworkGamer sender;
-                    PacketReader packetReader = new PacketReader();
-                    gamer.ReceiveData(packetReader, out sender);
+                    LocalNetworkGamer gamer = screenManager.Game1.Session.LocalGamers[0];
 
-                    if (gamer != sender)
+                    if (gamer.IsDataAvailable)
                     {
-                        Joueur2.Position = packetReader.ReadVector3();
-                        joueur2.Rotation = (float)packetReader.ReadDouble();
+                        NetworkGamer sender;
+                        PacketReader packetReader = new PacketReader();
+                        gamer.ReceiveData(packetReader, out sender);
+
+                        if (gamer != sender)
+                        {
+                            Joueur2.Position = packetReader.ReadVector3();
+                            joueur2.Rotation = (float)packetReader.ReadDouble();
+                        }
                     }
                 }
 
@@ -148,8 +151,8 @@ namespace ligne7
             }
             else
             {
-                screenManager.Game1.PacketWriter.Write(screenManager.MainScreen.Map.Joueur.PositionReseau);
-                screenManager.Game1.PacketWriter.Write(screenManager.MainScreen.Map.Joueur.CameraYawY);
+                screenManager.Game1.PacketWriter.Write(Joueur.PositionReseau);
+                screenManager.Game1.PacketWriter.Write((double)Joueur.CameraYawXReseau);
                 screenManager.Game1.Session.LocalGamers[0].SendData(screenManager.Game1.PacketWriter, SendDataOptions.ReliableInOrder);
             }
         }
