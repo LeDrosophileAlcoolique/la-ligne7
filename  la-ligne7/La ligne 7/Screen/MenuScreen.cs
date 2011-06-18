@@ -120,7 +120,7 @@ namespace ligne7
 
                 for (int i = 0; i < screenManager.Game1.AvailableSessions.Count; ++i)
                 {
-                    menu.Liens[i] = new Lien(screenManager.Game1.AvailableSessions[i].HostGamertag, "Rejoindre seveur", 30, y);
+                    menu.Liens[i] = new Lien(screenManager.Game1.AvailableSessions[i].HostGamertag, "Rejoindre serveur", 30, y);
                     y += 100;
                 }
 
