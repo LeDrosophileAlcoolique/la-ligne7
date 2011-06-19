@@ -59,6 +59,7 @@ namespace ligne7
 
         public new BoundingBox GenerateBoundingBox(Vector3 nextPosition)
         {
+            /*
             Matrix[] transforms = new Matrix[model.Bones.Count];
             model.CopyAbsoluteBoneTransformsTo(transforms);
 
@@ -75,6 +76,9 @@ namespace ligne7
             genereBox.Max += nextPosition;
 
             return genereBox;
+            */
+
+            return new BoundingBox(nextPosition - new Vector3(5, 20, 5), nextPosition + new Vector3(5, 20, 5));
         }
 
         public Matrix CameraRotation()

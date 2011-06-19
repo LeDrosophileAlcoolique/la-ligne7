@@ -105,6 +105,7 @@ namespace ligne7
 
         public BoundingBox GenerateBoundingBox(Vector3 nextPosition)
         {
+            /*
             Matrix[] transforms = new Matrix[model.Bones.Count];
             model.CopyAbsoluteBoneTransformsTo(transforms);
 
@@ -123,6 +124,13 @@ namespace ligne7
             genereBox.Max += nextPosition;
 
             return genereBox;
+            */
+
+            int a2 = 3; 
+            int b2 = 100;
+            int c2 = 3;
+
+            return new BoundingBox(position - new Vector3(a2, 0, c2), position + new Vector3(a2, b2, c2));
         }
 
         protected bool IsCollision(BoundingBox nextBox, IEnumerable<Modele3D> list)
@@ -184,6 +192,7 @@ namespace ligne7
 
         public new BoundingBox GenerateBoundingBox(Vector3 nextPosition)
         {
+            /*
             Matrix[] transforms = new Matrix[model.Bones.Count];
             model.CopyAbsoluteBoneTransformsTo(transforms);
 
@@ -200,6 +209,9 @@ namespace ligne7
             genereBox.Max += nextPosition;
 
             return genereBox;
+            */
+
+            return new BoundingBox(nextPosition - new Vector3(5, 20, 5), nextPosition + new Vector3(5, 20, 5));
         }
     }
 
@@ -280,6 +292,28 @@ namespace ligne7
         {
             return box.Intersects(cible.Box);
         }
+
+        public new BoundingBox GenerateBoundingBox(Vector3 nextPosition)
+        {
+            Matrix[] transforms = new Matrix[model.Bones.Count];
+            model.CopyAbsoluteBoneTransformsTo(transforms);
+
+            BoundingBox genereBox = new BoundingBox();
+            BoundingSphere sphere;
+
+            foreach (ModelMesh mesh in model.Meshes)
+            {
+                sphere = mesh.BoundingSphere.Transform(transforms[mesh.ParentBone.Index] * Matrix.CreateRotationY(rotation) * Matrix.CreateScale(taille));
+                sphere.Center = new Vector3(sphere.Center.X / 2, sphere.Center.Y / 2, sphere.Center.Z / 2);
+                sphere.Radius = sphere.Radius / 2;
+                genereBox = BoundingBox.CreateMerged(genereBox, BoundingBox.CreateFromSphere(sphere));
+            }
+
+            genereBox.Min += nextPosition;
+            genereBox.Max += nextPosition;
+
+            return genereBox;
+        }
     }
 
     class Declancheur : Modele3D
@@ -307,6 +341,28 @@ namespace ligne7
         public bool IsCollision(Joueur joueur)
         {
             return box.Intersects(joueur.Box);
+        }
+
+        public new BoundingBox GenerateBoundingBox(Vector3 nextPosition)
+        {
+            Matrix[] transforms = new Matrix[model.Bones.Count];
+            model.CopyAbsoluteBoneTransformsTo(transforms);
+
+            BoundingBox genereBox = new BoundingBox();
+            BoundingSphere sphere;
+
+            foreach (ModelMesh mesh in model.Meshes)
+            {
+                sphere = mesh.BoundingSphere.Transform(transforms[mesh.ParentBone.Index] * Matrix.CreateRotationY(rotation) * Matrix.CreateScale(taille));
+                sphere.Center = new Vector3(sphere.Center.X / 2, sphere.Center.Y / 2, sphere.Center.Z / 2);
+                sphere.Radius = sphere.Radius / 2;
+                genereBox = BoundingBox.CreateMerged(genereBox, BoundingBox.CreateFromSphere(sphere));
+            }
+
+            genereBox.Min += nextPosition;
+            genereBox.Max += nextPosition;
+
+            return genereBox;
         }
     }
 
