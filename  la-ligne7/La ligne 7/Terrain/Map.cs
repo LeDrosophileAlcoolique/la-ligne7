@@ -28,8 +28,7 @@ namespace ligne7
         protected Terrain terrain;
 
         protected Joueur2 joueur2;
-
-        protected string map;
+        
         protected Niveau nivo;
 
         public Map(ScreenManager screenManager, string map)
@@ -70,6 +69,9 @@ namespace ligne7
 
         public void Update(GameTime gameTime)
         {
+            if (screenManager.Game1.Session != null && !screenManager.Game1.Session.IsHost)
+                listMunition = new MyList<Munition>();
+
             joueur.Update(gameTime);
 
             if (screenManager.Game1.Session != null)
@@ -110,6 +112,8 @@ namespace ligne7
                         screenManager.Game1.PacketWriter.Write(tir.Position);
                         screenManager.Game1.PacketWriter.Write(tir.Direction);
                     }
+
+                    listMunition = new MyList<Munition>();
                 }
                   
                 screenManager.Game1.Session.LocalGamers[0].SendData(screenManager.Game1.PacketWriter, SendDataOptions.InOrder, screenManager.Game1.Session.RemoteGamers[0]);
