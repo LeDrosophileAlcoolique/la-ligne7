@@ -50,6 +50,21 @@ namespace ligne7
             box = GenerateBoundingBox(position);
         }
 
+        public Tir(Map map, ScreenManager screenManager, Vector3 position, Vector3 direction)
+            : base(map)
+        {
+            assetName = asset_name;
+            this.position = position;
+            rotation = init_rotation;
+            taille = init_taille;
+            moveSpeed = init_moveSpeed;
+
+            this.direction = direction;
+
+            LoadContent(screenManager.Content3D);
+            box = GenerateBoundingBox(position);
+        }
+
         protected bool IsKillEnemy(Map map)
         {
             foreach (MyList<Enemy>.Element enemy in map.ListEnemy.Enum())
@@ -82,6 +97,14 @@ namespace ligne7
             box = GenerateBoundingBox(position);
 
             return IsKillEnemy(map) || TropLoin(map.Joueur) || IsCollision(box, map.ListDecor());
-       }
+        }
+
+        public Vector3 Direction
+        {
+            get
+            {
+                return direction;
+            }
+        }
     }
 }

@@ -312,10 +312,18 @@ namespace ligne7
 
     class Terrain : Modele3D
     {
-        public Terrain(Map map, ScreenManager screenManager, Vector3 position)
+        protected int a;
+        protected int b;
+        protected int c;
+
+        public Terrain(Map map, ScreenManager screenManager, Vector3 position, string s, int i, int j, int k)
             : base (map)
         {
-            this.assetName = "FBX/terrain";
+            this.assetName = s;
+            a = i;
+            b = j;
+            c = k;
+
             this.position = position;
             rotation = 0;
             taille = 0.3f;
@@ -326,7 +334,7 @@ namespace ligne7
 
         public BoundingBox GenerateBoundingBox()
         {
-            return new BoundingBox(position - new Vector3(40, 0, 70), position + new Vector3(40, 150, 70));
+            return new BoundingBox(position - new Vector3(a, 0, c), position + new Vector3(a, b, c));
         }
     }
 }

@@ -45,7 +45,7 @@ namespace ligne7
 
         public override void LoadMap(Map map, ScreenManager screenManager)
         {
-            map.Terrain = new Terrain(map, screenManager, Vector3.Zero);
+            map.Terrain = new Terrain(map, screenManager, Vector3.Zero, "FBX/terrain", 40, 150, 70);
 
             map.ListDecorGS.Add(new Modele3D(map, screenManager, new Vector3(30, 0, 60), "FBX/pillier"));
             map.ListDecorGS.Add(new Modele3D(map, screenManager, new Vector3(30, 0, 30), "FBX/pillier"));
