@@ -29,7 +29,7 @@ namespace ligne7
             volume = 2;
             niveau = 0;
             vie = 1;
-            debug = 1;
+            debug = 0;
             nbrOptions = 3;
 
             this.son = son;

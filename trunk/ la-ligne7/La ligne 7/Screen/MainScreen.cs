@@ -20,6 +20,8 @@ namespace ligne7
         protected Ptdevie ptDeVie;
         protected Map map;
 
+        protected Objectif objectif;
+
         protected Debug debug;
 
         public MainScreen(ScreenManager screenManager)
@@ -27,7 +29,9 @@ namespace ligne7
         {
             curseur = new Curseur();
             ptDeVie = new Ptdevie();
-            map = new Map(screenManager);
+            map = new Map(screenManager, "nivo1");
+
+            objectif = map.Nivo.Objectif;
 
             debug = new Debug("Debug", 0, 0);
         }
@@ -47,12 +51,22 @@ namespace ligne7
             {
                 screenManager.ChangeGameScreen(new PauseScreen(screenManager));
             }
+            else if(objectif.IsVictoire())
+            {
+                map = new Map(screenManager, "nivo1");
+                map.LoadContent();
+                objectif = map.Nivo.Objectif;
+            }
+            else if (map.Joueur.Vie <= 0)
+            {
+                screenManager.ChangeGameScreen(new MortScreen(screenManager));
+            }
             else
             {
                 map.Update(gameTime);
 
                 if (screenManager.Options.Debug == 1)
-                    debug.Update(map.Joueur.Vie.ToString() + "; " + map.Joueur.CameraYawX.ToString() + "; " + map.Joueur.CameraYawY.ToString() + "; " + map.Joueur.Position.ToString());
+                    debug.Update(map.Joueur.Vie.ToString() + "; " + map.Joueur.CameraYawX.ToString() + "; " + map.Joueur.CameraYawY.ToString() + "; " + map.Joueur.Position.ToString() + "; " + map.Nivo.Objectif.NbrZombieTue);
 
                 screenManager.Game1.Souris.AuCentre(screenManager.Graphics);
             }
