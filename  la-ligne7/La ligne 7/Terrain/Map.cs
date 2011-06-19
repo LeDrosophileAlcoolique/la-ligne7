@@ -70,7 +70,7 @@ namespace ligne7
         public void Update(GameTime gameTime)
         {
             if (screenManager.Game1.Session != null && !screenManager.Game1.Session.IsHost)
-                listMunition = new MyList<Munition>();
+                listTir = new MyList<Tir>();
 
             joueur.Update(gameTime);
 
@@ -112,8 +112,6 @@ namespace ligne7
                         screenManager.Game1.PacketWriter.Write(tir.Position);
                         screenManager.Game1.PacketWriter.Write(tir.Direction);
                     }
-
-                    listMunition = new MyList<Munition>();
                 }
                   
                 screenManager.Game1.Session.LocalGamers[0].SendData(screenManager.Game1.PacketWriter, SendDataOptions.InOrder, screenManager.Game1.Session.RemoteGamers[0]);
