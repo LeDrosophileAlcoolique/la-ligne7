@@ -168,4 +168,41 @@ namespace ligne7
             }
         }
     }
+
+    class MortScreen : MenuScreen
+    {
+        protected Modele2D imgMort;
+
+        public MortScreen(ScreenManager screenManager)
+            : base(screenManager)
+        {
+            imgMort = new Modele2D("Image/eaten", new Vector2(310, 140)); 
+
+            menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("", "Image/jeu", new Vector2(370, 215)) };
+            menu.Liens = new Lien[] { new Lien("Game over !", "Main menu", 30, 250) };
+        }
+
+        public override void LoadContent()
+        {
+            base.LoadContent();
+
+            imgMort.LoadContent(screenManager.ContentImage);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            // On met l'écran en blanc
+            screenManager.Game.GraphicsDevice.Clear(Color.White);
+
+            screenManager.SpriteBatch.Begin();
+            fond.Draw(screenManager.SpriteBatch, Color.White);
+            menu.Draw(screenManager.SpriteBatch);
+            imgMort.Draw(screenManager.SpriteBatch, Color.White);
+            train.Draw(screenManager.SpriteBatch, Color.White);
+
+            // Pour afficher le curseur
+            curseur.Draw(screenManager.SpriteBatch, Color.RoyalBlue, 0.75f);
+            screenManager.SpriteBatch.End();
+        }
+    }
 }

@@ -56,6 +56,7 @@ namespace ligne7
             {
                 if (box.Intersects(enemy.Value.Box))
                 {
+                    map.Nivo.Objectif.Decrement(1);
                     map.ListEnemy.Delete(enemy);
                     return true;
                 }

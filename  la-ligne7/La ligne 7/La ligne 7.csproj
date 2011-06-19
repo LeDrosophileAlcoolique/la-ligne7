@@ -103,8 +103,10 @@
     <Compile Include="Screen\GameScreen.cs" />
     <Compile Include="Screen\MainScreen.cs" />
     <Compile Include="Screen\MenuScreen.cs" />
+    <Compile Include="Screen\Objectif.cs" />
     <Compile Include="Screen\ScreenManager.cs" />
     <Compile Include="Terrain\Map.cs" />
+    <Compile Include="Terrain\Niveau.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

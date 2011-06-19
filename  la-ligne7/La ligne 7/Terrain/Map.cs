@@ -29,7 +29,10 @@ namespace ligne7
 
         protected Joueur2 joueur2;
 
-        public Map(ScreenManager screenManager)
+        protected string map;
+        protected Niveau nivo;
+
+        public Map(ScreenManager screenManager, string map)
         {
             this.screenManager = screenManager;
 
@@ -46,6 +49,13 @@ namespace ligne7
 
             if (screenManager.Game1.Session != null)
                 joueur2 = new Joueur2(this, screenManager, Vector3.Zero);
+
+            switch (map)
+            {
+                case "nivo1":
+                    nivo = new Nivo1();
+                    break;
+            }
         }
 
         public void LoadContent()
@@ -55,24 +65,7 @@ namespace ligne7
             Munition.FirstLoadContent(screenManager.Content3D);
             Modele3D.FirstLoadContent(screenManager.Content3D);
 
-            terrain = new Terrain(this, screenManager, Vector3.Zero);
-
-            listDecor.Add(new Modele3D(this, screenManager, new Vector3(30, 0, 60), "FBX/pillier"));
-            listDecor.Add(new Modele3D(this, screenManager, new Vector3(30, 0, 30), "FBX/pillier"));
-            listDecor.Add(new Modele3D(this, screenManager, new Vector3(30, 0, -30), "FBX/pillier"));
-            listDecor.Add(new Modele3D(this, screenManager, new Vector3(30, 0, -60), "FBX/pillier"));
-
-            listDecor.Add(new Modele3D(this, screenManager, new Vector3(0, 0, 60), "FBX/pillier"));
-            listDecor.Add(new Modele3D(this, screenManager, new Vector3(0, 0, 30), "FBX/pillier"));
-            listDecor.Add(new Modele3D(this, screenManager, new Vector3(0, 0, -30), "FBX/pillier"));
-            listDecor.Add(new Modele3D(this, screenManager, new Vector3(0, 0, -60), "FBX/pillier"));
-
-            listDecor.Add(new Modele3D(this, screenManager, new Vector3(-30, 0, 60), "FBX/pillier"));
-            listDecor.Add(new Modele3D(this, screenManager, new Vector3(-30, 0, 30), "FBX/pillier"));
-            listDecor.Add(new Modele3D(this, screenManager, new Vector3(-30, 0, -30), "FBX/pillier"));
-            listDecor.Add(new Modele3D(this, screenManager, new Vector3(-30, 0, -60), "FBX/pillier"));
-
-            listDeclancheur.Add(new Declancheur(this, screenManager));
+            nivo.LoadMap(this, screenManager);
         }
 
         public void Update(GameTime gameTime)
@@ -174,9 +167,9 @@ namespace ligne7
                         listTir.Delete(tir);
                 }
 
+                /*
                 foreach (MyList<Declancheur>.Element declancheur in listDeclancheur.Enum())
                 {
-                    /*
                     if (declancheur.Value.IsCollision(joueur))
                     {
                         listEnemy.Add(new Enemy(this, screenManager, new Vector3(0, 0, -75)));
@@ -196,12 +189,12 @@ namespace ligne7
 
                         listDeclancheur.Delete(declancheur);
                     }
-                    */
                 }
+                */
 
                 foreach (MyList<Munition>.Element munition in listMunition.Enum())
                 {
-                    if (munition.Value.IsCollision(joueur) || munition.Value.IsCollision(joueur2))
+                    if (munition.Value.IsCollision(joueur) || (joueur2 != null && munition.Value.IsCollision(joueur2)))
                     {
                         listMunition.Delete(munition);
                         joueur.NbrMunition++;
@@ -265,6 +258,18 @@ namespace ligne7
             }
         }
 
+        public MyList<Modele3D> ListDecorGS
+        {
+            get
+            {
+                return listDecor;
+            }
+            set
+            {
+                listDecor = value;
+            }
+        }
+
         public MyList<Enemy> ListEnemy
         {
             get
@@ -274,6 +279,18 @@ namespace ligne7
             set
             {
                 listEnemy = value;
+            }
+        }
+
+        public MyList<Declancheur> ListDeclancheur
+        {
+            get
+            {
+                return listDeclancheur;
+            }
+            set
+            {
+                listDeclancheur = value;
             }
         }
 
@@ -291,6 +308,10 @@ namespace ligne7
             {
                 return terrain;
             }
+            set
+            {
+                terrain = value;
+            }
         }
 
         public Joueur2 Joueur2
@@ -302,6 +323,14 @@ namespace ligne7
             set
             {
                 joueur2 = value;
+            }
+        }
+
+        public Niveau Nivo
+        {
+            get
+            {
+                return nivo;
             }
         }
     }
