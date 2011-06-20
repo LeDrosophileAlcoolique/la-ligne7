@@ -233,7 +233,7 @@ namespace ligne7
     class Joueur2 : Modele3D
     {
         public Joueur2(Map map, ScreenManager screenManager, Vector3 position)
-            : base(map, screenManager, position, "FBX/zombie")
+            : base(map, screenManager, position, "FBX/player")
         {
             box = GenerateBoundingBox(position);
         }
