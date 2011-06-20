@@ -9,6 +9,7 @@ namespace ligne7
     {
         public int Nombre { get; set; }
         protected string objectif;
+        public bool IsVictoire { get; set; }
 
         protected Joueur joueur;
 
@@ -43,7 +44,7 @@ namespace ligne7
                     break;
             }
 
-            return result;
+            return IsVictoire || result;
         }
 
         public void Decrement(int value)

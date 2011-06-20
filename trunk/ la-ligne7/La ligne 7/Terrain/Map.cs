@@ -109,7 +109,7 @@ namespace ligne7
                         screenManager.Game1.PacketWriter.Write(munition.Position);
                     }
 
-                    screenManager.Game1.PacketWriter.Write(screenManager.MainScreen.Objectif.Nombre);
+                    screenManager.Game1.PacketWriter.Write(screenManager.MainScreen.Objectif.IsVictoire());
                 }
                 else
                 {
@@ -162,7 +162,7 @@ namespace ligne7
                             listMunition.Add(new Munition(this, screenManager, packetReader.ReadVector3()));
                         }
 
-                        screenManager.MainScreen.Objectif.Nombre = packetReader.ReadInt32();
+                        screenManager.MainScreen.Objectif.IsVictoire = packetReader.ReadBoolean();
                     }
                     else
                     {

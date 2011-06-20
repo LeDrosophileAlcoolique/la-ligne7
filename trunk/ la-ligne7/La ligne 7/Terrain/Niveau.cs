@@ -88,7 +88,7 @@ namespace ligne7
             : base("Position", "nivo2", joueur)
         {
             this.objectif.Nombre = 550;
-            joueur.Position = new Vector3(0, Joueur.hauteur_des_yeux, 400);
+            joueur.Position = new Vector3(0, Joueur.hauteur_des_yeux, -580);
         }
 
         public override void LoadMap(Map map, ScreenManager screenManager)
