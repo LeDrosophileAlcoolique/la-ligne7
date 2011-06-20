@@ -29,7 +29,7 @@ namespace ligne7
             volume = 2;
             niveau = 0;
             vie = 1;
-            debug = 1;
+            debug = 0;
             nbrOptions = 3;
 
             this.son = son;
@@ -132,10 +132,10 @@ namespace ligne7
             switch (niveau)
             {
                 case 1:
-                    result = 20;
+                    result = 10;
                     break;
                 case 2:
-                    result = 40;
+                    result = 20;
                     break;
             }
 
