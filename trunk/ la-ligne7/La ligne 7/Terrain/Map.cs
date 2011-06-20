@@ -109,7 +109,7 @@ namespace ligne7
                         screenManager.Game1.PacketWriter.Write(munition.Position);
                     }
 
-                    screenManager.Game1.PacketWriter.Write(screenManager.MainScreen.Objectif.IsVictoire());
+                    screenManager.Game1.PacketWriter.Write(screenManager.MainScreen.Map.Nivo.Name);
                 }
                 else
                 {
@@ -162,7 +162,8 @@ namespace ligne7
                             listMunition.Add(new Munition(this, screenManager, packetReader.ReadVector3()));
                         }
 
-                        screenManager.MainScreen.Objectif.isVictoire = packetReader.ReadBoolean();
+                        if (screenManager.MainScreen.Map.Nivo.Name != packetReader.ReadString())
+                            screenManager.MainScreen.Objectif.isVictoire = true;
                     }
                     else
                     {
