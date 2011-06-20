@@ -132,10 +132,10 @@ namespace ligne7
             switch (niveau)
             {
                 case 1:
-                    result = 10;
+                    result = 4;
                     break;
                 case 2:
-                    result = 20;
+                    result = 7;
                     break;
             }
 

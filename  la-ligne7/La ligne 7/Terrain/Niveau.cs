@@ -87,8 +87,8 @@ namespace ligne7
         public Nivo2(ScreenManager screenManager, Joueur joueur, Joueur2 joueur2)
             : base("Position", "nivo2", joueur)
         {
-            this.objectif.Nombre = 550;
-            joueur.Position = new Vector3(0, Joueur.hauteur_des_yeux, -580);
+            this.objectif.Nombre = 580;
+            joueur.Position = new Vector3(0, Joueur.hauteur_des_yeux, 550);
 
             if (screenManager.Game1.Session != null)
                 joueur2.Position = new Vector3(0, Joueur.hauteur_des_yeux, -540);
