@@ -38,7 +38,7 @@ namespace ligne7
         public Joueur(Map map, ScreenManager screenManager, int x, int z)
             : base (map)
         {
-            assetName = asset_name;
+            assetName = "FBX/player";
             this.screenManager = screenManager;
             projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, screenManager.Graphics.GraphicsDevice.Viewport.Width / screenManager.Graphics.GraphicsDevice.Viewport.Height, 1, 500); // 180° se rapproche de l'oeil humain
             position = new Vector3(x, hauteur_des_yeux, z);

@@ -88,7 +88,7 @@ namespace ligne7
             : base("Position", "nivo2", joueur)
         {
             this.objectif.Nombre = 580;
-            joueur.Position = new Vector3(0, Joueur.hauteur_des_yeux, 550);
+            joueur.Position = new Vector3(0, Joueur.hauteur_des_yeux, -580);
 
             if (screenManager.Game1.Session != null)
                 joueur2.Position = new Vector3(0, Joueur.hauteur_des_yeux, -540);
