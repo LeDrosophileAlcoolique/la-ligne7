@@ -55,7 +55,7 @@ namespace ligne7
                     nivo = new Nivo1();
                     break;
                 case "nivo2":
-                    nivo = new Nivo2(joueur);
+                    nivo = new Nivo2(joueur, joueur2);
                     break;
                 case "nivo3":
                     nivo = new Nivo3();

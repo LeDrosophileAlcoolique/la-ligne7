@@ -84,11 +84,12 @@ namespace ligne7
 
     class Nivo2 : Niveau
     {
-        public Nivo2(Joueur joueur)
+        public Nivo2(Joueur joueur, Joueur2 joueur2)
             : base("Position", "nivo2", joueur)
         {
             this.objectif.Nombre = 550;
             joueur.Position = new Vector3(0, Joueur.hauteur_des_yeux, -580);
+            joueur2.Position = new Vector3(0, Joueur.hauteur_des_yeux, -570);
         }
 
         public override void LoadMap(Map map, ScreenManager screenManager)
