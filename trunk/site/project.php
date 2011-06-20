@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require("include/include.php");
 
 echo $miseHTML['header'];
@@ -51,6 +51,11 @@ stupides ils sont plus ou moins nombreux et plein de méchantes créatures
 qui vous tapent ça fait mal ! ! De plus, vos munitions pourraient bien être
 plus rares que prévues. Mais attention, vous pourriez ne pas en revenir. Bon
 courage.</p>
+
+<img class="left" src="images/multi.jpg" />
+
+<h1>Un mode coopération</h1>
+<p>Vous donnant la possibilité de jouer avec un ami afin de combattre cette horde de zombie qui ne cesse de s'agrandir. Vous viverez avec votre ami une aventure exceptionnelle.</p>
 <?php
 echo $miseHTML['footer'];
 ?>
