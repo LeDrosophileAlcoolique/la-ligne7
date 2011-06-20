@@ -7,16 +7,23 @@ namespace ligne7
 {
     class Objectif
     {
-        public int NbrZombieTue { get; set; }
-        public int TimeNiveau { get; set; }
-
+        public int Nombre { get; set; }
         protected string objectif;
+
+        protected Joueur joueur;
 
         public Objectif(string objectif)
         {
-            NbrZombieTue = 0;
-            TimeNiveau = 0;
+            Nombre = 0;
             this.objectif = objectif;
+        }
+
+        public Objectif(string objectif, Joueur joueur)
+        {
+            Nombre = 0;
+            this.objectif = objectif;
+
+            this.joueur = joueur;
         }
 
         public bool IsVictoire()
@@ -26,10 +33,13 @@ namespace ligne7
             switch (objectif)
             { 
                 case "Zombie":
-                    result = NbrZombieTue <= 0;
+                    result = Nombre <= 0;
                     break;
                 case "Time":
-                    result = TimeNiveau <= 0;
+                    result = Nombre <= 0;
+                    break;
+                case "Position":
+                    result = joueur.Position.Z >= Nombre;
                     break;
             }
 
@@ -38,14 +48,14 @@ namespace ligne7
 
         public void Decrement(int value)
         {
-            switch (objectif)
+            Nombre -= value;
+        }
+
+        public string Mission
+        {
+            get
             {
-                case "Zombie":
-                    NbrZombieTue -= value;
-                    break;
-                case "Time":
-                    TimeNiveau -= value;
-                    break;
+                return objectif;
             }
         }
     }

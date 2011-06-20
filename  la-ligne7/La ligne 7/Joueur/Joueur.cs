@@ -14,7 +14,7 @@ namespace ligne7
     class Joueur : ModelDeplacement
     {
         // Constante
-        protected const float hauteur_des_yeux = 5.75f;
+        public const float hauteur_des_yeux = 5.75f;
         protected const int nbr_par_munition = 25;
         public const int nbr_vie = 21;
 
@@ -32,6 +32,8 @@ namespace ligne7
         public int NbrMunition { get; set; }
 
         protected int vie = nbr_vie;
+
+        protected bool cac;
    
         public Joueur(Map map, ScreenManager screenManager, int x, int z)
             : base (map)
@@ -55,6 +57,8 @@ namespace ligne7
 
             nbrBalle = nbr_par_munition;
             NbrMunition = 2;
+
+            cac = false;
         }
 
         public new BoundingBox GenerateBoundingBox(Vector3 nextPosition)
@@ -153,11 +157,30 @@ namespace ligne7
 
         public void Tir()
         {
-            if (screenManager.Game1.Souris.IsNewClickPress() && nbrBalle >= 1)
+            if (!cac)
             {
-                screenManager.Son.LoadContentAndPlay("famas tir");
-                map.ListTir.Add(new Tir(map, screenManager, this));
-                nbrBalle--;
+                if (screenManager.Game1.Souris.IsNewClickPress() && nbrBalle >= 1)
+                {
+                    screenManager.Son.LoadContentAndPlay("famas tir");
+                    map.ListTir.Add(new Tir(map, screenManager, this));
+                    nbrBalle--;
+                }
+            }
+            else
+            {
+                if (screenManager.Game1.Souris.IsNewClickPress())
+                {
+                    foreach (MyList<Enemy>.Element enemy in map.ListEnemy.Enum())
+                    {
+                        if (Math.Abs(enemy.Value.Position.X - position.X) < 15 && Math.Abs(enemy.Value.Position.Z - position.Z) < 15)
+                        {
+                            if (map.Nivo.Objectif.Mission == "Zombie")
+                                map.Nivo.Objectif.Decrement(1);
+
+                            map.ListEnemy.Delete(enemy);
+                        }
+                    }
+                }
             }
 
             if (screenManager.Game1.Clavier.IsNewKeyPress(Keys.R) && NbrMunition >= 1)
@@ -168,6 +191,9 @@ namespace ligne7
 
             if (screenManager.Game1.Clavier.IsNewKeyPress(Keys.T))
                 nbrBalle = nbr_par_munition;
+
+            if (screenManager.Game1.Clavier.IsNewKeyPress(Keys.F))
+                cac = !cac;
 
             if (screenManager.Game1.Clavier.IsNewKeyPress(Keys.Y))
                 map.ListEnemy = new MyList<Enemy>();

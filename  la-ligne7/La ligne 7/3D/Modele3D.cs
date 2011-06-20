@@ -33,6 +33,13 @@ namespace ligne7
         // La carte (la classe qui a accès à tous les ennemis, joueur, ... etc)
         protected Map map;
 
+        protected int a2;
+        protected int b2;
+        protected int c2;
+
+        protected BoundingBox box2;
+        protected BoundingBox box3;
+
         public Modele3D(Map map)
         {
             this.map = map;
@@ -44,6 +51,25 @@ namespace ligne7
             this.position = position;
             rotation = 0;
             taille = 0.3f;
+
+            a2 = 3;
+            b2 = 100;
+            c2 = 3;
+
+            LoadContent(screenManager.Content3D);
+            box = GenerateBoundingBox(position);
+        }
+
+        public Modele3D(Map map, ScreenManager screenManager, Vector3 position, string assetName, int a2, int b2, int c2)
+        {
+            this.assetName = assetName;
+            this.position = position;
+            rotation = 0;
+            taille = 0.3f;
+
+            this.a2 = a2;
+            this.b2 = b2;
+            this.c2 = c2;
 
             LoadContent(screenManager.Content3D);
             box = GenerateBoundingBox(position);
@@ -59,6 +85,17 @@ namespace ligne7
         {
             // On charge le Model
             model = ressourceManager.GetElement(assetName);
+
+            if (assetName == "FBX/train")
+            {
+                box = GenerateBoundingBoxspecial(position, 20, 15, 50);
+                box2 = GenerateBoundingBoxspecial(position + new Vector3(0, 0, -40), 7, 15, 9);
+                box3 = GenerateBoundingBoxspecial(position + new Vector3(0, 0, 40), 7, 15, 9);
+            }
+            else
+            {
+                box = GenerateBoundingBox(position);
+            }
         }
 
         public static void FirstLoadContent(RessourceManager<Model> ressourceManager, string assetName)
@@ -126,10 +163,6 @@ namespace ligne7
             return genereBox;
             */
 
-            int a2 = 3; 
-            int b2 = 100;
-            int c2 = 3;
-
             return new BoundingBox(position - new Vector3(a2, 0, c2), position + new Vector3(a2, b2, c2));
         }
 
@@ -144,11 +177,31 @@ namespace ligne7
             return false;
         }
 
+        public BoundingBox GenerateBoundingBoxspecial(Vector3 position, int a, int b, int c)
+        {
+            return new BoundingBox(position - new Vector3(a, 0, c), position + new Vector3(a, b, c));
+        }
+
         public BoundingBox Box
         {
             get
             {
                 return box;
+            }
+        }
+
+        public BoundingBox Box2
+        {
+            get
+            {
+                return box2;
+            }
+        }
+        public BoundingBox Box3
+        {
+            get
+            {
+                return box3;
             }
         }
 
@@ -235,6 +288,17 @@ namespace ligne7
                 position = nextPosition;
                 box = nextBox;
             }
+        }
+
+        protected new bool IsCollision(BoundingBox nextBox, IEnumerable<Modele3D> list)
+        {
+            foreach (Modele3D modele in list)
+            {
+                if (this != modele && (nextBox.Intersects(modele.Box) || (modele.Box2 != new BoundingBox(Vector3.Zero, Vector3.Zero) && nextBox.Intersects(modele.Box2)) || (modele.Box3 != new BoundingBox(Vector3.Zero, Vector3.Zero) && nextBox.Intersects(modele.Box3))))
+                    return true;
+            }
+
+            return false;
         }
     }
 
@@ -393,4 +457,84 @@ namespace ligne7
             return new BoundingBox(position - new Vector3(a, 0, c), position + new Vector3(a, b, c));
         }
     }
+
+    class Box : Modele3D
+    {
+        public Box(Map map, ScreenManager screenManager, Vector3 position)
+            : base(map, screenManager, position, "FBX/box", 1, 10, 1)
+        { 
+        
+        }
+    }
+
+    class Gravier : Modele3D
+    {
+        public Gravier(Map map, ScreenManager screenManager, Vector3 position)
+            : base(map, screenManager, position, "FBX/gravier", 2, 10, 2)
+        {
+
+        }
+    }
+
+    class Wall : Modele3D
+    {
+        public Wall(Map map, ScreenManager screenManager, Vector3 position)
+            : base(map, screenManager, position, "FBX/wall", 2, 10, 1)
+        {
+
+        }
+    }
+
+    class Pillier2 : Modele3D
+    { 
+        public Pillier2(Map map, ScreenManager screenManager, Vector3 position)
+            : base(map, screenManager, position, "FBX/pillier2", 1, 100, 1)
+        {
+
+        }
+    }
+
+    /*
+    class Train3D : Modele3D
+    {
+        protected BoundingBox box2;
+        protected BoundingBox box3;
+
+        public Train3D(Map map, ScreenManager screenManager, Vector3 position)
+            : base(map, screenManager, position, "FBX/train")
+        {
+
+        }
+
+        public new void LoadContent(RessourceManager<Model> ressourceManager)
+        {
+            // On charge le Model
+            model = ressourceManager.GetElement(assetName);
+
+            box = GenerateBoundingBoxspecial(position, 7, 15, 10);
+            box2 = GenerateBoundingBoxspecial(position + new Vector3(0, 0, -40), 7, 15, 9);
+            box3 = GenerateBoundingBoxspecial(position + new Vector3(0, 0, 40), 7, 15, 9);
+        }
+
+        public BoundingBox GenerateBoundingBoxspecial(Vector3 position, int a, int b, int c)
+        {
+            return new BoundingBox(position - new Vector3(a, 0, c), position + new Vector3(a, b, c));
+        }
+
+        public BoundingBox Box2
+        {
+            get
+            {
+                return box2;
+            }
+        }
+        public BoundingBox Box3
+        {
+            get
+            {
+                return box3;
+            }
+        }
+    }
+    */
 }

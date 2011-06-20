@@ -54,6 +54,12 @@ namespace ligne7
                 case "nivo1":
                     nivo = new Nivo1();
                     break;
+                case "nivo2":
+                    nivo = new Nivo2(joueur);
+                    break;
+                case "nivo3":
+                    nivo = new Nivo3();
+                    break;
             }
         }
 
@@ -102,6 +108,8 @@ namespace ligne7
                     {
                         screenManager.Game1.PacketWriter.Write(munition.Position);
                     }
+
+                    screenManager.Game1.PacketWriter.Write(screenManager.MainScreen.Objectif.Nombre);
                 }
                 else
                 {
@@ -162,6 +170,8 @@ namespace ligne7
                         {
                             listTir.Add(new Tir(this, screenManager, packetReader.ReadVector3(), packetReader.ReadVector3()));
                         }
+
+                        screenManager.MainScreen.Objectif.Nombre = screenManager.Game1.PacketReader.ReadInt32();
                     }
                 }
             }
