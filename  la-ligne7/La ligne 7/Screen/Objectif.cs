@@ -17,6 +17,8 @@ namespace ligne7
         {
             Nombre = 0;
             this.objectif = objectif;
+
+            isVictoire = false;
         }
 
         public Objectif(string objectif, Joueur joueur)
@@ -25,6 +27,7 @@ namespace ligne7
             this.objectif = objectif;
 
             this.joueur = joueur;
+            isVictoire = false;
         }
 
         public bool IsVictoire()
