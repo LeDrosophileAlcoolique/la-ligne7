@@ -162,7 +162,7 @@ namespace ligne7
                             listMunition.Add(new Munition(this, screenManager, packetReader.ReadVector3()));
                         }
 
-                        screenManager.MainScreen.Objectif.IsVictoire = packetReader.ReadBoolean();
+                        screenManager.MainScreen.Objectif.isVictoire = packetReader.ReadBoolean();
                     }
                     else
                     {
