@@ -199,6 +199,7 @@ $miseHTML['header'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
               <li><a href="telechargement.php">Téléchargement</a></li>
               <li><a href="team.php">L\'équipe</a></li>
               <li><a href="contact.php">Contact</a></li>
+              <li><a href="liens.php">Liens</a></li>
           </ul>
       </div>
       
