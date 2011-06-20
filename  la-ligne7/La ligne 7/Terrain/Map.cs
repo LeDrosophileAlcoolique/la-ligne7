@@ -162,7 +162,7 @@ namespace ligne7
                             listMunition.Add(new Munition(this, screenManager, packetReader.ReadVector3()));
                         }
 
-                        screenManager.MainScreen.Objectif.Nombre = screenManager.Game1.PacketReader.ReadInt32();
+                        screenManager.MainScreen.Objectif.Nombre = packetReader.ReadInt32();
                     }
                     else
                     {
