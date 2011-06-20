@@ -69,6 +69,8 @@ namespace ligne7
                         screenManager.ChangeGameScreen(new VictoireScreen(screenManager));
                         break;
                 }
+
+                objectif.isVictoire = false;
             }
             else if (map.Joueur.Vie <= 0)
             {
