@@ -53,9 +53,22 @@ namespace ligne7
             }
             else if(objectif.IsVictoire())
             {
-                map = new Map(screenManager, "nivo1");
-                map.LoadContent();
-                objectif = map.Nivo.Objectif;
+                switch (map.Nivo.Name)
+                {
+                    case "nivo1":
+                        map = new Map(screenManager, "nivo2");
+                        map.LoadContent();
+                        objectif = map.Nivo.Objectif;
+                        break;
+                    case "nivo2":
+                        map = new Map(screenManager, "nivo3");
+                        map.LoadContent();
+                        objectif = map.Nivo.Objectif;
+                        break;
+                    case "nivo3":
+                        screenManager.ChangeGameScreen(new VictoireScreen(screenManager));
+                        break;
+                }
             }
             else if (map.Joueur.Vie <= 0)
             {
@@ -63,10 +76,13 @@ namespace ligne7
             }
             else
             {
+                if (objectif.Mission == "Time")
+                    objectif.Decrement(gameTime.ElapsedGameTime.Milliseconds);
+
                 map.Update(gameTime);
 
                 if (screenManager.Options.Debug == 1)
-                    debug.Update(map.Joueur.Vie.ToString() + "; " + map.Joueur.CameraYawX.ToString() + "; " + map.Joueur.CameraYawY.ToString() + "; " + map.Joueur.Position.ToString() + "; " + map.Nivo.Objectif.NbrZombieTue);
+                    debug.Update(map.Joueur.Vie.ToString() + "; " + map.Joueur.CameraYawX.ToString() + "; " + map.Joueur.CameraYawY.ToString() + "; " + map.Joueur.Position.ToString() + "; " + map.Nivo.Objectif.Nombre);
 
                 screenManager.Game1.Souris.AuCentre(screenManager.Graphics);
             }
@@ -92,6 +108,18 @@ namespace ligne7
             get
             {
                 return map;
+            }
+        }
+
+        public Objectif Objectif
+        {
+            get
+            {
+                return objectif;
+            }
+            set
+            {
+                objectif = value;
             }
         }
     }

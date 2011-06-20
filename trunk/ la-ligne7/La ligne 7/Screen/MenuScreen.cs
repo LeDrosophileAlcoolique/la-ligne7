@@ -138,7 +138,7 @@ namespace ligne7
         public PauseScreen(ScreenManager screenManager)
             : base(screenManager)
         {
-            menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("Jouer", "Image/jeu", new Vector2(370, 215)) };
+            menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("Main screen", "Image/jeu", new Vector2(370, 215)) };
             menu.Liens = new Lien[] { new Lien("Options", "Options pause menu", 30, 150), new Lien("Abondonner", "Abondonner", 30, 250) };
         }
     }
@@ -150,7 +150,7 @@ namespace ligne7
         {
             menu.Page = "options";
 
-            menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("Jouer", "Image/jeu", new Vector2(370, 215)) };
+            menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("Main screen", "Image/jeu", new Vector2(370, 215)) };
             menu.Liens = new Lien[4];
 
             menu.Liens[0] = new Lien("Volume : " + screenManager.Options.Volume.ToString(), "Modif volume", 30, 150);
@@ -166,6 +166,105 @@ namespace ligne7
                     menu.Liens[3] = new Lien("Retour", "Pause", 30, 375);
                     break;
             }
+        }
+    }
+
+    class InstructionScreen : MenuScreen
+    {
+        public InstructionScreen(ScreenManager screenManager)
+            : base(screenManager)
+        {
+            menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("Jouer", "Image/jeu", new Vector2(370, 215)) };
+            menu.Liens = new Lien[] { new Lien("Clic gauche pour tirer", "", 30, 130), new Lien("Z pour avancer", "", 30, 170), new Lien("S pour reculer", "", 30, 210), new Lien("Q pour gauche", "", 30, 250), new Lien("D pour droite", "", 30, 290), new Lien("R pour recharger", "", 30, 330), new Lien("Retour", "Main menu", 30, 370) };
+        }
+    }
+
+    class IntroScreen : MenuScreen
+    {
+        protected MyVideo video;
+
+        public IntroScreen(ScreenManager screenManager)
+            : base(screenManager)
+        {
+            video = new MyVideo();
+
+            menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("", "Image/jeu", new Vector2(370, 215)) };
+            menu.Liens = new Lien[] { new Lien("Continuer", "Main screen", 30, 250) };
+        }
+
+        public override void LoadContent()
+        {
+            base.LoadContent();
+
+            video.LoadVideo("Video/intro", screenManager.Game1.Content);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            video.Update();
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            // On met l'écran en blanc
+            screenManager.Game.GraphicsDevice.Clear(Color.White);
+
+            screenManager.SpriteBatch.Begin();
+            fond.Draw(screenManager.SpriteBatch, Color.White);
+            menu.Draw(screenManager.SpriteBatch);
+            //train.Draw(screenManager.SpriteBatch, Color.White);
+            video.Draw(screenManager.SpriteBatch);
+
+            // Pour afficher le curseur
+            curseur.Draw(screenManager.SpriteBatch, Color.RoyalBlue, 0.75f);
+            screenManager.SpriteBatch.End();
+        }
+    }
+
+
+    class VictoireScreen : MenuScreen
+    {
+        protected MyVideo video;
+
+        public VictoireScreen(ScreenManager screenManager)
+            : base(screenManager)
+        {
+            video = new MyVideo();
+
+            menu.Boutons = new Bouton[] { new Bouton("Exit", "Image/exit", new Vector2(720, 89)), new Bouton("", "Image/jeu", new Vector2(370, 215)) };
+            menu.Liens = new Lien[] { new Lien("Victoire !", "Main menu", 30, 250) };
+        }
+
+        public override void LoadContent()
+        {
+            base.LoadContent();
+
+            video.LoadVideo("Video/victoire", screenManager.Game1.Content);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            video.Update();
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            // On met l'écran en blanc
+            screenManager.Game.GraphicsDevice.Clear(Color.White);
+
+            screenManager.SpriteBatch.Begin();
+            fond.Draw(screenManager.SpriteBatch, Color.White);
+            menu.Draw(screenManager.SpriteBatch);
+            //train.Draw(screenManager.SpriteBatch, Color.White);
+            video.Draw(screenManager.SpriteBatch);
+
+            // Pour afficher le curseur
+            curseur.Draw(screenManager.SpriteBatch, Color.RoyalBlue, 0.75f);
+            screenManager.SpriteBatch.End();
         }
     }
 

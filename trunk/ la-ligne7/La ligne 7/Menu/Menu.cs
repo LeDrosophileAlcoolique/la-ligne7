@@ -118,12 +118,16 @@ namespace ligne7
             switch (fonction)
             { 
                 case "Jouer":
+                    screenManager.ChangeGameScreen(new IntroScreen(screenManager));
+                    break;
+                case "Main screen":
                     screenManager.ChargeMainScreen();
                     break;
                 case "Main menu":
                     screenManager.ChangeGameScreen(new MainMenuScreen(screenManager));
                     break;
                 case "Instructions":
+                    screenManager.ChangeGameScreen(new InstructionScreen(screenManager));
                     break;
                 case "Multi":
                     screenManager.ChangeGameScreen(new ReseauScreen(screenManager));
