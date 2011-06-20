@@ -264,7 +264,7 @@ namespace ligne7
             return genereBox;
             */
 
-            return new BoundingBox(nextPosition - new Vector3(5, 20, 5), nextPosition + new Vector3(5, 20, 5));
+            return new BoundingBox(nextPosition - new Vector3(3, 20, 3), nextPosition + new Vector3(3, 20, 3));
         }
     }
 
