@@ -84,12 +84,14 @@ namespace ligne7
 
     class Nivo2 : Niveau
     {
-        public Nivo2(Joueur joueur, Joueur2 joueur2)
+        public Nivo2(ScreenManager screenManager, Joueur joueur, Joueur2 joueur2)
             : base("Position", "nivo2", joueur)
         {
             this.objectif.Nombre = 550;
             joueur.Position = new Vector3(0, Joueur.hauteur_des_yeux, -580);
-            joueur2.Position = new Vector3(0, Joueur.hauteur_des_yeux, -570);
+
+            if (screenManager.Game1.Session != null)
+                joueur2.Position = new Vector3(0, Joueur.hauteur_des_yeux, -540);
         }
 
         public override void LoadMap(Map map, ScreenManager screenManager)
@@ -141,10 +143,13 @@ namespace ligne7
 
     class Nivo3 : Niveau
     {
-        public Nivo3()
+        public Nivo3(ScreenManager screenManager, Joueur2 joueur2)
             : base("Time", "nivo3")
         {
             this.objectif.Nombre = 5 * 1000 * 60;
+
+            if (screenManager.Game1.Session != null)
+                joueur2.Position = new Vector3(0, Joueur.hauteur_des_yeux, 30);
         }
 
         public override void LoadMap(Map map, ScreenManager screenManager)
