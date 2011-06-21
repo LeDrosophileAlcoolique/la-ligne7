@@ -10,6 +10,7 @@ namespace ligne7
         public int Nombre { get; set; }
         protected string objectif;
         public bool isVictoire { get; set; }
+        public bool isDefaite { get; set; }
 
         protected Joueur joueur;
 
@@ -19,15 +20,17 @@ namespace ligne7
             this.objectif = objectif;
 
             isVictoire = false;
+            isDefaite = false;
         }
 
         public Objectif(string objectif, Joueur joueur)
         {
             Nombre = 0;
             this.objectif = objectif;
-
+          
             this.joueur = joueur;
             isVictoire = false;
+            isDefaite = false;
         }
 
         public bool IsVictoire()
