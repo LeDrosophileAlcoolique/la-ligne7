@@ -1,4 +1,4 @@
-﻿<?php                  
+<?php                  
 require("bdd.php");
    
 function mysqlProtectAndHTML ($string, $method = "POST") {
@@ -18,7 +18,7 @@ function mysqlProtectAndHTML ($string, $method = "POST") {
     
     if (isset($method[$string])) {
         $string = $method[$string];
-        $string = trim(mysql_real_escape_string(htmlspecialchars($string)));
+        $string = trim(mysql_real_escape_string(htmlspecialchars(utf8_decode($string))));
     }else{
         $string = "";
     }
