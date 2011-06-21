@@ -197,6 +197,12 @@ namespace ligne7
 
             if (screenManager.Game1.Clavier.IsNewKeyPress(Keys.Y))
                 map.ListEnemy = new MyList<Enemy>();
+
+            if (screenManager.Game1.Clavier.IsNewKeyPress(Keys.V))
+                screenManager.MainScreen.Objectif.isVictoire = true;
+
+            if (screenManager.Game1.Clavier.IsNewKeyPress(Keys.B))
+                screenManager.MainScreen.Objectif.isDefaite = true;
         }
 
         public void Update(GameTime gameTime)

@@ -66,11 +66,30 @@ namespace ligne7
                         objectif = map.Nivo.Objectif;
                         break;
                     case "nivo3":
+                        screenManager.InitMainScreen();
                         screenManager.ChangeGameScreen(new VictoireScreen(screenManager));
                         break;
                 }
 
                 objectif.isVictoire = false;
+            }
+            else if (objectif.isDefaite)
+            {
+                switch (map.Nivo.Name)
+                {
+                    case "nivo2":
+                        map = new Map(screenManager, "nivo1");
+                        map.LoadContent();
+                        objectif = map.Nivo.Objectif;
+                        break;
+                    case "nivo3":
+                        map = new Map(screenManager, "nivo2");
+                        map.LoadContent();
+                        objectif = map.Nivo.Objectif;
+                        break;
+                }
+
+                objectif.isDefaite = false;
             }
             else if (map.Joueur.Vie <= 0)
             {
