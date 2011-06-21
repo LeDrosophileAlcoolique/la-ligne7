@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require("include/include.php");
 
 echo $miseHTML['header'];
@@ -19,7 +19,7 @@ echo $miseHTML['header'];
 <p>La rapport est disponible en <a href="telechargement/rapport4.pdf">cliquant ici</a>.</p>
 
 <h1>XNA / dot.net</h1>
-<p>Les éléments nécessaires pour pouvoir jouer : <a href="telechargement/dotNetFx35setup.exe">.NET</a> et <a href="xnafx31_redist.msi">xna</a></p>
+<p>Les éléments nécessaires pour pouvoir jouer : <a href="telechargement/dotNetFx35setup.exe">.NET</a> et <a href="telechargement/xnafx31_redist.msi">xna</a></p>
 
 <h1>Le jeu (l'installeur)</h1>
 <p>Et le plus important, le jeu est disponible gratuitement en téléchargement en <a href="telechargement/La Ligne 7.exe">cliquant ici</a>.</p>
